@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}WorkoutApp{% endblock title %}</title>
+    
+    {% load static %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <script src="{% static 'js/base.js' %}"></script>
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    {% block head_end %}
+    {% endblock head_end %}
+</head>
+
+<body>
+    
+    {% block body_header %}{% endblock body_header %}
+    
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+    
+    {% block body_footer %}{% endblock body_footer %}
+    
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+	Liste des oeuvres
+{% endblock %}
+{% block content %}
+    {% for artwork in artworks %}
+    <div>
+        <p>{{ artwork.name }}</p>
+        <p>{{ artwork.height }}</p>
+        <p>{{ artwork.width }}</p>
+        <p>{{ artwork.artist.name }}</p>
+    </div>
+    {% endfor %}
+{% endblock content %}
