@@ -3,6 +3,7 @@
 	Liste des oeuvres
 {% endblock %}
 {% block content %}
+    <a href="{% url 'users:logout' %}">Déconnexion</a>
     {% for artwork in artworks %}
     <div>
         <p>{{ artwork.name }}</p>
