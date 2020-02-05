@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}
+    Mon compte
+{% endblock %}
+{% block content %}
+
+    <span class="card-title">{{ user.get_username }}</span><br>
+    <a href="{% url 'users:account_settings'%}">Modifier mes infos</a>
+    <a href="{% url 'users:logout' %}">Déconnexion</a>
+		
+{% endblock content %}
