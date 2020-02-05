@@ -46,7 +46,7 @@ def logout_view(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("artworks:artworks_list"))
+        return HttpResponseRedirect(reverse("users:myaccount"))
     elif 'username' in request.POST and 'password' in request.POST:
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -58,7 +58,7 @@ def login_view(request):
                 if request.GET.get('next') is not None:
                     return redirect(request.GET['next'])
                 else:
-                    return HttpResponseRedirect(reverse("artworks:artworks_list"))
+                    return HttpResponseRedirect(reverse("users:myaccount"))
             else:
                 return render(
                     request,
