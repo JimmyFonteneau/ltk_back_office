@@ -10,7 +10,7 @@ DEBUG = False
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+DATABASES['hobby-dev'] = dj_database_url.config(conn_max_age=600)
 
 django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
+del DATABASES['hobby-dev']['OPTIONS']['sslmode']
