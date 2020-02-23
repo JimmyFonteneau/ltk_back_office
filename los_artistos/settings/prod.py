@@ -13,4 +13,4 @@ DATABASES = {}
 DATABASES['hobby-dev'] = dj_database_url.config(conn_max_age=600)
 
 django_heroku.settings(locals())
-del DATABASES['hobby-dev']['OPTIONS']['sslmode']
+del DATABASES['default']['OPTIONS']['sslmode']
