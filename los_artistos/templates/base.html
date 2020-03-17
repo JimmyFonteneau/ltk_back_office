@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+{% load pwa %}
 <head>
     <meta charset="utf-8">
     <title>{% block title %}WorkoutApp{% endblock title %}</title>
@@ -9,6 +9,8 @@
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <script src="{% static 'js/base.js' %}"></script>
         
+    {% progressive_web_app_meta %}
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
     {% block head_end %}

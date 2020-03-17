@@ -8,4 +8,5 @@ urlpatterns = [
     path(r'artworks/', include('artworks.urls', namespace='artworks')),
     path(r'users/', include('users.urls', namespace='users')),
     path('', include ('homepage.urls')),
+    path('', include('pwa.urls')),
 ]

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'users',
     'homepage',
 
+    'pwa',
     'whitenoise.runserver_nostatic',
 ]
 
@@ -128,3 +129,32 @@ AUTH_USER_MODEL = "users.UserProfile"
 LOGIN_URL = '/users/login/'
 
 LOGIN_REDIRECT_URL = '/users/myaccount/'
+
+
+# PWA
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'serviceworker.js')
+PWA_APP_DEBUG_MODE = True
+PWA_APP_NAME = 'LTK Gallery'
+PWA_APP_DESCRIPTION = "My app description" 
+PWA_APP_THEME_COLOR = '#0A0302' 
+PWA_APP_BACKGROUND_COLOR = '#ffffff' 
+PWA_APP_DISPLAY = 'standalone' 
+PWA_APP_SCOPE = '/' 
+PWA_APP_START_URL = '/' 
+PWA_APP_ICONS = [
+    {
+      "src": "static/images/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "static/images/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "static/images/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+]
