@@ -18,8 +18,18 @@
 </head>
 
 <body>
+    {% block body_header %}    
+    {% if user.is_authenticated %}
+    <p>Authenticated</p>
+    <a href="{% url 'users:logout' %}">Déconnexion</a>
+    <a href="{% url 'users:myaccount' %}">Mon compte</a>
+    <a href="{% url 'users:account_settings' %}">Paramètres</a>
+    {% else %}
+    <a href="{% url 'users:login' %}">Se connecter</a>
+    <a href="{% url 'users:register' %}">S'inscrire</a>
+    {% endif %}
     
-    {% block body_header %}{% endblock body_header %}
+    {% endblock body_header %}
     
     <div class="container">
         {% block content %}{% endblock content %}
