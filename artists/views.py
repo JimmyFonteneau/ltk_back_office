@@ -1,7 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import ArtistForm
 from .models import Artist
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+def is_superuser(user=None):    
+    if user == None:
+        return false   
+    return user.is_superuser
+
+@user_passes_test(is_superuser)    
 def artist_new(request):
     if request.method == "POST":
         form = ArtistForm(request.POST)
