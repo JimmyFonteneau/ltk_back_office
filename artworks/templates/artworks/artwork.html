@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}   
+    <div>
+        <p>{{ artwork.name }}</p>
+        <p>{{ artwork.height }}</p>
+        <p>{{ artwork.width }}</p>
+        <p>{{ artwork.artist.name }}</p>
+    </div>
+{% endblock content %}

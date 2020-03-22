@@ -1,7 +1,4 @@
 {% extends "base.html" %}
-{% block title %}
-	Liste des oeuvres
-{% endblock %}
 {% block content %}
 <h2>Toutes les oeuvres d'arts</h2>    
 {% for artwork in artworks %}
@@ -10,6 +7,7 @@
         <p>{{ artwork.height }}</p>
         <p>{{ artwork.width }}</p>
         <p>{{ artwork.artist.name }}</p>
+        <a class="btn btn-primary" href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}" role="button">Show</a> 
     </div>
     {% endfor %}
 {% endblock content %}

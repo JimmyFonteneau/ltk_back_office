@@ -21,3 +21,13 @@ def artworks_list(request):
             'artworks': artworks
         }
     )
+
+def artwork(request, artwork_id):             
+    artwork = Artwork.objects.get(id=artwork_id)    
+    return render(
+        request,
+        'artworks/artwork.html',
+        {
+            'artwork': artwork,
+        }
+    )  

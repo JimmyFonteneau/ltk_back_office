@@ -22,3 +22,13 @@ def all_artists(request):
             'artists_list': artists,
         }
     )
+
+def artist(request, artist_id):             
+    artist = Artist.objects.get(id=artist_id)    
+    return render(
+        request,
+        'artists/artist.html',
+        {
+            'artist': artist,
+        }
+    ) 
