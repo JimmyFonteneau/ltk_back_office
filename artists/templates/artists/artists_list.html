@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Calls</h2>
+{% for artist in artists_list %}
+<a class="btn btn-primary" href="" role="button">{{ artist.name }}</a>   
+{% endfor %}
+
+{% endblock %}
