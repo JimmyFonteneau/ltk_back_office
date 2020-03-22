@@ -20,11 +20,17 @@
 <body>
     {% block body_header %}    
     {% if user.is_authenticated %}
-    <p>Authenticated</p>
     <a href="{% url 'users:logout' %}">Déconnexion</a>
     <a href="{% url 'users:myaccount' %}">Mon compte</a>
     <a href="{% url 'users:account_settings' %}">Paramètres</a>
+    {% if user.is_superuser %}
+    <p>Hello super user</p>
+    {% endif %}
     {% else %}
+    <a href="{% url 'users:login' %}">Le concept</a>
+    <a href="{% url 'artists:artists' %}">Les artistes</a>
+    <a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a>
+    <a href="{% url 'users:login' %}">Contact</a>
     <a href="{% url 'users:login' %}">Se connecter</a>
     <a href="{% url 'users:register' %}">S'inscrire</a>
     {% endif %}
