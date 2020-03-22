@@ -11,7 +11,7 @@ def is_superuser(user=None):
 @user_passes_test(is_superuser)
 def artwork_new(request):
     if request.method == "POST":
-        form = ArtworkForm(request.POST)
+        form = ArtworkForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()           
             return redirect("artworks:artworks_list")

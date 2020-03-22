@@ -36,6 +36,8 @@ class Artwork(models.Model):
         blank=False,
     )
 
+    photo = models.ImageField(upload_to='artworks', default='/default.jpg')
+
     def __str__(self):
         return self.name
 

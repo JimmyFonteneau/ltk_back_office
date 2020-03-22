@@ -5,5 +5,7 @@
         <p>{{ artwork.height }}</p>
         <p>{{ artwork.width }}</p>
         <p>{{ artwork.artist.name }}</p>
+        <p>{{ artwork.photo.url }}</p>
+        <img src="{{ artwork.photo.url }}">
     </div>
 {% endblock content %}
