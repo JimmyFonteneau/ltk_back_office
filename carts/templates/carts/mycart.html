@@ -1,24 +1,23 @@
 {% extends "base.html" %}
-{% block content %}   
-    <div>
-        {% csrf_token %}        
-        <input type="hidden" name="artwork_id" value="{{ artwork.id }}"></input>
-        
+{% block content %}
+<h2>Mon panier</h2>
+{% csrf_token %}    
+{% for artwork in artworks %}
+    <div id="div_{{ artwork.id }}">         
         <p>{{ artwork.name }}</p>
         <p>{{ artwork.height }}</p>
         <p>{{ artwork.width }}</p>
         <p>{{ artwork.artist.name }}</p>
-        <p>{{ artwork.photo.url }}</p>
-        <img src="{{ artwork.photo.url }}">
-        <button>Ajouter au panier</button>
+        <button name="delete" id="{{ artwork.id }}">Supprimer du panier</button>
     </div>
+    {% endfor %}
 
     <script>
-        $("button" ).click(function () {
+        $("button[name=delete]" ).click(function (event) {
             var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
-            var artwork_id = $('input[name="artwork_id"]').val();
+            var artwork_id = event.target.id;
             $.ajax({
-                url: '/carts/add/',
+                url: '/carts/delete/',
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -26,9 +25,9 @@
                     "artwork_id": artwork_id,
                 },
             }).done(function(totalInCart) {
-                $( "#cart_element" ).html(totalInCart);
+                $( "div[id=div_"+artwork_id+"]" ).remove();
             });
         });
     </script>
-{% endblock content %}
 
+{% endblock content %}

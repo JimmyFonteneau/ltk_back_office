@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ArtistForm
+from .forms import ArtistForm, ModifyArtistForm
 from .models import Artist
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -19,6 +19,23 @@ def artist_new(request):
     else:
         form = ArtistForm()
     return render(request, 'artists/artists_edit.html', {'form': form})
+
+@user_passes_test(is_superuser)
+def update_artist(request, artist_id):             
+    artist = Artist.objects.get(id=artist_id)    
+    if request.method == 'POST':
+        form = ModifyArtistForm(request.POST, instance=artist)
+        if form.is_valid():           
+            form.save()
+    else:
+        form = ModifyArtistForm(instance=artist)
+    return render(
+        request,
+        'artists/artist_update.html',
+        {
+            'form': form,
+        }
+    ) 
 
 def all_artists(request):
     artists = Artist.objects.all()

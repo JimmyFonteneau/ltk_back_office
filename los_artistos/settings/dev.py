@@ -13,3 +13,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+EMAIL_HOST = "127.0.0.1"
+EMAIL_PORT = 1025

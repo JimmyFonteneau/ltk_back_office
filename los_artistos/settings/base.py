@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'artists',
     'artworks',
     'users',
+    'carts',
     'homepage',
 
     'pwa',
