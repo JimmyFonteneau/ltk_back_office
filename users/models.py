@@ -9,6 +9,18 @@ class UserProfile(AbstractUser):
         'Email', 
         unique=True
     )
+    firstname = models.CharField(
+        verbose_name="Prénom",
+        max_length=256,
+        blank=False,
+        null=False,
+    )
+    lastname = models.CharField(
+        verbose_name="Nom de famille",
+        max_length=256,
+        blank=False,
+        null=False,
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

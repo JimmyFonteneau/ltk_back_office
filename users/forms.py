@@ -25,9 +25,14 @@ class RegisterForm(forms.Form):
         required=True,
         widget=forms.PasswordInput(),
     )
-    username = forms.CharField(
-        label = "Nom d'utilisateur",
-        max_length=64,
+    firstname = forms.CharField(
+        label = "Prénom",
+        max_length=256,
+        required=True,
+    )
+    lastname = forms.CharField(
+        label = "Nom de famille",
+        max_length=256,
         required=True,
     )
     
@@ -48,20 +53,13 @@ class RegisterForm(forms.Form):
         else:
             raise forms.ValidationError("Cet utilisateur existe déjà")
 
-        try:
-            UserProfile.objects.get(username=cleaned_data['username'])
-        except UserProfile.DoesNotExist:
-            pass
-        else:
-            raise forms.ValidationError("Ce nom est déjà pris")
-
         return cleaned_data
         
 
 class LoginForm(forms.Form):
 
-    username = forms.CharField(
-        label = "Nom d'utilisateur",
+    email = forms.CharField(
+        label = "Email",
         max_length=64,
         required=True,
     )
@@ -77,4 +75,4 @@ class AccountSettingsForm(forms.ModelForm):
   
     class Meta:
         model = UserProfile
-        fields = ('username', )
+        fields = ('firstname', 'lastname')

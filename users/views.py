@@ -14,7 +14,7 @@ def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
+            username = form.cleaned_data['email']
             email = form.cleaned_data['email']
             raw_password = form.cleaned_data['raw_password']
             user = UserProfile.objects.create_user(
@@ -47,10 +47,10 @@ def logout_view(request):
 def login_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:myaccount"))
-    elif 'username' in request.POST and 'password' in request.POST:
+    elif 'email' in request.POST and 'password' in request.POST:
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
+            username = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
@@ -96,13 +96,13 @@ def account_settings(request):
             return HttpResponseRedirect(reverse("users:myaccount"))
     else:
         form = AccountSettingsForm(instance=request.user)
-        return render(
-            request,
-            'users/register.html',
-            {
-                'url_form': reverse("users:account_settings"),
-                'title': "Modification du compte",
-                'form':form,
-                'modify': True
-            }
-        )
+    return render(
+        request,
+        'users/register.html',
+        {
+            'url_form': reverse("users:account_settings"),
+            'title': "Modification du compte",
+            'form':form,
+            'modify': True
+        }
+    )

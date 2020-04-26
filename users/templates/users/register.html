@@ -11,17 +11,36 @@
         
         <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label><br>
         {{ form.email }}<br>
+        {% if form.errors.email %}
+            <span>{{ form.errors.email }}</span>
+        {% endif %}
         
         <label for="{{ form.raw_password.id_for_label }}">{{ form.raw_password.label }}</label><br>
         {{ form.raw_password }}<br>
+        {% if form.errors.raw_password %}
+            <span>{{ form.errors.raw_password }}</span>
+        {% endif %}
         
         <label for="{{ form.raw_password_confirmation.id_for_label }}">{{ form.raw_password_confirmation.label }}</label><br>
         {{ form.raw_password_confirmation }}<br>
+        {% if form.errors.raw_password_confirmation %}
+            <span>{{ form.errors.raw_password_confirmation }}</span>
+        {% endif %}
+
         
     {% endif %}
-    
-    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label><br>
-    {{ form.username }}<br>
+
+    <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label><br>
+    {{ form.firstname }}<br>
+    {% if form.errors.firstname %}
+        <span>{{ form.errors.firstname }}</span>
+    {% endif %}
+
+    <label for="{{ form.lastname.id_for_label }}">{{ form.lastname.label }}</label><br>
+    {{ form.lastname }}<br>
+    {% if form.errors.lastname %}
+        <span>{{ form.errors.lastname }}</span>
+    {% endif %}
     
     <input type="submit" value="Valider"><br>
     

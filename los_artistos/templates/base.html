@@ -26,14 +26,12 @@
     {% if user.is_authenticated %}
         <a href="{% url 'users:logout' %}">Déconnexion</a>
         <a href="{% url 'users:myaccount' %}">Mon compte</a>
-        <a href="{% url 'users:account_settings' %}">Paramètres</a>
         <a id="cart_element" class="btn btn-primary" href="{% url 'carts:cart_list'%}" role="button"></a> 
         {% if user.is_superuser %}
             <p>Hello super user</p>
         {% endif %}
     {% else %}
-        <a href="{% url 'users:login' %}">Se connecter</a>
-        <a href="{% url 'users:register' %}">S'inscrire</a>
+        <a href="{% url 'users:login' %}">Connexion</a>
     {% endif %}
     
     {% endblock body_header %}

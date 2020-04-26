@@ -7,14 +7,14 @@
 <form method="post" action="{% url 'users:login' %}">
     {% csrf_token %}
 
-    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label><br>
-    {{ form.username }}<br>
+    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label><br>
+    {{ form.email }}<br>
     
     <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label><br>
     {{ form.password }}<br>
 
     {% if auth_error %}
-        Nom d'utilisateur ou mot de passe incorrect<br>
+        Email ou mot de passe incorrect<br>
     {% endif %}
     
     <input type="submit" value="Valider"><br>
