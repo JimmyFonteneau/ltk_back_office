@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+    {{ artwork.name }}
+{% endblock %}
 {% block content %}   
     <div>
         {% csrf_token %}        

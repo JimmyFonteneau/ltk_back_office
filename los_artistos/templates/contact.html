@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-
+{% block title %}
+	Contact
+{% endblock %}
 {% block content %}
     <h2>Contact</h2>
     <form method="POST" enctype="multipart/form-data" class="contact-form">{% csrf_token %}

@@ -18,7 +18,8 @@
 </head>
 
 <body>
-    {% block body_header %}    
+    {% block body_header %}   
+    <a href="/">Logo</a>
     <a href="/concept">Le concept</a>
     <a href="{% url 'artists:artists' %}">Les artistes</a>
     <a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a>
