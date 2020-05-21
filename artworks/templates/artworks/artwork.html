@@ -13,25 +13,14 @@
         <p>{{ artwork.artist.name }}</p>
         <p>{{ artwork.photo.url }}</p>
         <img src="{{ artwork.photo.url }}">
-        <button>Ajouter au panier</button>
+
+        <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
+            {{ cart_artwork_form }}
+            {% csrf_token %}
+            <input type="submit" value="Ajouter au panier">
+        </form>
+        
     </div>
 
-    <script>
-        $("button" ).click(function () {
-            var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
-            var artwork_id = $('input[name="artwork_id"]').val();
-            $.ajax({
-                url: '/carts/add/',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    "csrfmiddlewaretoken": csrftoken,
-                    "artwork_id": artwork_id,
-                },
-            }).done(function(totalInCart) {
-                $( "#cart_element" ).html(totalInCart);
-            });
-        });
-    </script>
 {% endblock content %}
 

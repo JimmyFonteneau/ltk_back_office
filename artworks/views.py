@@ -3,6 +3,7 @@ from .forms import ArtworkForm, ModifyArtworkForm
 from .models import Artwork
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
+from carts.forms import CartAddArtworkForm
 
 def is_superuser(user=None):    
     if user == None:
@@ -55,11 +56,13 @@ def artworks_list(request):
     )
 
 def artwork(request, artwork_id):             
-    artwork = Artwork.objects.get(id=artwork_id)    
+    artwork = Artwork.objects.get(id=artwork_id)
+    cart_artwork_form = CartAddArtworkForm()
     return render(
         request,
         'artworks/artwork.html',
         {
             'artwork': artwork,
+            'cart_artwork_form': cart_artwork_form
         }
-    )  
+    )

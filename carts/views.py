@@ -1,62 +1,42 @@
-from django.shortcuts import render, redirect
-from .models import Cart
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 from artworks.models import Artwork
-from users.models import UserProfile
-from django.http import HttpResponse, HttpResponseRedirect
-    
-def cart_add(request):
-    artwork_id = request.POST['artwork_id']
-    artwork = Artwork.objects.get(id=artwork_id) 
-    if request.is_ajax() and request.method == 'POST':
-        cartExist = Cart.objects.filter(user_id=request.user.id).exists()
-        if cartExist == False:
-            cart = Cart(user=request.user)
-            cart.save()
-            cart.artworks.add(artwork)
-            count = len(cart.artworks.filter())
-            print(count)
-            return HttpResponse(count)
-        else:
-            cartByUser = Cart.objects.get(user_id=request.user.id)
-            cartByUser.artworks.add(artwork)
-            count = len(cartByUser.artworks.filter())
-            print(count)
-            return HttpResponse(count)
-    else:
-        raise Http404
+from .cart import Cart
+from .forms import CartAddArtworkForm
 
-def cart_length(request):
-    cartExist = Cart.objects.filter(user_id=request.user.id).exists()
-    if cartExist == False:
-        raise Http404
-    else:
-        cartByUser = Cart.objects.get(user_id=request.user.id)
-        count = len(cartByUser.artworks.filter())
-        return HttpResponse(count)
-    
-def cart_delete(request):
-    artwork_id = request.POST['artwork_id']
-    artwork = Artwork.objects.get(id=artwork_id)
-    cartExist = Cart.objects.filter(user_id=request.user.id).exists()
-    if cartExist == False:
-        raise Http404
-    else:
-        cartByUser = Cart.objects.get(user_id=request.user.id)
-        cartByUser.artworks.remove(artwork)
-        return HttpResponse(True)
-    return HttpResponse(True)
-
-def cart(request):
-    cartExist = Cart.objects.filter(user_id=request.user.id).exists()
-    if cartExist == False:
-        raise Http404
-    else:
-        cartByUser = Cart.objects.get(user_id=request.user.id)
-        return render(
-            request, 
-            'carts/mycart.html', 
-            {
-                'cart': cartByUser,
-                'artworks': cartByUser.artworks.all(),
-            }
+@require_POST
+def cart_add(request, artwork_id):
+    cart = Cart(request)
+    artwork = get_object_or_404(Artwork, id=artwork_id)
+    form = CartAddArtworkForm(request.POST)
+    if form.is_valid():
+        cd = form.cleaned_data
+        cart.add(
+            artwork=artwork,
+            quantity=cd['quantity'],
+            update_quantity=cd['update']
         )
+    return redirect('carts:cart_detail')
+
+def cart_remove(request, artwork_id):
+    cart = Cart(request)
+    artwork = get_object_or_404(Artwork, id=artwork_id)
+    cart.remove(artwork)
+    return redirect('carts:cart_detail')
+
+def cart_detail(request):
+    cart = Cart(request)
+    for item in cart:
+        item['update_quantity_form'] = CartAddArtworkForm(
+                initial={
+                    'quantity': item['quantity'],
+                    'update': True
+                }
+            )
+    return render(
+        request, 
+        'carts/cart_detail.html', 
+        {
+            'cart': cart
+        }
+    )

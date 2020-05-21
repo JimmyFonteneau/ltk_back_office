@@ -27,6 +27,14 @@ class Artwork(models.Model):
         null=False,
     )
 
+    price = models.DecimalField(
+        verbose_name="Prix (€)",
+        max_digits=7, 
+        decimal_places=2,
+        blank=False,
+        null=False,
+    )
+
     artist = models.ForeignKey(
         Artist,
         on_delete=models.CASCADE,

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}
+    Your cart
+{% endblock %}
+{% block content %}
+  <h1>Your shopping cart</h1>
+  <table class="cart">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Oeuvre</th>
+        <th>Quantité</th>
+        <th>Prix unitaire</th>                
+        <th>Prix</th>
+        <th>Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+        {% with artwork=item.artwork %}
+          <tr>
+            <td><img src="{{ artwork.photo.url }}"></td>
+            <td>{{ artwork.name }}</td>
+            <td>
+              <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
+                {{ item.update_quantity_form.quantity }}
+                {{ item.update_quantity_form.update }}
+                <input type="submit" value="Update">
+                {% csrf_token %}
+              </form>
+            </td>
+            <td class="num">{{ item.price }}€</td>
+            <td class="num">{{ item.total_price }}€</td>
+            <td><a href="{% url 'carts:cart_remove' artwork.id %}">Remove</a></td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+      <tr class="total">
+        <td>Total</td>
+        <td colspan="4"></td>
+        <td class="num">{{ cart.get_total_price }}€</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="text-right">
+    <a href="{% url 'artworks:artworks_list' %}" class="button light">Continue shopping</a>
+    <a href="#" class="button">Checkout</a>
+  </p>
+{% endblock %}
