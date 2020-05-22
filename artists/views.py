@@ -8,7 +8,7 @@ def is_superuser(user=None):
         return false   
     return user.is_superuser
 
-@user_passes_test(is_superuser)    
+@user_passes_test(is_superuser)
 def artist_new(request):
     if request.method == "POST":
         form = ArtistForm(request.POST)

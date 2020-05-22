@@ -25,11 +25,12 @@
     <a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a>
     <a href="/contact">Contact</a>
     {% if user.is_authenticated %}
-        <a href="{% url 'users:logout' %}">Déconnexion</a>
-        <a href="{% url 'users:myaccount' %}">Mon compte</a>
-        {% if user.is_superuser %}
-            <p>Hello super user</p>
-        {% endif %}
+        <a href="{% url 'users:myaccount' %}">
+            Mon compte
+            {% if user.is_superuser %}
+                (super user)
+            {% endif %}
+        </a>
     {% else %}
         <a href="{% url 'users:login' %}">Connexion</a>
     {% endif %}

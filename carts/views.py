@@ -10,11 +10,10 @@ def cart_add(request, artwork_id):
     artwork = get_object_or_404(Artwork, id=artwork_id)
     form = CartAddArtworkForm(request.POST)
     if form.is_valid():
-        cd = form.cleaned_data
         cart.add(
             artwork=artwork,
-            quantity=cd['quantity'],
-            update_quantity=cd['update']
+            quantity=form.cleaned_data['quantity'],
+            update_quantity=form.cleaned_data['update']
         )
     return redirect('carts:cart_detail')
 

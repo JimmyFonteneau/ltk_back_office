@@ -14,8 +14,10 @@ class Cart(object):
     def add(self, artwork, quantity=1, update_quantity=False):
         artwork_id = str(artwork.id)
         if artwork_id not in self.cart:
-            self.cart[artwork_id] = {'quantity': 0,
-                                    'price': str(artwork.price)}
+            self.cart[artwork_id] = {
+                'quantity': 0,
+                'price': str(artwork.price)
+            }
         if update_quantity:
             self.cart[artwork_id]['quantity'] = quantity
         else:
