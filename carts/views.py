@@ -50,7 +50,6 @@ def order_confirm(request):
     )
     artworks = []
     for item in cart:
-        print(item)
         artworks.append(item['artwork'])
     order.artworks.set(artworks)
     order.save()
