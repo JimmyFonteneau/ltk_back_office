@@ -1,13 +1,13 @@
 from django import forms
 
-ARTWORK_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 10)]
+ARTWORK_NB_MONTH_CHOICES = [(1,"3"),(2,"6"),(3,"9")]
 
 class CartAddArtworkForm(forms.Form):
 
-    quantity = forms.TypedChoiceField(
-        choices=ARTWORK_QUANTITY_CHOICES,
+    nb_month = forms.TypedChoiceField(
+        choices=ARTWORK_NB_MONTH_CHOICES,
         coerce=int,
-        label="Quantité"
+        label="Nombre de Mois"
     )
     
     update = forms.BooleanField(

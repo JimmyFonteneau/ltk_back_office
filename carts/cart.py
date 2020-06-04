@@ -11,17 +11,17 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def add(self, artwork, quantity=1, update_quantity=False):
+    def add(self, artwork, nb_month=3, update_nb_month=False):
         artwork_id = str(artwork.id)
         if artwork_id not in self.cart:
-            self.cart[artwork_id] = {
-                'quantity': 0,
+            self.cart[artwork_id] = {   
+                'nb_month': 0,
                 'price': str(artwork.price)
             }
-        if update_quantity:
-            self.cart[artwork_id]['quantity'] = quantity
+        if update_nb_month:
+            self.cart[artwork_id]['nb_month'] = nb_month
         else:
-            self.cart[artwork_id]['quantity'] += quantity
+            self.cart[artwork_id]['nb_month'] = nb_month
         self.save()
 
     def save(self):
@@ -42,14 +42,14 @@ class Cart(object):
 
         for item in self.cart.values():
             item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+            item['total_price'] = item['price'] * item['nb_month']
             yield item
 
     def __len__(self):
-        return sum(item['quantity'] for item in self.cart.values())
+        return len(self.cart.values())
 
     def get_total_price(self):
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        return sum(Decimal(item['price']) * item['nb_month'] for item in self.cart.values())
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]

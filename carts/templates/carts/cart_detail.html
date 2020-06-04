@@ -10,7 +10,7 @@
         <tr>
           <th>Image</th>
           <th>Oeuvre</th>
-          <th>Quantité</th>
+          <th>Nombre de Mois</th>
           <th>Prix unitaire</th>                
           <th>Prix</th>
           <th>Supprimer</th>
@@ -24,8 +24,8 @@
               <td>{{ artwork.name }}</td>
               <td>
                 <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
-                  {{ item.update_quantity_form.quantity }}
-                  {{ item.update_quantity_form.update }}
+                  {{ item.update_nb_month_form.nb_month }}
+                  {{ item.update_nb_month_form.update }}
                   <input type="submit" value="Update">
                   {% csrf_token %}
                 </form>

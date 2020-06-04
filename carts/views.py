@@ -14,8 +14,8 @@ def cart_add(request, artwork_id):
     if form.is_valid():
         cart.add(
             artwork=artwork,
-            quantity=form.cleaned_data['quantity'],
-            update_quantity=form.cleaned_data['update']
+            nb_month=form.cleaned_data['nb_month'],
+            update_nb_month=form.cleaned_data['update']
         )
     return redirect('carts:cart_detail')
 
@@ -28,9 +28,9 @@ def cart_remove(request, artwork_id):
 def cart_detail(request):
     cart = Cart(request)
     for item in cart:
-        item['update_quantity_form'] = CartAddArtworkForm(
+        item['update_nb_month_form'] = CartAddArtworkForm(
                 initial={
-                    'quantity': item['quantity'],
+                    'nb_month': item['nb_month'],
                     'update': True
                 }
             )
