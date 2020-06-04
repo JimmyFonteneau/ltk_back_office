@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm, RegisterForm, AccountSettingsForm
 from .models import UserProfile
+from carts.models import Order
 
 
 def register_view(request):
@@ -84,7 +85,7 @@ def myaccount(request):
     return render(
         request,
         'users/myaccount.html',
-        )
+    )
 
 
 @login_required
@@ -104,5 +105,16 @@ def account_settings(request):
             'title': "Modification du compte",
             'form':form,
             'modify': True
+        }
+    )
+
+@login_required
+def myorders(request):
+    orders = Order.objects.filter(user=request.user)
+    return render(
+        request,
+        'users/myorders.html',
+        {
+            'orders': orders
         }
     )

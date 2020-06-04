@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+    Mes commandes
+{% endblock %}
+{% block content %}
+
+    {% for order in orders %}
+        <div>
+            {{ order.id }}
+            {{ order.created_at }}
+            {% for artwork in order.artworks.all %}
+                <p>{{ artwork }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+		
+{% endblock content %}

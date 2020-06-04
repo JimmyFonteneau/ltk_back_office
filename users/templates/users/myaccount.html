@@ -6,6 +6,7 @@
 
     <span class="card-title">{{ user.get_username }}</span><br>
     <a href="{% url 'users:account_settings'%}">Modifier mes infos</a>
+    <a href="{% url 'users:myorders'%}">Mes commandes</a>
     <a href="{% url 'users:logout' %}">Déconnexion</a>
 		
 {% endblock content %}
