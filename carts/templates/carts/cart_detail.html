@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}
-    Your cart
+    Votre panier
 {% endblock %}
 {% block content %}
-  <h1>Your shopping cart</h1>
+  <h1>Votre panier</h1>
   {% if cart|length > 0 %}
     <table class="cart">
       <thead>
@@ -45,7 +45,7 @@
     </table>
     <p>
       <a href="{% url 'artworks:artworks_list' %}" class="button light">Voir d'autres oeuvres</a>
-      <a href="#" class="button">Valider la commande</a>
+      <a href="{% url 'carts:order_confirm' %}" class="button">Valider la commande</a>
     </p>
   {% else %}
     <p>Votre panier est vide</p>

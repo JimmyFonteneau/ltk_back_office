@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from artworks.models import Artwork
+from .models import Order
 from .cart import Cart
 from .forms import CartAddArtworkForm
 
@@ -37,5 +39,26 @@ def cart_detail(request):
         'carts/cart_detail.html', 
         {
             'cart': cart
+        }
+    )
+
+@login_required
+def order_confirm(request):
+    cart = Cart(request)
+    order = Order.objects.create(
+        user = request.user,
+    )
+    artworks = []
+    for item in cart:
+        print(item)
+        artworks.append(item['artwork'])
+    order.artworks.set(artworks)
+    order.save()
+    cart.clear()
+    return render(
+        request, 
+        'carts/order_confirm.html', 
+        {
+            'order': order
         }
     )
