@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'users',
     'carts',
     'homepage',
+    'rates',
 
     'pwa',
     'whitenoise.runserver_nostatic',

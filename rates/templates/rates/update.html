@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}
+    Update rates
+{% endblock %}
+{% block content %}   
+<form method="POST" enctype="multipart/form-data" class="artist-form">{% csrf_token %}
+    {% for form in forms %}
+        {{ form }}
+    {% endfor %}    
+    <button type="submit" class="save btn btn-default">Save</button>
+    <a class="btn btn-primary" href="{% url 'rates:rates_add'%}" role="button">AJouter un taux</a>
+</form>
+{% endblock content %}
