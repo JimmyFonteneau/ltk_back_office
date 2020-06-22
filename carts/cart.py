@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from artworks.models import Artwork
+from rates.models import Rate
 
 class Cart(object):
 
@@ -11,17 +12,15 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def add(self, artwork, nb_month=3, update_nb_month=False):
+    def add(self, artwork, nb_month):
+        nb_month = str(nb_month)
         artwork_id = str(artwork.id)
         if artwork_id not in self.cart:
-            self.cart[artwork_id] = {   
-                'nb_month': 0,
+            self.cart[artwork_id] = {
+                'nb_month': nb_month,
                 'price': str(artwork.price)
             }
-        if update_nb_month:
-            self.cart[artwork_id]['nb_month'] = nb_month
-        else:
-            self.cart[artwork_id]['nb_month'] = nb_month
+        self.cart[artwork_id]['nb_month'] = int(nb_month)
         self.save()
 
     def save(self):
@@ -41,15 +40,16 @@ class Cart(object):
             self.cart[str(artwork.id)]['artwork'] = artwork
 
         for item in self.cart.values():
+            rate = Rate.objects.get(duration=item['nb_month'])
             item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['nb_month']
+            item['total_price'] = round(item['price'] * item['nb_month'] / 3 * rate.rate, 2)
             yield item
 
     def __len__(self):
         return len(self.cart.values())
 
     def get_total_price(self):
-        return sum(Decimal(item['price']) * item['nb_month'] for item in self.cart.values())
+        return round(sum(Decimal(item['price']) * item['nb_month'] / 3 * Rate.objects.get(duration=item['nb_month']).rate for item in self.cart.values()), 2)
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]

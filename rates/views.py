@@ -9,7 +9,7 @@ def add(request):
         form = RateForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/rates/update/')
     else:
         form = RateForm()
     return render(request, 'rates/add.html', {'form': form})
@@ -21,9 +21,10 @@ def update(request):
     if request.method == 'POST':
         for r in rates:
             index+=1
-            form = ModifyRateForm( request.POST, instance=r, prefix="form"+str(index))
+            form = ModifyRateForm(request.POST, instance=r, prefix="form"+str(index))
             if form.is_valid():
                 form.save() 
+            forms.append(ModifyRateForm(instance=r, prefix="form"+str(index)))
     else:            
         for r in rates:
             index+=1

@@ -19,7 +19,7 @@ class Rate(models.Model):
     )
     
     def __str__(self):
-        return "Taux"+str(self.rate)
+        return str(self.duration)
 
     class Meta:
         verbose_name = "Taux"
