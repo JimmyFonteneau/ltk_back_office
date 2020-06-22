@@ -13,9 +13,8 @@ def artist_new(request):
     if request.method == "POST":
         form = ArtistForm(request.POST)
         if form.is_valid():
-            form.save()
-            # return redirect('post_detail', pk=post.pk)
-            return redirect("users:account_settings")
+            form.save()            
+            return redirect("artists:artists")
     else:
         form = ArtistForm()
     return render(request, 'artists/artists_edit.html', {'form': form})

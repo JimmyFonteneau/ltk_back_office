@@ -5,13 +5,34 @@
 {% block content %}
 
 <h2>Les artistes mode admin</h2>
-{% for artist in artists_list %}
+<a class="btn btn-primary" href="{% url 'artists:artist_new' %}" role="button">Ajouter un artiste</a>
+
+<!-- {% for artist in artists_list %}
 <div>
     <p>{{ artist.name }}</p>
     <p>{{ artist.firstname }}</p>
     <p>{{ artist.lastname }}</p>
     <a class="btn btn-primary" href="{% url 'artists:artist_show' artist_id=artist.id %}" role="button">Show</a>
 </div>  
-{% endfor %}
+{% endfor %} -->
+
+<table id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>nom d'artiste</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for artist in artists_list %}
+        <tr>
+            <td>{{ artist.name }}</td>
+            <td>{{ artist.firstname }}</td>
+            <td>{{ artist.lastname }}</td>
+        </tr>                    
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
