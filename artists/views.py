@@ -39,13 +39,22 @@ def update_artist(request, artist_id):
 
 def all_artists(request):
     artists = Artist.objects.all()
-    return render(
-        request,
-        'artists/artists_list.html',
-        {
-            'artists_list': artists,
-        }
-    )
+    if request.user.is_superuser:
+        return render(
+            request,
+            'artists/artists_list_admin.html',
+            {
+                'artists_list': artists,
+            }
+        )
+    else:
+        return render(
+            request,
+            'artists/artists_list.html',
+            {
+                'artists_list': artists,
+            }
+        )
 
 def artist(request, artist_id):             
     artist = Artist.objects.get(id=artist_id)    

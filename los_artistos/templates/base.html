@@ -25,11 +25,7 @@
 
 <body>
     {% block body_header %}   
-    <a href="/">Logo</a>
-    <a href="/concept">Le concept</a>
-    <a href="{% url 'artists:artists' %}">Les artistes</a>
-    <a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a>
-    <a href="/contact">Contact</a>
+
     {% if user.is_authenticated %}
         <a href="{% url 'users:myaccount' %}">
             Mon compte
@@ -40,15 +36,23 @@
         {% if user.is_superuser %}
             <a href="{% url 'rates:rates_update' %}">modification des taux</a>
             <a href="{% url 'site_content:update_content' %}">Modifier le contenu du site</a>
+            <a href="{% url 'artworks:artworks_list' %}">Liste des oeuvres</a>
+            <a href="{% url 'artists:artists' %}">Liste des artistes</a>
+        {% else %}
+            <a href="/">Logo</a>
+            <a href="/concept">Le concept</a>
+            <a href="{% url 'artists:artists' %}">Les artistes</a>
+            <a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a>
+            <a href="/contact">Contact</a>
+            <span class="cart">
+                <a href="{% url 'carts:cart_detail' %}">
+                    Mon panier ({{ cart|length }})
+                </a>
+            </span>
         {% endif %}
     {% else %}
         <a href="{% url 'users:login' %}">Connexion</a>
     {% endif %}
-    <span class="cart">
-        <a href="{% url 'carts:cart_detail' %}">
-            Mon panier ({{ cart|length }})
-        </a>
-    </span>
 
     {% endblock body_header %}
     

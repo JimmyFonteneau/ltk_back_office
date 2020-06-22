@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+    List artists
+{% endblock %}
+{% block content %}
+
+<h2>Les artistes mode admin</h2>
+{% for artist in artists_list %}
+<div>
+    <p>{{ artist.name }}</p>
+    <p>{{ artist.firstname }}</p>
+    <p>{{ artist.lastname }}</p>
+    <a class="btn btn-primary" href="{% url 'artists:artist_show' artist_id=artist.id %}" role="button">Show</a>
+</div>  
+{% endfor %}
+
+{% endblock %}

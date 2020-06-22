@@ -47,13 +47,23 @@ def update_artwork(request, artwork_id):
 
 def artworks_list(request):
     artworks = Artwork.objects.all()
-    return render(
-        request, 
-        'artworks/artworks_list.html', 
-        {
-            'artworks': artworks
-        }
-    )
+    print(request.user.is_superuser)
+    if request.user.is_superuser:
+        return render(
+            request, 
+            'artworks/artworks_list_admin.html', 
+            {
+                'artworks': artworks
+            }
+        )
+    else :
+        return render(
+            request, 
+            'artworks/artworks_list.html', 
+            {
+                'artworks': artworks
+            }
+        )
 
 def artwork(request, artwork_id):             
     artwork = Artwork.objects.get(id=artwork_id)
