@@ -34,7 +34,8 @@
             {% endif %}
         </a>
         {% if user.is_superuser %}
-            <a href="{% url 'rates:rates_update' %}">modification des taux</a>
+        <a href="{% url 'dashboard' %}">Dashboard</a>    
+        <a href="{% url 'rates:rates_update' %}">modification des taux</a>
             <a href="{% url 'site_content:update_content' %}">Modifier le contenu du site</a>
             <a href="{% url 'artworks:artworks_list' %}">Liste des oeuvres</a>
             <a href="{% url 'artists:artists' %}">Liste des artistes</a>

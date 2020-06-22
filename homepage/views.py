@@ -11,6 +11,12 @@ def homepage(request):
         'homepage/homepage.html'
     )
 
+def dashboard(request):
+    return render(
+        request, 
+        'homepage/dashboard.html'
+    )
+
 class SearchResultsView(ListView):
     model = Artwork
     template_name = 'search_results.html'
@@ -19,8 +25,7 @@ class SearchResultsView(ListView):
             Q(name__icontains='el pueblo') | Q(artist__icontains='pablo')
         )
 
-def search_result_view(request):
-    print('POPOPPOPOP')
+def search_result_view(request):    
     ctx = {}
     url_parameter = request.GET.get("q")
 
@@ -30,8 +35,7 @@ def search_result_view(request):
         artworks = []
 
     ctx["artworks"] = artworks
-
-    print('POPOPPOPOP')
+    
     if request.is_ajax():
         html = render_to_string(
             template_name="homepage/artworks-results-partial.html", 
