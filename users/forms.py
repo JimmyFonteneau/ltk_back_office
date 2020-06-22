@@ -35,6 +35,16 @@ class RegisterForm(forms.Form):
         max_length=256,
         required=True,
     )
+    company = forms.CharField(
+        label = "Entreprise",
+        max_length=256,
+        required=False,
+    )
+    phone = forms.CharField(
+        label = "Téléphone",
+        max_length=12,
+        required=False,
+    )
     
     def clean(self):
         cleaned_data = super(RegisterForm, self).clean()

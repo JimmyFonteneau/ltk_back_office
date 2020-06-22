@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
 from .managers import CustomUserManager
 
 class UserProfile(AbstractUser):
@@ -20,6 +19,20 @@ class UserProfile(AbstractUser):
         max_length=256,
         blank=False,
         null=False,
+    )
+    company = models.CharField(
+        verbose_name="Entreprise",
+        max_length=256,
+        blank=False,
+        null=False,
+        default='default company',
+    )
+    phone = models.CharField(
+        verbose_name="Téléphone",
+        max_length=12,
+        blank=False,
+        null=False,
+        default='0000000000',
     )
 
     USERNAME_FIELD = 'email'

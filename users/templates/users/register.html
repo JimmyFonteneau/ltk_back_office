@@ -41,6 +41,18 @@
     {% if form.errors.lastname %}
         <span>{{ form.errors.lastname }}</span>
     {% endif %}
+
+    <label for="{{ form.company.id_for_label }}">{{ form.company.label }}</label><br>
+    {{ form.company }}<br>
+    {% if form.errors.company %}
+        <span>{{ form.errors.company }}</span>
+    {% endif %}
+
+    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label><br>
+    {{ form.phone }}<br>
+    {% if form.errors.phone %}
+        <span>{{ form.errors.phone }}</span>
+    {% endif %}
     
     <input type="submit" value="Valider"><br>
     
