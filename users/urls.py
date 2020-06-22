@@ -11,4 +11,6 @@ urlpatterns = [
     path('myaccount/', views.myaccount, name="myaccount"),
     path('account_settings/', views.account_settings, name="account_settings"),
     path('myorders/', views.myorders, name="myorders"),
+    path('all-users/', views.all_users, name='users_all'),
+    path('user-<int:user_id>/', views.user, name='user'),
 ]

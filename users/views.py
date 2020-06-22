@@ -118,3 +118,33 @@ def myorders(request):
             'orders': orders
         }
     )
+
+def all_users(request):
+    users = UserProfile.objects.all()
+    if request.user.is_superuser:        
+        return render(
+            request,
+            'users/users_list.html',
+            {
+                'users_list': users
+            }
+        )
+    else:
+        return HttpResponseRedirect(reverse("users:myaccount"))
+
+def user(request, user_id):             
+    user = UserProfile.objects.get(id=user_id)    
+    if request.method == 'POST':
+        form = AccountSettingsForm(request.POST, instance=user)
+        if form.is_valid():           
+            form.save()
+            return HttpResponseRedirect(reverse("users:users_all"))
+    else:
+        form = AccountSettingsForm(instance=user)
+    return render(
+        request,
+        'users/user_update.html',
+        {
+            'form': form,
+        }
+    ) 

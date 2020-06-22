@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+
+<p>{{ form.non_field_errors }}</p>
+<form method="post" action="{{ url_form }}">
+    {% csrf_token %}
+    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label><br>
+    {{ form.email }}<br>
+    {% if form.errors.email %}
+        <span>{{ form.errors.email }}</span>
+    {% endif %}
+    
+    {% if not modify %}        
+        
+        <label for="{{ form.raw_password.id_for_label }}">{{ form.raw_password.label }}</label><br>
+        {{ form.raw_password }}<br>
+        {% if form.errors.raw_password %}
+            <span>{{ form.errors.raw_password }}</span>
+        {% endif %}
+        
+        <label for="{{ form.raw_password_confirmation.id_for_label }}">{{ form.raw_password_confirmation.label }}</label><br>
+        {{ form.raw_password_confirmation }}<br>
+        {% if form.errors.raw_password_confirmation %}
+            <span>{{ form.errors.raw_password_confirmation }}</span>
+        {% endif %}
+
+        
+    {% endif %}
+
+    <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label><br>
+    {{ form.firstname }}<br>
+    {% if form.errors.firstname %}
+        <span>{{ form.errors.firstname }}</span>
+    {% endif %}
+
+    <label for="{{ form.lastname.id_for_label }}">{{ form.lastname.label }}</label><br>
+    {{ form.lastname }}<br>
+    {% if form.errors.lastname %}
+        <span>{{ form.errors.lastname }}</span>
+    {% endif %}
+
+    <label for="{{ form.company.id_for_label }}">{{ form.company.label }}</label><br>
+    {{ form.company }}<br>
+    {% if form.errors.company %}
+        <span>{{ form.errors.company }}</span>
+    {% endif %}
+
+    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label><br>
+    {{ form.phone }}<br>
+    {% if form.errors.phone %}
+        <span>{{ form.errors.phone }}</span>
+    {% endif %}
+    
+    <input type="submit" value="Valider"><br>
+    
+
+</form>
+
+{% endblock content %}
