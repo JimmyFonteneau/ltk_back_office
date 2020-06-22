@@ -85,4 +85,4 @@ class AccountSettingsForm(forms.ModelForm):
   
     class Meta:
         model = UserProfile
-        fields = ('firstname', 'lastname')
+        fields = ('firstname', 'lastname', 'email', 'company', 'phone')
