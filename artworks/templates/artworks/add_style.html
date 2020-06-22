@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}
+    New style
+{% endblock %}
+{% block content %}
+    <h2>New style</h2>
+    <form method="POST" enctype="multipart/form-data" class="artist-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

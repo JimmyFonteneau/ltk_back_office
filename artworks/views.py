@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import ArtworkForm, ModifyArtworkForm
-from .models import Artwork
+from .forms import ArtworkForm, ModifyArtworkForm, StyleForm
+from .models import Artwork, Artwork_Style
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from carts.forms import CartAddArtworkForm
+from django.db.models import Q
+from django.template.loader import render_to_string
+from django.http import HttpResponse, JsonResponse
 
 def is_superuser(user=None):    
     if user == None:
@@ -45,15 +48,34 @@ def update_artwork(request, artwork_id):
         }
     ) 
 
-def artworks_list(request):
+def artworks_list(request):    
     artworks = Artwork.objects.all()
-    print(request.user.is_superuser)
+    styles = Artwork_Style.objects.all()
+    ctx = {}
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:       
+        if int(url_parameter) > 0:
+            artworks = Artwork.objects.filter(style=url_parameter)
+    
+    ctx["artworks"] = artworks
+
     if request.user.is_superuser:
+        if request.is_ajax():
+            html = render_to_string(
+                template_name="artworks/artworks_filtered.html", 
+                context={"artworks": artworks}
+            )
+
+            data_dict = {"html_from_view": html}
+
+            return JsonResponse(data=data_dict, safe=False)
         return render(
             request, 
             'artworks/artworks_list_admin.html', 
             {
-                'artworks': artworks
+                'artworks': artworks,
+                'styles': styles,
             }
         )
     else :
@@ -76,3 +98,13 @@ def artwork(request, artwork_id):
             'cart_artwork_form': cart_artwork_form
         }
     )
+
+def add_style(request):
+    if request.method == "POST":
+        form = StyleForm(request.POST)
+        if form.is_valid():
+            form.save()           
+            return redirect("artworks:artworks_list")
+    else:
+        form = StyleForm()
+    return render(request, 'artworks/add_style.html', {'form': form})

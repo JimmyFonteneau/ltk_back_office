@@ -45,19 +45,21 @@
             <a href="{% url 'artists:artists' %}">Liste des artistes</a>
             <a href="{% url 'users:users_all' %}">Liste des utilisateurs</a>
         {% else %}
-            <a href="/">Logo</a>
-            <a href="/concept">Le concept</a>
-            <a href="{% url 'artists:artists' %}">Les artistes</a>
-            <a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a>
-            <a href="/contact">Contact</a>
-            <span class="cart">
-                <a href="{% url 'carts:cart_detail' %}">
-                    Mon panier ({{ cart|length }})
-                </a>
-            </span>
+
         {% endif %}
     {% else %}
+
         <a href="{% url 'users:login' %}">Connexion</a>
+        <a href="/">Logo</a>
+        <a href="/concept">Le concept</a>
+        <a href="{% url 'artists:artists' %}">Les artistes</a>
+        <a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a>
+        <a href="/contact">Contact</a>
+        <span class="cart">
+            <a href="{% url 'carts:cart_detail' %}">
+                Mon panier ({{ cart|length }})
+            </a>
+        </span>
     {% endif %}
 
     {% endblock body_header %}
