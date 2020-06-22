@@ -1,0 +1,9 @@
+{% if artworks %}
+  <ul>
+  {% for artwork in artworks %}
+    <li>{{ artwork.name }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No artworks found.</p>
+{% endif %}

@@ -6,10 +6,10 @@ class ArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price')
 
 class ModifyArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price')

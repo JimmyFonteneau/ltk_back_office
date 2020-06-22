@@ -30,7 +30,7 @@ class Artwork(models.Model):
     price = models.DecimalField(
         verbose_name="Prix (€)",
         max_digits=7, 
-        decimal_places=2,
+        decimal_places=0,
         blank=False,
         null=False,
     )
