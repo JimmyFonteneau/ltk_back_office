@@ -6,7 +6,11 @@
     <title>{% block title %}Galerie LTK{% endblock title %}</title>
     
     {% load static %}
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    {% if user.is_superuser %}
+        <link href="{% static 'css/admin.css' %}" rel="stylesheet">
+    {% else %}
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    {% endif %}   
     <script src="{% static 'js/base.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery-3.4.1.js' %}"></script>  
     {% progressive_web_app_meta %}
