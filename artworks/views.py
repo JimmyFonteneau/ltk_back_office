@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import ArtworkForm, ModifyArtworkForm, StyleForm, CategoryForm
-from .models import Artwork, Artwork_Style, Artwork_Category
+from .forms import ArtworkForm, ModifyArtworkForm, StyleForm, CategoryForm, StoragePlaceForm
+from .models import Artwork, Artwork_Style, Artwork_Category, Artwork_Storage_Place
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from carts.forms import CartAddArtworkForm
@@ -52,18 +52,24 @@ def artworks_list(request):
     artworks = Artwork.objects.all()
     styles = Artwork_Style.objects.all()
     categories = Artwork_Category.objects.all()
+    storage_places = Artwork_Storage_Place.objects.all()
 
     ctx = {}
     style = request.GET.get("s")
     category = request.GET.get("c")
+    sp = request.GET.get("sp")
 
     if style:       
         if int(style) > 0:
-            artworks = Artwork.objects.filter(style=style)
+            artworks = artworks.filter(style=style)
     
     if category:       
         if int(category) > 0:
-            artworks = Artwork.objects.filter(category=category)
+            artworks = artworks.filter(category=category)
+    
+    if sp:       
+        if int(sp) > 0:
+            artworks = artworks.filter(storage_place=sp)
     
     ctx["artworks"] = artworks
 
@@ -84,6 +90,7 @@ def artworks_list(request):
                 'artworks': artworks,
                 'styles': styles,
                 'categories': categories,
+                'storage_places': storage_places,
             }
         )
     else :
@@ -126,3 +133,13 @@ def add_category(request):
     else:
         form = CategoryForm()
     return render(request, 'artworks/add_category.html', {'form': form})
+
+def add_storage_place(request):
+    if request.method == "POST":
+        form = StoragePlaceForm(request.POST)
+        if form.is_valid():
+            form.save()           
+            return redirect("artworks:artworks_list")
+    else:
+        form = StoragePlaceForm()
+    return render(request, 'artworks/add_storage_place.html', {'form': form})

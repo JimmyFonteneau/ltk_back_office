@@ -5,7 +5,8 @@
             <th>Nom de l'oeuvre</th>
             <th>Nom de l'artiste</th> 
             <th>Style</th>
-            <th>Category</th>                   
+            <th>Category</th>
+            <th>Lieu de stockage</th>                   
         </tr>
     </thead>
     <tbody>
@@ -15,7 +16,8 @@
             <th>{{ artwork.name }}</th>
             <th>{{ artwork.artist.name }}</th>
             <th>{{ artwork.style }}</th> 
-            <th>{{ artwork.category }}</th>           
+            <th>{{ artwork.category }}</th>
+            <th>{{ artwork.storage_place }}</th>           
         </tr>                    
         {% endfor %}
     </tbody>

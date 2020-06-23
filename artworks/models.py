@@ -64,6 +64,16 @@ class Artwork(models.Model):
         default='',
     )
 
+    storage_place = models.ForeignKey(
+        "Artwork_Storage_Place",        
+        on_delete=models.CASCADE,
+        verbose_name = "Lieu de stockage",
+        db_index=True,
+        null=False,
+        blank=False,
+        default='',
+    )
+
     photo = models.ImageField(upload_to='artworks', default='/default.jpg')
 
     def __str__(self):
@@ -104,3 +114,19 @@ class Artwork_Category(models.Model):
     class Meta:
         verbose_name = "Catégorie de l'oeuvre"
         verbose_name_plural = "Catégories des oeuvres"
+
+class Artwork_Storage_Place(models.Model):
+
+    name = models.CharField(
+        verbose_name="Nom",
+        max_length=200,
+        blank=False,
+        null=False,
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Lieu de stockage de l'oeuvre"
+        verbose_name_plural = "Lieux de stockage des oeuvres"

@@ -1,18 +1,18 @@
 from django import forms
 
-from .models import Artwork, Artwork_Style, Artwork_Category
+from .models import Artwork, Artwork_Style, Artwork_Category, Artwork_Storage_Place
 
 class ArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place')
 
 class ModifyArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place')
 
 class StyleForm(forms.ModelForm):
 
@@ -24,4 +24,10 @@ class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Artwork_Category
+        fields = ('name', )
+
+class StoragePlaceForm(forms.ModelForm):
+
+    class Meta:
+        model = Artwork_Storage_Place
         fields = ('name', )

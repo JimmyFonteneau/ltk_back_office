@@ -7,6 +7,7 @@
     <a class="btn btn-primary" href="{% url 'artworks:artwork_new' %}" role="button">Ajouter une oeuvre</a>
     <a class="btn btn-primary" href="{% url 'artworks:add_style' %}" role="button">Ajouter un style</a>
     <a class="btn btn-primary" href="{% url 'artworks:add_category' %}" role="button">Ajouter une catégorie</a>
+    <a class="btn btn-primary" href="{% url 'artworks:add_storage_place' %}" role="button">Ajouter un lie de stockage</a>
 
     {% for style in styles %}
     <input type="checkbox" id="style_{{ style.id }}">
@@ -16,6 +17,11 @@
     {% for category in categories %}
     <input type="checkbox" id="category_{{ category.id }}">
     <label for="category_{{ category.id }}">{{ category.name }}</label>
+    {% endfor %}
+
+    {% for sp in storage_places %}
+    <input type="checkbox" id="sp_{{ sp.id }}">
+    <label for="sp_{{ sp.id }}">{{ sp.name }}</label>
     {% endfor %}
 
     <div id="replaceable-artwork">
@@ -48,11 +54,28 @@
             const request_parameters = {}
             const id = this.id.split('_')[1];
             const type = this.id.split('_')[0];
+            var inputsCheck= $('input[type="checkbox"]:checked')
 
-            if(this.checked) {
-                var inputsCheck= $('input[type="checkbox"]:checked')                 
-                var inputAlreadyCheck = Object.values(inputsCheck).find( i => i.id && i.id.split('_')[0] === type && i.id !== this.id);
-                if (inputAlreadyCheck) $(`#style_${inputAlreadyCheck.id}`).prop('checked', false);
+            Object.values(inputsCheck).forEach(ic => {
+                if (ic.id && ic.id.split('_')[0] !== type) {
+                    switch (ic.id.split('_')[0]) {
+                    case 'style':
+                        request_parameters.s = ic.id.split('_')[1]
+                        break;
+                    case 'category':
+                        request_parameters.c = ic.id.split('_')[1]
+                        break;
+                    case 'sp':
+                        request_parameters.sp = ic.id.split('_')[1]
+                        break;
+                }
+                }
+            });
+            
+
+            if(this.checked) {                                 
+                var inputAlreadyCheck = Object.values(inputsCheck).find( i => i.id && i.id.split('_')[0] === type && i.id.split('_')[1] !== id);
+                if (inputAlreadyCheck) $(`#${type}_${inputAlreadyCheck.id.split('_')[1]}`).prop('checked', false);
                 
                 switch (type) {
                     case 'style':
@@ -61,9 +84,13 @@
                     case 'category':
                         request_parameters.c = id
                         break;
+                    case 'sp':
+                        request_parameters.sp = id
+                        break;
                     default:
                         request_parameters.c = 0
-                        request_parameters.s = 0   
+                        request_parameters.s = 0
+                        request_parameters.sp = 0   
                     break;
                 }
                  
@@ -75,9 +102,12 @@
                     case 'category':
                         request_parameters.c = 0
                         break;
+                    case 'sp':
+                        request_parameters.sp = 0
                     default:
                         request_parameters.c = 0
-                        request_parameters.s = 0   
+                        request_parameters.s = 0
+                        request_parameters.sp = 0    
                     break;
                 }
             }                         
