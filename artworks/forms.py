@@ -12,7 +12,7 @@ class ModifyArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state', 'spotlight')
 
 class StyleForm(forms.ModelForm):
 

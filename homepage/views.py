@@ -4,11 +4,17 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView
 from artworks.models import Artwork
 from django.db.models import Q
+from artworks.models import Artwork
 
 def homepage(request):
+    artworks = Artwork.objects.all()
+    artworks = artworks.filter(spotlight=True)
     return render(
         request, 
-        'homepage/homepage.html'
+        'homepage/homepage.html',
+        {
+            'artworks': artworks,
+        }       
     )
 
 def dashboard(request):
