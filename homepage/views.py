@@ -38,7 +38,7 @@ def search_result_view(request):
     
     if request.is_ajax():
         html = render_to_string(
-            template_name="homepage/artworks-results-partial.html", 
+            template_name="artworks-results-partial.html", 
             context={"artworks": artworks}
         )
 
