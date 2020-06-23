@@ -4,7 +4,8 @@
             <th>Id</th>
             <th>Nom de l'oeuvre</th>
             <th>Nom de l'artiste</th> 
-            <th>Style</th>                   
+            <th>Style</th>
+            <th>Category</th>                   
         </tr>
     </thead>
     <tbody>
@@ -13,7 +14,8 @@
             <th>{{ artwork.id }}</th>
             <th>{{ artwork.name }}</th>
             <th>{{ artwork.artist.name }}</th>
-            <th>{{ artwork.style }}</th>           
+            <th>{{ artwork.style }}</th> 
+            <th>{{ artwork.category }}</th>           
         </tr>                    
         {% endfor %}
     </tbody>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import ArtworkForm, ModifyArtworkForm, StyleForm
-from .models import Artwork, Artwork_Style
+from .forms import ArtworkForm, ModifyArtworkForm, StyleForm, CategoryForm
+from .models import Artwork, Artwork_Style, Artwork_Category
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from carts.forms import CartAddArtworkForm
@@ -51,12 +51,19 @@ def update_artwork(request, artwork_id):
 def artworks_list(request):    
     artworks = Artwork.objects.all()
     styles = Artwork_Style.objects.all()
-    ctx = {}
-    url_parameter = request.GET.get("q")
+    categories = Artwork_Category.objects.all()
 
-    if url_parameter:       
-        if int(url_parameter) > 0:
-            artworks = Artwork.objects.filter(style=url_parameter)
+    ctx = {}
+    style = request.GET.get("s")
+    category = request.GET.get("c")
+
+    if style:       
+        if int(style) > 0:
+            artworks = Artwork.objects.filter(style=style)
+    
+    if category:       
+        if int(category) > 0:
+            artworks = Artwork.objects.filter(category=category)
     
     ctx["artworks"] = artworks
 
@@ -76,6 +83,7 @@ def artworks_list(request):
             {
                 'artworks': artworks,
                 'styles': styles,
+                'categories': categories,
             }
         )
     else :
@@ -108,3 +116,13 @@ def add_style(request):
     else:
         form = StyleForm()
     return render(request, 'artworks/add_style.html', {'form': form})
+
+def add_category(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()           
+            return redirect("artworks:artworks_list")
+    else:
+        form = CategoryForm()
+    return render(request, 'artworks/add_category.html', {'form': form})

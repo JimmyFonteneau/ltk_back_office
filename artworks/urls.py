@@ -10,4 +10,5 @@ urlpatterns = [
     path('artwork-<int:artwork_id>/', views.artwork, name="artwork_show"),
     path('update-artwork-<int:artwork_id>/', views.update_artwork, name="artwork_update"),
     path('new-style/', views.add_style, name="add_style"),
+    path('new-categorie/', views.add_category, name="add_category"),
 ]

@@ -6,10 +6,16 @@
     <h2>Toutes les oeuvres d'arts mode admin</h2>
     <a class="btn btn-primary" href="{% url 'artworks:artwork_new' %}" role="button">Ajouter une oeuvre</a>
     <a class="btn btn-primary" href="{% url 'artworks:add_style' %}" role="button">Ajouter un style</a>
+    <a class="btn btn-primary" href="{% url 'artworks:add_category' %}" role="button">Ajouter une catégorie</a>
 
     {% for style in styles %}
-    <input type="checkbox" id="{{ style.id }}">
-    <label for="{{ style.id }}">{{ style.name }}</label>
+    <input type="checkbox" id="style_{{ style.id }}">
+    <label for="style_{{ style.id }}">{{ style.name }}</label>
+    {% endfor %}
+
+    {% for category in categories %}
+    <input type="checkbox" id="category_{{ category.id }}">
+    <label for="category_{{ category.id }}">{{ category.name }}</label>
     {% endfor %}
 
     <div id="replaceable-artwork">
@@ -21,7 +27,7 @@
         // const user_input = $("#user-input")
         const artists_div = $('#replaceable-artwork')
         const endpoint = ''
-        const delay_by_in_ms = 700
+        const delay_by_in_ms = 100
         let scheduled_function = false
 
         let ajax_call = function (endpoint, request_parameters) {
@@ -40,14 +46,40 @@
 
         $('input[type="checkbox"]').change(function () {
             const request_parameters = {}
+            const id = this.id.split('_')[1];
+            const type = this.id.split('_')[0];
+
             if(this.checked) {
-                 var inputsCheck= $('input[type="checkbox"]:checked')
-                 console.log(inputsCheck);
-                 var inputAlreadyCheck = Object.values(inputsCheck).find( i => i.id && i.id !== this.id);
-                 if (inputAlreadyCheck) $(`#${inputAlreadyCheck.id}`).prop('checked', false);
-                request_parameters.q = this.id // value of user_input: the HTML element with ID user-input
+                var inputsCheck= $('input[type="checkbox"]:checked')                 
+                var inputAlreadyCheck = Object.values(inputsCheck).find( i => i.id && i.id.split('_')[0] === type && i.id !== this.id);
+                if (inputAlreadyCheck) $(`#style_${inputAlreadyCheck.id}`).prop('checked', false);
+                
+                switch (type) {
+                    case 'style':
+                        request_parameters.s = id
+                        break;
+                    case 'category':
+                        request_parameters.c = id
+                        break;
+                    default:
+                        request_parameters.c = 0
+                        request_parameters.s = 0   
+                    break;
+                }
+                 
             } else {
-                request_parameters.q = 0
+                switch (type) {
+                    case 'style':
+                        request_parameters.s = 0
+                        break;
+                    case 'category':
+                        request_parameters.c = 0
+                        break;
+                    default:
+                        request_parameters.c = 0
+                        request_parameters.s = 0   
+                    break;
+                }
             }                         
             
             // if scheduled_function is NOT false, cancel the execution of the function
