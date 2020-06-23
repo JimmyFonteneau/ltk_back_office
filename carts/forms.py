@@ -5,4 +5,5 @@ class CartAddArtworkForm(forms.Form):
 
     nb_month = forms.ModelChoiceField(
         queryset=Rate.objects.all(),
+        initial=Rate.objects.all()[0]
     )
