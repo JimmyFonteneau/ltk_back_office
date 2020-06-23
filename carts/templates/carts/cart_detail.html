@@ -20,7 +20,7 @@
         {% for item in cart %}
           {% with artwork=item.artwork %}
             <tr>
-              <td><img src="{{ artwork.photo.url }}"></td>
+              <td><img src="{{ artwork.photo.url }}" width="200"></td>
               <td>{{ artwork.name }}</td>
               <td>
                 <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
@@ -44,8 +44,8 @@
       </tbody>
     </table>
     <p>
-      <a href="{% url 'artworks:artworks_list' %}" class="button light">Voir d'autres oeuvres</a>
-      <a href="{% url 'carts:order_confirm' %}" class="button">Valider la commande</a>
+      <a href="{% url 'carts:order_confirm_noaccount' %}">Continuer sans compte</a>
+      <a href="{% url 'carts:order_confirm' %}">Valider la commande</a>
     </p>
   {% else %}
     <p>Votre panier est vide</p>

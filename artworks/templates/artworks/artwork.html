@@ -12,14 +12,17 @@
         <p>{{ artwork.width }}</p>
         <p>{{ artwork.artist.name }}</p>
         <p>{{ artwork.photo.url }}</p>
-        <img src="{{ artwork.photo.url }}">
+        <img src="{{ artwork.photo.url }}" width="200">
 
-        <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
-            {{ cart_artwork_form }}
-            {% csrf_token %}
-            <input type="submit" value="Ajouter au panier">
-        </form>
-        
+        {% if artwork.state == 1 %}   
+            <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
+                {{ cart_artwork_form }}
+                {% csrf_token %}
+                <input type="submit" value="Ajouter au panier">
+            </form>
+        {% else %}
+            <p>indispo</p>
+        {% endif %}   
     </div>
 
 {% endblock content %}

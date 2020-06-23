@@ -6,12 +6,13 @@
 
     {% for order in orders %}
         <div>
-            {{ order.id }}
-            {{ order.created_at }}
+            <p>{{ order.id }}</p>
+            <p>{{ order.created_at }}</p>
             {% for artwork in order.artworks.all %}
                 <p>{{ artwork }}</p>
             {% endfor %}
         </div>
+        <br>
     {% endfor %}
 		
 {% endblock content %}

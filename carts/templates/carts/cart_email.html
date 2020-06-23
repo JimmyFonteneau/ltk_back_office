@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    Votre email
+{% endblock %}
+{% block content %}
+  <h1>Votre email</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}

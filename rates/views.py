@@ -15,7 +15,7 @@ def add(request):
     return render(request, 'rates/add.html', {'form': form})
 
 def update(request):
-    rates = Rate.objects.all()    
+    rates = Rate.objects.all().order_by('duration')
     forms = []
     index = 0
     if request.method == 'POST':
