@@ -85,6 +85,11 @@ class Artwork(models.Model):
         default='',
     )
 
+    spotlight = models.BooleanField(
+        verbose_name="Mise en avant",
+        default=False,
+    )
+
     photo = models.ImageField(upload_to='artworks', default='/default.jpg')
 
     def __str__(self):
