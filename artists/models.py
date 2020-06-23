@@ -22,6 +22,11 @@ class Artist(models.Model):
         blank=True,
         null=True,
     )
+
+    spotlight = models.BooleanField(
+        verbose_name="Mise en avant",
+        default=False,
+    )
     
     def __str__(self):
         return self.name

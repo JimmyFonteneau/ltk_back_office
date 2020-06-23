@@ -5,9 +5,13 @@
 {% block content %}   
   <h2>This is the homepage</h2> 
 
-{% for artwork in artworks %}
-  <li>{{ artwork.name }}</li>
-{% endfor %}
+<ul>
+  {% for artwork in artworks %}
+    <li>{{ artwork.name }}</li>
+  {% endfor %}
 </ul>
+
+<p>Artiste à l'honneur</p>
+<p> {{ artist.name }} </p>
 
 {% endblock content %}

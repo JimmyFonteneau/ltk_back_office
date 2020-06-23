@@ -12,4 +12,4 @@ class ModifyArtistForm(forms.ModelForm):
 
     class Meta:
         model = Artist
-        fields = ('firstname', 'lastname','name',)
+        fields = ('firstname', 'lastname','name', 'spotlight',)
