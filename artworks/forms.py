@@ -6,13 +6,13 @@ class ArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state')
 
 class ModifyArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state')
 
 class StyleForm(forms.ModelForm):
 

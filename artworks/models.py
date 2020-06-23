@@ -4,6 +4,17 @@ from artists.models import Artist
 
 class Artwork(models.Model):
 
+    ARTWORK_STATES = (
+        (1, 'Non loué'),
+        (2, 'Loué'),
+    )
+
+    state = models.PositiveSmallIntegerField(
+        choices=ARTWORK_STATES,
+        default=1,
+        blank=True,
+        null=True, )
+
     name = models.CharField(
         verbose_name="Nom",
         max_length=200,

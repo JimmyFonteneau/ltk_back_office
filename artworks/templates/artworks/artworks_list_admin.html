@@ -24,6 +24,11 @@
     <label for="sp_{{ sp.id }}">{{ sp.name }}</label>
     {% endfor %}
 
+    {% for id, state in states %}
+    <input type="checkbox" id="state_{{ id }}">
+    <label for="state_{{ id }}">{{ state }}</label>
+    {% endfor %}
+
     <div id="replaceable-artwork">
         {% include './artworks_filtered.html' %}
     </div>
@@ -68,6 +73,9 @@
                     case 'sp':
                         request_parameters.sp = ic.id.split('_')[1]
                         break;
+                    case 'state':
+                        request_parameters.st = ic.id.split('_')[1]
+                        break;
                 }
                 }
             });
@@ -87,10 +95,14 @@
                     case 'sp':
                         request_parameters.sp = id
                         break;
+                    case 'state':
+                        request_parameters.st = id
+                        break;
                     default:
                         request_parameters.c = 0
                         request_parameters.s = 0
-                        request_parameters.sp = 0   
+                        request_parameters.sp = 0
+                        request_parameters.st = 0   
                     break;
                 }
                  
@@ -104,6 +116,8 @@
                         break;
                     case 'sp':
                         request_parameters.sp = 0
+                    case 'st':
+                        request_parameters.st = 0
                     default:
                         request_parameters.c = 0
                         request_parameters.s = 0

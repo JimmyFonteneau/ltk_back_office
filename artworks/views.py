@@ -58,6 +58,7 @@ def artworks_list(request):
     style = request.GET.get("s")
     category = request.GET.get("c")
     sp = request.GET.get("sp")
+    st = request.GET.get("st")
 
     if style:       
         if int(style) > 0:
@@ -70,6 +71,10 @@ def artworks_list(request):
     if sp:       
         if int(sp) > 0:
             artworks = artworks.filter(storage_place=sp)
+    
+    if st:       
+        if int(st) > 0:
+            artworks = artworks.filter(state=st)
     
     ctx["artworks"] = artworks
 
@@ -91,6 +96,7 @@ def artworks_list(request):
                 'styles': styles,
                 'categories': categories,
                 'storage_places': storage_places,
+                'states': Artwork.ARTWORK_STATES,
             }
         )
     else :

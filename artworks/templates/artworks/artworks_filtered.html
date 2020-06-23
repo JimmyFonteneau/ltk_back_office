@@ -6,7 +6,8 @@
             <th>Nom de l'artiste</th> 
             <th>Style</th>
             <th>Category</th>
-            <th>Lieu de stockage</th>                   
+            <th>Lieu de stockage</th> 
+            <th>Etat</th>                   
         </tr>
     </thead>
     <tbody>
@@ -17,7 +18,13 @@
             <th>{{ artwork.artist.name }}</th>
             <th>{{ artwork.style }}</th> 
             <th>{{ artwork.category }}</th>
-            <th>{{ artwork.storage_place }}</th>           
+            <th>{{ artwork.storage_place }}</th>
+            {% if artwork.state == 1 %}
+            <th>Non loué</th>
+            {% endif %} 
+            {% if artwork.state == 2 %}
+            <th>Loué</th>
+            {% endif %}        
         </tr>                    
         {% endfor %}
     </tbody>
