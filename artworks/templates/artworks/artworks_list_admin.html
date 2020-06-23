@@ -30,7 +30,7 @@
     {% endfor %}
 
     <div id="replaceable-artwork">
-        {% include './artworks_filtered.html' %}
+        {% include './artworks_filtered_admin.html' %}
     </div>
 
 <script>
@@ -121,7 +121,8 @@
                     default:
                         request_parameters.c = 0
                         request_parameters.s = 0
-                        request_parameters.sp = 0    
+                        request_parameters.sp = 0 
+                        request_parameters.st = 0  
                     break;
                 }
             }                         

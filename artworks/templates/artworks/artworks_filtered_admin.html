@@ -1,0 +1,51 @@
+<table id="artwork_table" class="display">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom de l'oeuvre</th>
+            <th>Nom de l'artiste</th> 
+            <th>Style</th>
+            <th>Category</th>
+            <th>Lieu de stockage</th> 
+            <th>Etat</th>                   
+        </tr>
+    </thead>
+    <tbody>
+        {% for artwork in artworks %}
+        <tr>
+            <th>{{ artwork.id }}</th>
+            <th>{{ artwork.name }}</th>
+            <th>{{ artwork.artist.name }}</th>
+            <th>{{ artwork.style }}</th> 
+            <th>{{ artwork.category }}</th>
+            <th>{{ artwork.storage_place }}</th>
+            {% if artwork.state == 1 %}
+            <th>Non loué</th>
+            {% endif %} 
+            {% if artwork.state == 2 %}
+            <th>Loué</th>
+            {% endif %}        
+        </tr>                    
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function() {                   
+        var artwork_table = $('#artwork_table').DataTable({
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
+        });
+        $('#artwork_table tbody').on('click', 'tr', function () {
+            var data = artwork_table.row( this ).data();
+            var id = data[0];
+            console.log(document.location);
+            document.location.pathname = `artworks/update-artwork-${id}/`;
+         });
+    });
+</script>

@@ -81,7 +81,7 @@ def artworks_list(request):
     if request.user.is_superuser:
         if request.is_ajax():
             html = render_to_string(
-                template_name="artworks/artworks_filtered.html", 
+                template_name="artworks/artworks_filtered_admin.html", 
                 context={"artworks": artworks}
             )
 
@@ -100,11 +100,22 @@ def artworks_list(request):
             }
         )
     else :
+        if request.is_ajax():
+            html = render_to_string(
+                template_name="artworks/artworks_filtered.html", 
+                context={"artworks": artworks}
+            )
+
+            data_dict = {"html_from_view": html}
+
+            return JsonResponse(data=data_dict, safe=False)
         return render(
             request, 
             'artworks/artworks_list.html', 
             {
-                'artworks': artworks
+                'artworks': artworks,
+                'styles': styles,
+                'categories': categories,
             }
         )
 

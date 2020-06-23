@@ -4,13 +4,103 @@
 {% endblock %}
 {% block content %}
 <h2>Toutes les oeuvres d'arts</h2>    
-{% for artwork in artworks %}
-    <div>
-        <p>{{ artwork.name }}</p>
-        <p>{{ artwork.height }}</p>
-        <p>{{ artwork.width }}</p>
-        <p>{{ artwork.artist.name }}</p>
-        <a class="btn btn-primary" href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}" role="button">Show</a> 
-    </div>
-    {% endfor %}
+
+{% for style in styles %}
+<input type="checkbox" id="style_{{ style.id }}">
+<label for="style_{{ style.id }}">{{ style.name }}</label>
+{% endfor %}
+
+{% for category in categories %}
+<input type="checkbox" id="category_{{ category.id }}">
+<label for="category_{{ category.id }}">{{ category.name }}</label>
+{% endfor %}
+
+<div id="replaceable-artwork-site">
+    {% include './artworks_filtered.html' %}
+</div>
+
+<script>
+    $( document ).ready(function() {
+        // const user_input = $("#user-input")
+        const artists_div = $('#replaceable-artwork-site')
+        const endpoint = ''
+        const delay_by_in_ms = 100
+        let scheduled_function = false
+
+        let ajax_call = function (endpoint, request_parameters) {
+            $.getJSON(endpoint, request_parameters)
+                .done(response => {
+                    // fade out the artists_div, then:
+                    artists_div.fadeTo('slow', 0).promise().then(() => {
+                        // replace the HTML contents
+                        artists_div.html(response['html_from_view'])
+                        // fade-in the div with new contents
+                        artists_div.fadeTo('slow', 1)
+                    })
+                })
+        }
+
+
+        $('input[type="checkbox"]').change(function () {
+            const request_parameters = {}
+            const id = this.id.split('_')[1];
+            const type = this.id.split('_')[0];
+            var inputsCheck= $('input[type="checkbox"]:checked')
+
+            Object.values(inputsCheck).forEach(ic => {
+                if (ic.id && ic.id.split('_')[0] !== type) {
+                    switch (ic.id.split('_')[0]) {
+                    case 'style':
+                        request_parameters.s = ic.id.split('_')[1]
+                        break;
+                    case 'category':
+                        request_parameters.c = ic.id.split('_')[1]
+                        break;
+                }
+            }
+        });
+            
+
+            if(this.checked) {                                 
+                var inputAlreadyCheck = Object.values(inputsCheck).find( i => i.id && i.id.split('_')[0] === type && i.id.split('_')[1] !== id);
+                if (inputAlreadyCheck) $(`#${type}_${inputAlreadyCheck.id.split('_')[1]}`).prop('checked', false);
+                
+                switch (type) {
+                    case 'style':
+                        request_parameters.s = id
+                        break;
+                    case 'category':
+                        request_parameters.c = id
+                        break;
+                    default:
+                        request_parameters.c = 0
+                        request_parameters.s = 0 
+                    break;
+                }
+                 
+            } else {
+                switch (type) {
+                    case 'style':
+                        request_parameters.s = 0
+                        break;
+                    case 'category':
+                        request_parameters.c = 0
+                        break;
+                    default:
+                        request_parameters.c = 0
+                        request_parameters.s = 0
+                    break;
+                }
+            }                         
+            
+            // if scheduled_function is NOT false, cancel the execution of the function
+            if (scheduled_function) {
+                clearTimeout(scheduled_function)
+            }
+
+            // setTimeout returns the ID of the function to be executed
+            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+        })
+    });
+</script>
 {% endblock content %}
