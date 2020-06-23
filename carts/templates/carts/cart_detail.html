@@ -20,7 +20,7 @@
         {% for item in cart %}
           {% with artwork=item.artwork %}
             <tr>
-              <td><img src="{{ artwork.photo.url }}"></td>
+              <td><img src="{{ artwork.photo.url }}" width="200"></td>
               <td>{{ artwork.name }}</td>
               <td>
                 <form action="{% url 'carts:cart_add' artwork.id %}" method="post">

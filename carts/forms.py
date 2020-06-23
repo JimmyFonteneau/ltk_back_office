@@ -4,6 +4,5 @@ from rates.models import Rate
 class CartAddArtworkForm(forms.Form):
 
     nb_month = forms.ModelChoiceField(
-        queryset=Rate.objects.all(),
-        initial=Rate.objects.all()[0]
+        queryset=Rate.objects.all().order_by('duration')
     )

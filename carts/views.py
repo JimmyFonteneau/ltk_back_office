@@ -51,6 +51,9 @@ def order_confirm(request):
     artworks = []
     for item in cart:
         artworks.append(item['artwork'])
+        artwork = Artwork.objects.get(id=item['artwork'].id)
+        artwork.state = 2
+        artwork.save()
     order.artworks.set(artworks)
     order.save()
     cart.clear()
