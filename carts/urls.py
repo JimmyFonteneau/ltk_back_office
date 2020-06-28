@@ -5,8 +5,6 @@ app_name = 'carts'
 
 urlpatterns = [
     path(r'mycart/', views.cart_detail, name='cart_detail'),
-    path(r'order-confirm/', views.order_confirm, name='order_confirm'),
-    path(r'order-confirm-noaccount/', views.order_confirm_noaccount, name='order_confirm_noaccount'),
     path(r'add-<int:artwork_id>/', views.cart_add, name='cart_add'),
     path(r'remove-<int:artwork_id>/', views.cart_remove, name='cart_remove'),
 ]

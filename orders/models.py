@@ -5,13 +5,13 @@ from artworks.models import Artwork
 
 class Order(models.Model):
 
-    UserProfile = models.ForeignKey(
+    user = models.ForeignKey(
         UserProfile,
         on_delete=models.CASCADE,
-        verbose_name = "Artiste",
         db_index=True,
         null=False,
         blank=False,
+        related_name='order_user'
     )
 
     price = models.DecimalField(
@@ -22,11 +22,11 @@ class Order(models.Model):
         null=False,
     )
 
-    artworks = models.ManyToManyField(Artwork)
+    artworks = models.ManyToManyField(Artwork, related_name='order_artwork')
 
     def __str__(self):
-        return self.name
+        return str(self.user) + ' - ' + str(self.price) + '€'
 
     class Meta:
-        verbose_name = "Oeuvre"
-        verbose_name_plural = "Oeuvres"
+        verbose_name = "Commande"
+        verbose_name_plural = "Commandes"

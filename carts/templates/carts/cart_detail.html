@@ -44,8 +44,8 @@
       </tbody>
     </table>
     <p>
-      <a href="{% url 'carts:order_confirm_noaccount' %}">Continuer sans compte</a>
-      <a href="{% url 'carts:order_confirm' %}">Valider la commande</a>
+      <a href="{% url 'orders:order_confirm_noaccount' %}">Continuer sans compte</a>
+      <a href="{% url 'orders:order_confirm' %}">Valider la commande</a>
     </p>
   {% else %}
     <p>Votre panier est vide</p>
