@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'pwa',
     'whitenoise.runserver_nostatic',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +115,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CART_SESSION_ID = 'cart'
 
@@ -167,4 +167,9 @@ PWA_APP_ICONS = [
       "type": "image/png",
       "sizes": "512x512"
     }
+]
+
+
+CRONJOBS = [
+    ('*/1 * * * *', 'los_artistos.cron.my_scheduled_job', '>> /home/jimmy/log/file.log')
 ]
