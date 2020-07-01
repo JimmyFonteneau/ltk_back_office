@@ -109,7 +109,7 @@ def account_settings(request):
 
 @login_required
 def myorders(request):
-    orders = Order.objects.filter(user=request.user)
+    orders = Order.objects.filter(user=request.user, state=2)
     return render(
         request,
         'users/myorders.html',

@@ -5,6 +5,19 @@ from artworks.models import Artwork
 
 class Order(models.Model):
 
+    ORDER_STATES = (
+        (1, 'En attente'),
+        (2, 'Confirmée'),
+        (3, 'Refusée'),
+    )
+
+    state = models.PositiveSmallIntegerField(
+        choices=ORDER_STATES,
+        default=2,
+        blank=False,
+        null=False
+    )
+
     user = models.ForeignKey(
         UserProfile,
         on_delete=models.CASCADE,

@@ -18,7 +18,8 @@ def order_confirm(request):
     cart = Cart(request)
     order = Order.objects.create(
         user = request.user,
-        price = cart.get_total_price()
+        price = cart.get_total_price(),
+        state = 2
     )
     artworks = []
     for item in cart:
@@ -42,15 +43,32 @@ def order_confirm_noaccount(request):
         form = OrderEmailForm(request.POST)
         if form.is_valid():
             cart = Cart(request)
-            url = '<a href="'+settings.ALLOWED_HOSTS[0]+'/orders/create-user-orders-'+form.cleaned_data['email']+'-'+"1"+'/">Créer l\'utilisateur et ses commandes</a>'
+            user = UserProfile.objects.create(
+                email = form.cleaned_data['email'],
+                username = form.cleaned_data['email'],
+                password = 'pbkdf2_sha256$150000$2dRlISozxbnS$J7k+eU3tLNXxQjbhdnng1vKI863U7kcLgWrRwOmxqsc='
+            )
+            order = Order.objects.create(
+                user = user,
+                price = cart.get_total_price(),
+                state = 1
+            )
+            artworks = []
+            for item in cart:
+                artworks.append(item['artwork'])
+                artwork = Artwork.objects.get(id=item['artwork'].id)
+                artwork.state = 2
+                artwork.save()
+            order.artworks.set(artworks)
+            order.save()
+            cart.clear()
             send_mail(
                 'Demande de location',
-                url,
+                '<a href="'+settings.ALLOWED_HOSTS[0]+'/orders/accept-order-'+str(order.id)+'">Accepter la commande</a>\n<a href="'+settings.ALLOWED_HOSTS[0]+'/orders/deny-order-'+str(order.id)+'">Refuser la commande</a>',
                 form.cleaned_data['email'],
                 ['admin@email.com'],
                 fail_silently=False,
             )
-            cart.clear()
             return render(
                 request, 
                 'orders/order_confirm_noaccount.html', 
@@ -67,12 +85,15 @@ def order_confirm_noaccount(request):
     )
 
 @user_passes_test(is_superuser)
-def create_user_orders(request, **kwargs):
-    user = UserProfile.objects.create(
-        email = kwargs['user_email'],
-        username = kwargs['user_email']
-    )
-    artwork = Artwork.objects.get(id=kwargs['artwork_id'])
-    #artwork.state = 2
-    #artwork.save()
-    return render( request, 'orders/create_user_orders.html', {})
+def accept_order(request, **kwargs):
+    order = Order.objects.get(id=kwargs['order_id'])
+    order.state = 2
+    order.save()
+    return render(request, 'orders/accept_order.html', {})
+
+@user_passes_test(is_superuser)
+def deny_order(request, **kwargs):
+    order = Order.objects.get(id=kwargs['order_id'])
+    order.state = 3
+    order.save()
+    return render(request, 'orders/deny_order.html', {})

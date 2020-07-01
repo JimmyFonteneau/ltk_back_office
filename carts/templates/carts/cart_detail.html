@@ -44,7 +44,9 @@
       </tbody>
     </table>
     <p>
-      <a href="{% url 'orders:order_confirm_noaccount' %}">Continuer sans compte</a>
+      {% if !user.is_authenticated %}
+        <a href="{% url 'orders:order_confirm_noaccount' %}">Continuer sans compte</a>
+      {% endif %}
       <a href="{% url 'orders:order_confirm' %}">Valider la commande</a>
     </p>
   {% else %}
