@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.sites.models import Site
+from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from carts.cart import Cart
@@ -42,7 +42,7 @@ def order_confirm_noaccount(request):
         form = OrderEmailForm(request.POST)
         if form.is_valid():
             cart = Cart(request)
-            url = '<a href="'+Site.objects.get_current()+'/orders/create-user-orders-'+form.cleaned_data['email']+'-'+1+'/">Créer l\'utilisateur et ses commandes</a>'
+            url = '<a href="'+settings.ALLOWED_HOSTS[0]+'/orders/create-user-orders-'+form.cleaned_data['email']+'-'+"1"+'/">Créer l\'utilisateur et ses commandes</a>'
             send_mail(
                 'Demande de location',
                 url,

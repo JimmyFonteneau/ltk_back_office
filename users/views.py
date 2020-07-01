@@ -6,8 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm, RegisterForm, AccountSettingsForm
 from .models import UserProfile
-from carts.models import Order
-
+from orders.models import Order
 
 def register_view(request):
     if request.user.is_authenticated:
