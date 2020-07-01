@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from artworks.models import Artwork
-from .models import Order
+from orders.models import Order
 from .cart import Cart
 from .forms import CartAddArtworkForm
 from rates.models import Rate

@@ -6,8 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm, RegisterForm, AccountSettingsForm
 from .models import UserProfile
-from carts.models import Order
-
+from orders.models import Order
 
 def register_view(request):
     if request.user.is_authenticated:
@@ -110,7 +109,7 @@ def account_settings(request):
 
 @login_required
 def myorders(request):
-    orders = Order.objects.filter(user=request.user)
+    orders = Order.objects.filter(user=request.user, state=2)
     return render(
         request,
         'users/myorders.html',

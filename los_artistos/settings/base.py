@@ -140,6 +140,7 @@ LOGIN_URL = '/users/login/'
 
 LOGIN_REDIRECT_URL = '/users/myaccount/'
 
+SITE_ID = 1
 
 # PWA
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'serviceworker.js')
@@ -153,17 +154,17 @@ PWA_APP_SCOPE = '/'
 PWA_APP_START_URL = '/' 
 PWA_APP_ICONS = [
     {
-      "src": "static/images/favicon.ico",
+      "src": "/static/images/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "static/images/logo192.png",
+      "src": "/static/images/logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "static/images/logo512.png",
+      "src": "/static/images/logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
