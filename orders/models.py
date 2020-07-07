@@ -35,6 +35,9 @@ class Order(models.Model):
         null=False,
     )
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     artworks = models.ManyToManyField(Artwork, related_name='order_artwork')
 
     def __str__(self):
