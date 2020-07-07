@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from carts.cart import Cart
 from artworks.models import Artwork
 from .models import Order
-from .forms import OrderEmailForm
+from .forms import OrderEmailForm, OrderUpdate
 from users.models import UserProfile
 import random, string
 
@@ -99,3 +99,30 @@ def deny_order(request, **kwargs):
     order.state = 3
     order.save()
     return render(request, 'orders/deny_order.html', {})
+
+def order_update(request, order_id):             
+    order = Order.objects.get(id=order_id)    
+    if request.method == 'POST':
+        form = OrderUpdate(request.POST, instance=order)
+        if form.is_valid():           
+            form.save()
+    else:
+        form = OrderUpdate(instance=order)
+    return render(
+        request,
+        'orders/order_update.html',
+        {
+            'form': form,
+        }
+    ) 
+
+def orders_list(request):
+    orders = Order.objects.all()
+    if request.user.is_superuser:
+        return render(
+            request,
+            'orders/orders_list.html',
+            {
+                'orders_list': orders,
+            }
+        )
