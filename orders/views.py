@@ -7,6 +7,7 @@ from artworks.models import Artwork
 from .models import Order
 from .forms import OrderEmailForm
 from users.models import UserProfile
+import random, string
 
 def is_superuser(user=None):    
     if user == None:
@@ -46,7 +47,7 @@ def order_confirm_noaccount(request):
             user = UserProfile.objects.create(
                 email = form.cleaned_data['email'],
                 username = form.cleaned_data['email'],
-                password = ''.join(random.choices(string.ascii_uppercase + string.digits, k=N))
+                password = ''.join(random.choices(string.ascii_uppercase + string.digits))
             )
             user.save()
             order = Order.objects.create(
@@ -65,7 +66,7 @@ def order_confirm_noaccount(request):
             cart.clear()
             send_mail(
                 'Demande de location',
-                '<a href="'+settings.ALLOWED_HOSTS[1]+'/orders/accept-order-'+str(order.id)+'">Accepter la commande</a>\n<a href="'+settings.ALLOWED_HOSTS[1]+'/orders/deny-order-'+str(order.id)+'">Refuser la commande</a>',
+                '<a href="'+settings.ALLOWED_HOSTS[1]+'orders/accept-order-'+str(order.id)+'">Accepter la commande</a>\n<a href="'+settings.ALLOWED_HOSTS[1]+'orders/deny-order-'+str(order.id)+'">Refuser la commande</a>',
                 form.cleaned_data['email'],
                 ['admin@email.com'],
                 fail_silently=False,
