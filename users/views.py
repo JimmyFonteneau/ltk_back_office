@@ -159,7 +159,7 @@ def forgot_password(request):
             user.save()
             send_mail(
                 'Demande de récupération de mot de passe',
-                '<a href="'+settings.URL_TEST+'users/updated-password-'+str(user.id)+'">Modifier mon mot de passe</a>',
+                '<a href="'+settings.ALLOWED_HOSTS[1]+'users/updated-password-'+str(user.id)+'">Modifier mon mot de passe</a>',
                 form.cleaned_data['email'],
                 ['admin@email.com'],
                 fail_silently=False,

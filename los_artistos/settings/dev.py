@@ -1,7 +1,6 @@
 from .base import *
 
-ALLOWED_HOSTS = ['127.0.0.1']
-URL_TEST = 'http://127.0.0.1:8000/'
+ALLOWED_HOSTS = ['127.0.0.1','http://127.0.0.1:8000/']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
