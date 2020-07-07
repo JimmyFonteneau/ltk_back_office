@@ -6,14 +6,15 @@
     <div>
         {% csrf_token %}        
         <input type="hidden" name="artwork_id" value="{{ artwork.id }}"></input>
+        <input type="hidden" name="artwork_timer" value="{{ artwork.timer|date:'Y-m-d' }}"></input>
         
         <p>{{ artwork.name }}</p>
         <p>{{ artwork.height }}</p>
         <p>{{ artwork.width }}</p>
         <p>{{ artwork.artist.name }}</p>
         <p>{{ artwork.photo.url }}</p>
+        <p id="timer"></p>
         <img src="{{ artwork.photo.url }}" width="200">
-
         {% if artwork.state == 1 %}   
             <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
                 {{ cart_artwork_form }}
@@ -25,5 +26,13 @@
         {% endif %}   
     </div>
 
-{% endblock content %}
+    <script>
+        $(document).ready(function() {
+            $('#timer').html(moment($('input[name="artwork_timer"]').val()).countdown().toString())
+            setInterval(() => {
+                $('#timer').html(moment($('input[name="artwork_timer"]').val()).countdown().toString())
+            }, 1000);
+        });
+    </script>
 
+{% endblock content %}

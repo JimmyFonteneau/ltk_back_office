@@ -1,6 +1,7 @@
 from django.db import models
 
 from artists.models import Artist
+from django.utils import timezone
 
 class Artwork(models.Model):
 
@@ -90,7 +91,17 @@ class Artwork(models.Model):
         default=False,
     )
 
-    photo = models.ImageField(upload_to='artworks', default='/default.jpg')
+    photo = models.ImageField(
+        upload_to='artworks', 
+        default='/default.jpg'
+    )
+
+    timer = models.DateField(
+        verbose_name="Timer",
+        null=False,
+        blank=False,
+        default=timezone.now(),
+    )
 
     def __str__(self):
         return self.name

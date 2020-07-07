@@ -12,7 +12,13 @@ class ModifyArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state', 'spotlight')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state', 'spotlight', 'timer')
+        widgets = {
+            'timer': forms.DateInput(
+                attrs={'type': 'date'},
+                format='%Y-%m-%d'
+            )
+        }
 
 class StyleForm(forms.ModelForm):
 
