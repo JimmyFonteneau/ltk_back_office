@@ -2,6 +2,7 @@ from django.db import models
 
 from users.models import UserProfile
 from artworks.models import Artwork
+from rates.models import Rate
 
 class Order(models.Model):
 
@@ -39,6 +40,15 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     artworks = models.ManyToManyField(Artwork, related_name='order_artwork')
+    rate = models.ForeignKey(
+        Rate,
+        related_name='order_rate',
+        on_delete=models.CASCADE,
+        db_index=True,
+        null=False,
+        blank=False,
+        default=1,
+    )
 
     def __str__(self):
         return str(self.user) + ' - ' + str(self.price) + '€'
