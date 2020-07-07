@@ -46,8 +46,9 @@ def order_confirm_noaccount(request):
             user = UserProfile.objects.create(
                 email = form.cleaned_data['email'],
                 username = form.cleaned_data['email'],
-                password = 'pbkdf2_sha256$150000$2dRlISozxbnS$J7k+eU3tLNXxQjbhdnng1vKI863U7kcLgWrRwOmxqsc='
+                password = ''.join(random.choices(string.ascii_uppercase + string.digits, k=N))
             )
+            user.save()
             order = Order.objects.create(
                 user = user,
                 price = cart.get_total_price(),
