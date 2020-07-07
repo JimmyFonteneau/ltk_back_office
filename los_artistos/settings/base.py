@@ -174,3 +174,5 @@ PWA_APP_ICONS = [
 CRONJOBS = [
     ('*/1 * * * *', 'los_artistos.cron.my_scheduled_job', '>> /home/jimmy/log/file.log')
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

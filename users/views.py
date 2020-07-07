@@ -4,9 +4,11 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm, RegisterForm, AccountSettingsForm
+from .forms import LoginForm, RegisterForm, AccountSettingsForm, ForgotPassword, UpdatedPassword
 from .models import UserProfile
 from orders.models import Order
+from django.core.mail import send_mail
+from django.conf import settings
 
 def register_view(request):
     if request.user.is_authenticated:
@@ -145,5 +147,55 @@ def user(request, user_id):
         'users/user_update.html',
         {
             'form': form,
+        }
+    ) 
+
+def forgot_password(request):                    
+    if request.method == 'POST':
+        form = ForgotPassword(request.POST)        
+        if form.is_valid():           
+            user = UserProfile.objects.get(email=form.cleaned_data['email'])            
+            user.updated_password = True
+            user.save()
+            send_mail(
+                'Demande de récupération de mot de passe',
+                '<a href="'+settings.ALLOWED_HOSTS[1]+'users/updated-password-'+str(user.id)+'">Modifier mon mot de passe</a>',
+                form.cleaned_data['email'],
+                ['admin@email.com'],
+                fail_silently=False,
+            )
+    else:
+        form = ForgotPassword()
+    return render(
+        request,
+        'users/forgot_password.html',
+        {
+            'form': form,
+        }
+    ) 
+
+   
+def updated_password (request, user_id):                         
+    user = user = UserProfile.objects.get(id=user_id) 
+    if user.updated_password == False:
+        return HttpResponse('Action non autorisée, l\'utilisateur n\'a pas demandé de modification de mot de passe')
+    if request.method == 'POST':
+        form = UpdatedPassword(request.POST)        
+        if form.is_valid():           
+            user.set_password(form.cleaned_data['raw_password'])
+            user.updated_password = False
+            user.save()
+            return render(
+                request,
+                'users/password_validate.html',
+            )   
+    else:
+        form = UpdatedPassword()
+    return render(
+        request,
+        'users/updated_password.html',
+        {
+            'form': form,
+            'url_form': reverse('users:updated_password', kwargs={'user_id': str(user_id) }),
         }
     ) 

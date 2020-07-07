@@ -65,7 +65,7 @@ def order_confirm_noaccount(request):
             cart.clear()
             send_mail(
                 'Demande de location',
-                '<a href="'+settings.ALLOWED_HOSTS[0]+'/orders/accept-order-'+str(order.id)+'">Accepter la commande</a>\n<a href="'+settings.ALLOWED_HOSTS[0]+'/orders/deny-order-'+str(order.id)+'">Refuser la commande</a>',
+                '<a href="'+settings.ALLOWED_HOSTS[1]+'/orders/accept-order-'+str(order.id)+'">Accepter la commande</a>\n<a href="'+settings.ALLOWED_HOSTS[1]+'/orders/deny-order-'+str(order.id)+'">Refuser la commande</a>',
                 form.cleaned_data['email'],
                 ['admin@email.com'],
                 fail_silently=False,

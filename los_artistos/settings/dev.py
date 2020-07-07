@@ -1,7 +1,6 @@
 from .base import *
 
-ALLOWED_HOSTS = ['127.0.0.1']
-
+ALLOWED_HOSTS = ['127.0.0.1','http://127.0.0.1:8000/']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -14,5 +13,5 @@ DATABASES = {
     }
 }
 
-EMAIL_HOST = "127.0.0.1"
-EMAIL_PORT = 1025
+# EMAIL_HOST = "127.0.0.1"
+# EMAIL_PORT = 1025

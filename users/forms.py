@@ -86,3 +86,41 @@ class AccountSettingsForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('firstname', 'lastname', 'email', 'company', 'phone')
+
+class ForgotPassword(forms.Form):
+
+    email = forms.CharField(
+        label = "Email",
+        max_length=64,
+        required=True,
+    )
+
+class UpdatedPassword(forms.Form):
+
+    raw_password = forms.CharField(
+        label = "Mot de passe",
+        max_length=256,
+        min_length=10,
+        required=True,
+        help_text = "10 caractères minimum",
+        widget=forms.PasswordInput(),
+    )
+    raw_password_confirmation = forms.CharField(
+        label = "Mot de passe (confirmation)",
+        max_length=256,
+        min_length=10,
+        required=True,
+        widget=forms.PasswordInput(),
+    )
+    
+    def clean(self):
+        cleaned_data = super(UpdatedPassword, self).clean()
+        raw_password = cleaned_data.get('raw_password')
+        raw_password_confirmation = cleaned_data.get('raw_password_confirmation')
+        if len(raw_password) < 10:
+            raise forms.ValidationError("Le mot de passe doit faire 10 caractères minimum")
+        if raw_password and raw_password_confirmation:
+            if raw_password != raw_password_confirmation:
+                raise forms.ValidationError("Les mots de passe ne sont pas identiques")
+        
+        return cleaned_data

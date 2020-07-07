@@ -13,4 +13,6 @@ urlpatterns = [
     path('myorders/', views.myorders, name="myorders"),
     path('all-users/', views.all_users, name='users_all'),
     path('user-<int:user_id>/', views.user, name='user'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('updated-password-<int:user_id>', views.updated_password, name='updated_password'),   
 ]

@@ -35,6 +35,12 @@ class UserProfile(AbstractUser):
         default='0000000000',
     )
 
+    updated_password = models.BooleanField(
+        default=False,
+        blank=False,
+        null=False,        
+    )
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
