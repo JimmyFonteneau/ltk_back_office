@@ -155,6 +155,8 @@ def forgot_password(request):
         form = ForgotPassword(request.POST)        
         if form.is_valid():           
             user = UserProfile.objects.get(email=form.cleaned_data['email'])            
+            user.updated_password = True
+            user.save()
             send_mail(
                 'Demande de récupération de mot de passe',
                 '<a href="'+settings.URL_TEST+'users/updated-password-'+str(user.id)+'">Modifier mon mot de passe</a>',
@@ -175,10 +177,13 @@ def forgot_password(request):
    
 def updated_password (request, user_id):                         
     user = user = UserProfile.objects.get(id=user_id) 
+    if user.updated_password == False:
+        return HttpResponse('Action non autorisée, l\'utilisateur n\'a pas demandé de modification de mot de passe')
     if request.method == 'POST':
         form = UpdatedPassword(request.POST)        
         if form.is_valid():           
             user.set_password(form.cleaned_data['raw_password'])
+            user.updated_password = False
             user.save()
             return render(
                 request,
