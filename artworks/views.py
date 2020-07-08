@@ -7,6 +7,7 @@ from carts.forms import CartAddArtworkForm
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
+from django.core.paginator import Paginator
 
 def is_superuser(user=None):    
     if user == None:
@@ -49,10 +50,14 @@ def update_artwork(request, artwork_id):
     ) 
 
 def artworks_list(request):    
-    artworks = Artwork.objects.all()
+    artworks_list = Artwork.objects.all()
     styles = Artwork_Style.objects.all()
     categories = Artwork_Category.objects.all()
     storage_places = Artwork_Storage_Place.objects.all()
+
+    paginator = Paginator(artworks_list, 20)
+    page = request.GET.get('page')
+    artworks = paginator.get_page(page)
 
     ctx = {}
     style = request.GET.get("s")

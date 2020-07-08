@@ -4,6 +4,10 @@
         <p>{{ artwork.height }}</p>
         <p>{{ artwork.width }}</p>
         <p>{{ artwork.artist.name }}</p>
+        {% if artwork.timer is not None %}
+            <input type="hidden" class="artwork_timer" value="{{ artwork.timer|date:'Y-m-d' }}"></input>
+            <p class="timer"></p>
+        {% endif %}
         <a class="btn btn-primary" href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}" role="button">Show</a> 
     </div>
 {% endfor %}

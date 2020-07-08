@@ -6,6 +6,9 @@
     <title>{% block title %}Galerie LTK{% endblock title %}</title>
     
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/skeleton.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link href="{% static 'css/common.css' %}" rel="stylesheet">
     {% if user.is_superuser %}
         <link href="{% static 'css/admin.css' %}" rel="stylesheet">
@@ -15,6 +18,9 @@
     <script type="text/javascript" src="{% static 'js/jquery-3.4.1.js' %}"></script>      
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/e513a6919a.js"></script>
+    <script type="text/javascript" src="{% static 'js/custom.js_old' %}"></script>
     {% progressive_web_app_meta %}
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -37,38 +43,92 @@
                 (super user)
             {% endif %}
         </a>
-     {% else %}
-        <a href="{% url 'users:login' %}">Connexion</a>
-    {% endif %}
-    {% if user.is_superuser %}       
-        <a href="{% url 'dashboard' %}">Dashboard</a>    
-        <a href="{% url 'rates:rates_update' %}">Modification des taux</a>
-        <a href="{% url 'site_content:update_content' %}">Modifier le contenu du site</a>
-        <a href="{% url 'artworks:artworks_list' %}">Liste des oeuvres</a>
-        <a href="{% url 'artists:artists' %}">Liste des artistes</a>
-        <a href="{% url 'users:users_all' %}">Liste des utilisateurs</a>
-        <a href="{% url 'orders:orders_list' %}">Liste des commandes</a>
-        {% include './search_results.html' %}
+        {% if user.is_superuser %}       
+            <a href="{% url 'dashboard' %}">Dashboard</a>    
+            <a href="{% url 'rates:rates_update' %}">modification des taux</a>
+            <a href="{% url 'site_content:update_content' %}">Modifier le contenu du site</a>
+            <a href="{% url 'artworks:artworks_list' %}">Liste des oeuvres</a>
+            <a href="{% url 'artists:artists' %}">Liste des artistes</a>
+            <a href="{% url 'users:users_all' %}">Liste des utilisateurs</a>
+            {% include './search_results.html' %}
+        {% else %}
+
+        {% endif %}
     {% else %}
-        <a href="/">Logo</a>
-        <a href="/concept">Le concept</a>
-        <a href="{% url 'artists:artists' %}">Les artistes</a>
-        <a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a>
-        <a href="/contact">Contact</a>
-        <span class="cart">
-            <a href="{% url 'carts:cart_detail' %}">
-                Mon panier ({{ cart|length }})
-            </a>
-        </span>
+
+        <header class="header solid-nav">
+          <a href="/" class="logo"><img class="u-max-full-width" src="{% static 'images/logo-ltk.png' %}"></a>
+          <input class="menu-btn" type="checkbox" id="menu-btn" />
+          <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+          <ul class="menu">
+            <li><a href="/concept">Le concept</a></li>
+            <li><a href="{% url 'artists:artists' %}">Les artistes</a></li>
+            <li><a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="conn" href="{% url 'users:login' %}">Connexion</a></li>
+            <li><a href="{% url 'carts:cart_detail' %}">Mon panier ({{ cart|length }})</a></li>
+          </ul>
+        </header>
+
     {% endif %}
 
     {% endblock body_header %}
-    
-    <div class="container">
-        {% block content %}{% endblock content %}
-    </div>
+
+    <div class="content-page">{% block content %}{% endblock content %}</div>
     
     {% block body_footer %}
+
+    <div class="section footer">
+    <div class="container">
+      <div class="row">
+        <div class="five columns">
+          <div class="row">
+            <div class="one columns">
+              <div class="vbar"></div>
+            </div>
+            <div  class="eleven columns">
+              <h4>8 Place Louis Imbach</h4>
+              <p>49100 ANGERS<br>07 67 22 20 68</p>
+              <p>HORRAIRES<br>Lundi/vendredi: 8h-12h / 14h-17h<br>Samedi: 8h-12h / 14h-19h</p>
+            </div>
+          </div>
+        </div>
+        <div class="four columns">
+          <h4>Pratique:</h4>
+          <div class="hbar"></div>
+          <a href="#">Contact</a><br>
+          <a href="#">Toutes les oeuvres</a><br>
+          <a href="#">Tous les artistes</a><br>
+          <a href="#">Le concept Artotek</a><br>
+          <a href="#">Site de la galerie LTK</a><br>
+          <a href="#">Protection des données</a><br>
+        </div>
+        <div class="three columns">
+          <img class="u-max-full-width" src="{% static 'images/LOGO GALERIE.png' %}">
+          <div class="row">
+            <div class="twelve column social">
+              <div class="row">
+                <div class="three columns"><p></p></div>
+                <div class="two columns"><i class="fa fa-facebook fa-2x"></i></div>
+                <div class="two columns"><i class="fa fa-instagram fa-2x"></i></div>
+                <div class="two columns"><i class="fa fa-linkedin fa-2x"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section copyright">
+    <div class="container">
+      <div class="row">
+        <div class="twelve column">
+          ©Galerie LTK - 2020
+        </div>
+      </div>
+    </div>
+  </div>
     
     {% endblock body_footer %}
     

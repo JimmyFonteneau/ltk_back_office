@@ -91,7 +91,16 @@ class Artwork(models.Model):
         default=False,
     )
 
-    photo = models.ImageField(upload_to='artworks', default='/default.jpg')
+    photo = models.ImageField(
+        upload_to='artworks', 
+        default='/default.jpg'
+    )
+
+    timer = models.DateField(
+        verbose_name="Timer",
+        null=True,
+        blank=True,
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

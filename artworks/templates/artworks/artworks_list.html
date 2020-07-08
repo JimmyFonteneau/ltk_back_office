@@ -19,6 +19,24 @@
     {% include './artworks_filtered.html' %}
 </div>
 
+<div class="pagination">
+    <span class="step-links">
+        {% if artworks.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ artworks.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ artworks.number }} / {{ artworks.paginator.num_pages }}.
+        </span>
+
+        {% if artworks.has_next %}
+            <a href="?page={{ artworks.next_page_number }}">next</a>
+            <a href="?page={{ artworks.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
 <script>
     $( document ).ready(function() {
         // const user_input = $("#user-input")

@@ -12,8 +12,9 @@
         <p>{{ artwork.width }}</p>
         <p>{{ artwork.artist.name }}</p>
         <p>{{ artwork.photo.url }}</p>
+        <input type="hidden" class="artwork_timer" value="{{ artwork.timer|date:'Y-m-d' }}"></input>
+        <p class="timer"></p>
         <img src="{{ artwork.photo.url }}" width="200">
-
         {% if artwork.state == 1 %}   
             <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
                 {{ cart_artwork_form }}
@@ -26,4 +27,3 @@
     </div>
 
 {% endblock content %}
-

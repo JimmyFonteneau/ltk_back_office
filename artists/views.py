@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import ArtistForm, ModifyArtistForm
 from .models import Artist
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.paginator import Paginator
 
 def is_superuser(user=None):    
     if user == None:
@@ -37,7 +38,10 @@ def update_artist(request, artist_id):
     ) 
 
 def all_artists(request):
-    artists = Artist.objects.all()
+    artists_list = Artist.objects.all()
+    paginator = Paginator(artists_list, 20)
+    page = request.GET.get('page')
+    artists = paginator.get_page(page)
     if request.user.is_superuser:
         return render(
             request,
