@@ -1,17 +1,114 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
 	Home page
 {% endblock %}
 {% block content %}   
-  <h2>This is the homepage</h2> 
+   <div class="section hero">
+    <div class="container">
+	<h2 class="section-heading">L’art n’a jamais été aussi accessible</h2>
+	<button class="bt1"><a href ="oeuvres.html">Voir les oeuvres</a></button>
+	<button class="bt2">Voir les artistes</button>
+    </div>
+  </div>
 
-<ul>
-  {% for artwork in artworks %}
-    <li>{{ artwork.name }}</li>
-  {% endfor %}
+   <div class="section oeuvres">
+    <div class="container">
+    	<h4>OEUVRES A L'HONNEUR</h4>
+      <h3 class="section-heading">Oeuvres Street Art Disponibles</h3>
+      <div class="row">
+        <div class="six columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+      <p class="section-description">nom artiste</p>
+        </div>
+        <div class="six columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+      <p class="section-description">nom artiste</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+		  <p class="section-description">nom artiste</p>
+        </div>
+        <div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+		  <p class="section-description">nom artiste</p>
+        </div>
+		<div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+		  <p class="section-description">nom artiste</p>
+        </div>
+		<div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+		  <p class="section-description">nom artiste</p>
+        </div>
+      </div>
+	  <div class="row">
+        <div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+		  <p class="section-description">nom artiste</p>
+        </div>
+        <div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+		  <p class="section-description">nom artiste</p>
+        </div>
+		<div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+		  <p class="section-description">nom artiste</p>
+        </div>
+		<div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+		  <p class="section-description">nom artiste</p>
+        </div>
+	  <button class="bt3">Voir toutes les oeuvres</button>
+    <br>
+    <br>
+    </div>
+  </div>
+</div>
+
+  <div class="section concept">
+    <div class="container">
+    	<h4>GALERIE LTK</h4>
+      <h3 class="section-heading">L'art à portée de main</h3>
+      <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+      <button class="bt2">Decouvrir le concept</button>
+    </div>
+  </div>
+
+  <div class="section artiste">
+    <div class="container">
+    	<h4>ARTISTE DU MOMENT</h4>
+      <h3 class="section-heading">L'art de la couleur</h3>
+      <div class="row">
+        <div class="one-half column">
+          <img class="u-max-full-width" src="{% static 'images/redhape.png' %}">
+        </div>
+        <div class="one-half column cat-card">
+          <div class="card">
+			<h5>Red Ape</h5>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			<button class="bt4">Découvrir</button>
+		  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% for artwork in artworks %}
+  <li>{{ artwork.name }}</li>
+{% endfor %}
 </ul>
-
-<p>Artiste à l'honneur</p>
-<p> {{ artist.name }} </p>
 
 {% endblock content %}

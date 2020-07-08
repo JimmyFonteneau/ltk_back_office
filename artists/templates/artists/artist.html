@@ -1,11 +1,98 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
     {{ artist.name }}
 {% endblock %}
 {% block content %}   
-    <div>
-        <p>{{ artist.name }}</p>
-        <p>{{ artist.firstname }}</p>
-        <p>{{ artist.lastname }}</p>
+
+<div class="section fil">
+  <div class="container">
+    <div class="row">
+      <div class="four columns">
+        <ul class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <div  class="arrow"></div>
+          <li><a href="#">Artistes</a></li>
+          <div  class="arrow"></div>
+          <li><a href="#">{{ artist.name }}</a></li>
+        </ul>
+      </div>
     </div>
+  </div>
+</div>
+
+<div class="section u-fil artiste-f">
+  <div class="container">
+    <div class="row">
+      <div class="twelve column">
+        <div class="row">
+          <div class="nine columns">
+              <img class="u-max-full-width" src="{% static 'images/redhape.png' %}">
+          </div>
+          <div class="five columns cat-card">
+            <div class="card">
+              <h5>{{ artist.name }}</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <button class="btsubmit bt-m">Voir les oeuvres</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section  artiste-g">
+  <div class="container">
+    <div class="row">
+      <div class="nine columns">
+            <div class="card">
+              <h5>Son univers</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+      </div>
+      <div class="seven columns m-left">
+              <img class="u-max-full-width" src="{% static 'images/skull.png' %}">
+          </div>
+      <div class="seven columns m-right">
+              <img class="u-max-full-width" src="{% static 'images/opaf2.png' %}">
+          </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="section oeuvres">
+    <div class="container">
+    	<h4>{{ artist.name }}</h4>
+      <h3 class="section-heading">Ses oeuvres</h3>
+      <div class="row">
+        <div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+      <p class="section-description">nom artiste</p>
+        </div>
+        <div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+      <p class="section-description">nom artiste</p>
+        </div>
+    <div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+      <p class="section-description">nom artiste</p>
+        </div>
+    <div class="three columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+      <p class="section-description">nom artiste</p>
+        </div>
+      </div>
+     <button class="bt3">Toutes ses oeuvres</button>
+  </div>
+</div>
 {% endblock content %}
