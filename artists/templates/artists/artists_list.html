@@ -1,17 +1,59 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
     List artists
 {% endblock %}
 {% block content %}
 
-<h2>Les artistes</h2>
+<div class="section fil">
+  <div class="container">
+    <div class="row">
+      <div class="four columns">
+        <ul class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <div  class="arrow"></div>
+          <li><a href="#">Tous les artistes</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section u-fil artistes-d">
+  <div class="container">
+    <div class="row">
+      <div class="twelve column">
+        <h3 class="section-heading left  artistes-h">Tous nos artistes</h3>
+        <p class="section-description left artistes-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit, orci rutrum convallis viverra, nisl tellus molestie velit, vel efficitur nisl ante sed dolor. Phasellus et urna metus. In sodales, velit vel pharetra sodales, massa lacus semper augue, eu finibus leo justo vitae ipsum. Aenean fringilla sapien eros. Aliquam quis scelerisque est. Cras sit amet hendrerit metus</p>
+
 {% for artist in artists_list %}
-<div>
-    <p>{{ artist.name }}</p>
-    <p>{{ artist.firstname }}</p>
-    <p>{{ artist.lastname }}</p>
-    <a class="btn btn-primary" href="{% url 'artists:artist_show' artist_id=artist.id %}" role="button">Show</a>
-</div>  
+
+        <div class="row">
+          <div class="nine columns">
+              <img class="u-max-full-width" src="{% static 'images/redhape-c.png' %}">
+          </div>
+          <div class="one-half column cat-card">
+            <div class="card">
+            	<div class="row">
+            		<div class="one-half column">
+              			<h5>{{ artist.name }}</h5>
+              		</div>
+              		<div class="one-half column">
+              			<button class="bt4"><a href="{% url 'artists:artist_show' artist_id=artist.id %}" role="button">Découvrir</a></button>
+              		</div>
+          		</div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+
 {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
