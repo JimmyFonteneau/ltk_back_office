@@ -98,9 +98,8 @@ class Artwork(models.Model):
 
     timer = models.DateField(
         verbose_name="Timer",
-        null=False,
-        blank=False,
-        default=timezone.now(),
+        null=True,
+        blank=True,
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
