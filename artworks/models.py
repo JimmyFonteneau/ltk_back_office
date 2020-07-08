@@ -1,6 +1,7 @@
 from django.db import models
 
 from artists.models import Artist
+from rates.models import Rate
 
 class Artwork(models.Model):
 
@@ -94,6 +95,7 @@ class Artwork(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.name

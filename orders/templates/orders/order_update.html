@@ -4,8 +4,27 @@
 {% endblock %}
 {% block content %}   
 <h2>Update order</h2>
-<form method="POST" enctype="multipart/form-data">{% csrf_token %}
-    {{ form.as_p }}
+
+  <div style="display: flex, width: 100%">
+  {% for artwork in artworks %}
+  <div style="border: solid">
+    <p>Nom : {{ artwork.name }}</p>
+    <p>Durée :</p> 
+    <select name="select"> 
+        {% for a in artwork.duration.all %}
+            <option {% if a == artwork.rate %} selected {% endif %}> {{ a }} </option>
+        {% endfor %}
+    </select>
+    <p>Prix : {{ artwork.price }}</p>
+    
+  </div>  
+  {% endfor %}
+  </div>
+
+{{ form.as_p }}
+
+
     <button type="submit" class="save btn btn-default">Save</button>
-</form>
+
+
 {% endblock content %}

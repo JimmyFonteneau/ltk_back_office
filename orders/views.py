@@ -8,6 +8,7 @@ from .models import Order
 from .forms import OrderEmailForm, OrderUpdate
 from users.models import UserProfile
 import random, string
+from rates.models import Rate
 
 def is_superuser(user=None):    
     if user == None:
@@ -26,6 +27,7 @@ def order_confirm(request):
     for item in cart:
         artworks.append(item['artwork'])
         artwork = Artwork.objects.get(id=item['artwork'].id)
+        artwork.rate = Rate.objects.get(duration=item['update_nb_month_form'].id)
         artwork.state = 2
         artwork.save()
     order.artworks.set(artworks)
@@ -102,6 +104,11 @@ def deny_order(request, **kwargs):
 
 def order_update(request, order_id):             
     order = Order.objects.get(id=order_id)    
+    artworks = order.artworks.all()   
+    for a in artworks:
+        a.duration = Rate.objects.all()
+        print(a.rate)
+    rates = Rate.objects.all()
     if request.method == 'POST':
         form = OrderUpdate(request.POST, instance=order)
         if form.is_valid():           
@@ -113,6 +120,8 @@ def order_update(request, order_id):
         'orders/order_update.html',
         {
             'form': form,
+            'artworks': artworks,
+            'rates': rates,
         }
     ) 
 

@@ -13,4 +13,4 @@ class OrderUpdate(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ('price', 'state',)
+        fields = ('price', 'state')
