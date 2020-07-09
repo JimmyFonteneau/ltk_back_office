@@ -103,7 +103,7 @@ def order_update(request, order_id):
     order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
     order.artworks = []
     for order_artwork_rate in order_artwork_rates:
-        order.artworks.append(order_artwork_rate.artwork)
+        order.artworks.append(order_artwork_rate)
     if request.method == 'POST':
         form = OrderUpdate(request.POST, instance=order)
         if form.is_valid():
