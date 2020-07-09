@@ -3,53 +3,70 @@
     Votre panier
 {% endblock %}
 {% block content %}
-  <h1>Votre panier</h1>
+
+  <div class="section">
+    <div class="container">
+      <h3 class="section-heading">Votre demande de location</h3>
+      <p class="section-description full-width">Les prix présentés correspondent à une durée de location de 3 mois. Ils sont dégressifs sur des durées de location supérieures (par tranche de 3 mois).</p>
+    </div>
+  </div>
+
   {% if cart|length > 0 %}
-    <table class="cart">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Oeuvre</th>
-          <th>Nombre de Mois</th>
-          <th>Prix unitaire</th>                
-          <th>Prix</th>
-          <th>Supprimer</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="section">
+      <div class="container">
+        <h5 class="left">{{ cart|length }} produit(s)</h5>
+        <div class="hbar2"></div>
         {% for item in cart %}
-          {% with artwork=item.artwork %}
-            <tr>
-              <td><img src="{{ artwork.photo.url }}" width="200"></td>
-              <td>{{ artwork.name }}</td>
-              <td>
-                <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
-                  {{ item.update_nb_month_form.nb_month }}
-                  {{ item.update_nb_month_form.update }}
-                  <input type="submit" value="Update">
-                  {% csrf_token %}
-                </form>
-              </td>
-              <td class="num">{{ item.price }}€</td>
-              <td class="num">{{ item.total_price }}€</td>
-              <td><a href="{% url 'carts:cart_remove' artwork.id %}">Remove</a></td>
-            </tr>
-          {% endwith %}
-        {% endfor %}
-        <tr class="total">
-          <td>Total</td>
-          <td colspan="4"></td>
-          <td class="num">{{ cart.get_total_price }}€</td>
-        </tr>
-      </tbody>
-    </table>
-    <p>
-      {% if not user.is_authenticated %}
-        <a href="{% url 'orders:order_confirm_noaccount' %}">Continuer sans compte</a>
-      {% endif %}
-      <a href="{% url 'orders:order_confirm' %}">Valider la commande</a>
-    </p>
-  {% else %}
+            {% with artwork=item.artwork %}
+              <div class="row">
+                <div class="one columns"><img class="u-max-full-width border-i" src="{{ artwork.photo.url }}"></div>
+                <div class="two columns">
+                  <h5>{{ artwork.name }}</h5>
+                  <p>{{ artwork.artist.name }}</p>
+                  <div class="row">
+                    <div class="three columns"><img class="u-max-full-width" src="images/delete.svg"></div>
+                    <div class="nine columns"><p>Supprimer</p></div>
+                  </div>
+                </div>
+                <div class="two columns">
+                  <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
+                    {% csrf_token %}
+                    <h5>Durée de location:</h5>
+                    <p>{{ item.update_nb_month_form.nb_month }}</p>
+                    {{ item.update_nb_month_form.update }}
+                    <input type="submit" value="Update">
+                  </form>
+                </div>
+                <div class="three columns">
+                  <h5>Prix pour 3 mois</h5>
+                  <h3>{{ item.price }}€</h3>
+                </div>
+                <div class="four columns">
+                  <h5>Prix</h5>
+                  <h3>{{ item.total_price }}€</h3>
+                </div>
+              </div>
+            {% endwith %}
+          {% endfor %}
+
+          <h5 class="left">Total</h5>
+          <div class="hbar2"></div>
+          <div class="row">
+            <div class="eight columns"><p></p></div>
+            <div class="three columns">
+              <h5 class="left">Prix</h5>
+              <h3 class="left">{{ cart.get_total_price }}€</h3>
+            </div>
+          </div>
+          <h5 class="left">Effectuer ma commande</h5>
+          <div class="hbar2"></div>
+          <button class="bt3"><a href ="{% url 'orders:order_confirm_noaccount' %}">Continuer sans compte</a></button>
+          <button class="bt5"><a href="{% url 'orders:order_confirm' %}">Valider la commande</a></button>
+        </div>
+      </div>
+
+    {% else %}
     <p>Votre panier est vide</p>
   {% endif %}
+
 {% endblock %}
