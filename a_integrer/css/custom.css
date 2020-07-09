@@ -264,6 +264,12 @@ button a:hover {
   width: 10%;
 }
 
+.hbar2 {
+  border-top: 3px solid #FD0786;
+  height: 10px;
+  width: 100%;
+}
+
 .footer   h4 {
   font-family: 'Prata', serif;
   font-size: 40px;
@@ -754,4 +760,28 @@ p.oeuvre-p {
 
 .infos .left {
   padding-left: 15%;
+}
+
+.height-p {
+  height: 250px;
+}
+
+.grey-container {
+  padding: 4%;
+  background: #F5F5F5 0% 0% no-repeat padding-box;
+}
+
+.align label {
+  display: inline;
+}
+
+.mini-t {
+  font-size: 11px;
+  letter-spacing: 0px;
+  color: #00000063;
+}
+
+.grey-container2 {
+  padding: 25%;
+  background: #F5F5F5 0% 0% no-repeat padding-box;
 }
