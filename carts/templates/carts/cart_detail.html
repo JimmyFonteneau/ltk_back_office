@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
     Votre panier
 {% endblock %}
@@ -24,8 +25,8 @@
                   <h5>{{ artwork.name }}</h5>
                   <p>{{ artwork.artist.name }}</p>
                   <div class="row">
-                    <div class="three columns"><img class="u-max-full-width" src="images/delete.svg"></div>
-                    <div class="nine columns"><p>Supprimer</p></div>
+                    <div class="three columns"><img class="u-max-full-width" src="{% static 'images/delete.svg' %}"></div>
+                    <div class="nine columns"><p><a href="{% url 'carts:cart_remove' artwork.id %}">Supprimer</a></p></div>
                   </div>
                 </div>
                 <div class="two columns">
