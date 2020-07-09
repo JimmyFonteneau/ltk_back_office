@@ -43,11 +43,11 @@
                 <h6>Ma location en cours</h6>
               </div>
               <div class="two columns">
-                <img class="u-max-full-width grey-container2" src="{% static 'images/file.svg' %}">
+                <a href="{% url 'users:myorders'%}"><img class="u-max-full-width grey-container2" src="{% static 'images/file.svg' %}"></a>
                 <h6>Historique de locations</h6>
               </div>
               <div class="two columns">
-                <img class="u-max-full-width grey-container2" src="{% static 'images/user.svg' %}">
+                <a href="{% url 'users:account_settings'%}"><img class="u-max-full-width grey-container2" src="{% static 'images/user.svg' %}"></a>
                 <h6>Modifier mes informations</h6>
               </div>
             </div>

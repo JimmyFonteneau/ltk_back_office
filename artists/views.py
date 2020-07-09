@@ -39,7 +39,7 @@ def update_artist(request, artist_id):
 
 def all_artists(request):
     artists_list = Artist.objects.all()
-    paginator = Paginator(artists_list, 20)
+    paginator = Paginator(artists_list, 5)
     page = request.GET.get('page')
     artists = paginator.get_page(page)
     if request.user.is_superuser:
