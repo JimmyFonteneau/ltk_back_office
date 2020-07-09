@@ -107,7 +107,7 @@ button a:hover {
 /* Hero
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .hero {
-  background: url('/static/images/values-bg.png') no-repeat fixed center / cover;
+  background: url('../images/values-bg.png') no-repeat fixed center / cover;
   filter: contrast(90%);
   height:100%;
 
@@ -135,14 +135,14 @@ button a:hover {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .concept {
   border-bottom: 1px solid #ddd;
-  background: url('/static/images/cherry-lin.png') no-repeat fixed center / cover;
+  background: url('../images/cherry-lin.png') no-repeat fixed center / cover;
   color: #fff;
 }
 
 
 .concept-hero {
   border-bottom: 1px solid #ddd;
-  background: url('/static/images/concept-fond.png') no-repeat fixed center / cover;
+  background: url('../images/concept-fond.png') no-repeat fixed center / cover;
   color: #000000;
 }
 
@@ -155,6 +155,7 @@ button a:hover {
 .concept-hero2 .container {
   max-width: none;
 }
+
 
 /* Oeuvres
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -261,6 +262,12 @@ button a:hover {
   border-top: 3px solid #FD0786;
   height: 10px;
   width: 10%;
+}
+
+.hbar2 {
+  border-top: 3px solid #FD0786;
+  height: 10px;
+  width: 100%;
 }
 
 .footer   h4 {
@@ -753,4 +760,28 @@ p.oeuvre-p {
 
 .infos .left {
   padding-left: 15%;
+}
+
+.height-p {
+  height: 250px;
+}
+
+.grey-container {
+  padding: 4%;
+  background: #F5F5F5 0% 0% no-repeat padding-box;
+}
+
+.align label {
+  display: inline;
+}
+
+.mini-t {
+  font-size: 11px;
+  letter-spacing: 0px;
+  color: #00000063;
+}
+
+.grey-container2 {
+  padding: 25%;
+  background: #F5F5F5 0% 0% no-repeat padding-box;
 }
