@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 
-<form method="post" action="{% url 'users:login' %}">
+<!-- <form method="post" action="{% url 'users:login' %}">
     {% csrf_token %}
 
     <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label><br>
@@ -20,6 +20,43 @@
     <input type="submit" value="Valider"><br>
 
     <a href="{% url 'users:register' %}">Inscription</a>
-</form>
-
+</form> -->
+  
+<div class="section u-fil">
+        <div class="container">
+          <div class="row">
+            <div class="twelve column">
+              <h3 class="section-heading">Connexion</h3>
+              <p class="section-description full-width">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit, orci rutrum convallis viverra, nisl tellus molestie velit, vel efficitur nisl ante sed dolor. Phasellus et urna metus. In sodales, velit vel pharetra sodales, massa lacus semper augue, eu finibus leo justo vitae ipsum. Aenean fringilla sapien eros. Aliquam quis scelerisque est. Cras sit amet hendrerit</p>
+              <br>              
+              <button class="bt3"><a href="{% url 'users:register' %}">Créer un compte</a></button>
+              <button class="bt3"><a href="{% url 'users:forgot_password' %}">Mot de passe oublié</a></button>              
+              <br>
+              <br>
+              <form method="post" action="{% url 'users:login' %}">
+                {% csrf_token %}  
+                <div class="row">
+                  <div class="four columns"><p></p></div>
+                  <div class="four columns">
+                    {{ form.email }}
+                    <!-- <input class="u-full-width" type="email" placeholder="Votre adresse mail" id="email"> -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="four columns"><p></p></div>
+                  <div class="four columns">
+                    {{ form.password }}  
+                    <!-- <input class="u-full-width" type="password" placeholder="Votre mot de passe" id="password"> -->
+                  </div>
+                  <div class="four columns"><p></p></div>
+                </div>
+                {% if auth_error %}
+                    Email ou mot de passe incorrect
+                {% endif %}
+                <input class="btsubmit" type="submit" value="Continuer" >
+              </form>
+            </div>
+          </div>
+        </div> 
+      </div>
 {% endblock content %}
