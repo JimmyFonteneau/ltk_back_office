@@ -35,7 +35,6 @@
                     <h5>Durée de location:</h5>
                     <p>{{ item.update_nb_month_form.nb_month }}</p>
                     {{ item.update_nb_month_form.update }}
-                    <input type="submit" value="Update">
                   </form>
                 </div>
                 <div class="three columns">
@@ -69,5 +68,13 @@
     {% else %}
     <p>Votre panier est vide</p>
   {% endif %}
+
+  <script>
+    $(document).ready(function() {
+      $('select').on('change', function() {
+        $(this).parents('form')[0].submit();
+      });
+    });
+  </script>
 
 {% endblock %}
