@@ -55,7 +55,7 @@ def artworks_list(request):
     categories = Artwork_Category.objects.all()
     storage_places = Artwork_Storage_Place.objects.all()
 
-    paginator = Paginator(artworks_list, 20)
+    paginator = Paginator(artworks_list, 2)
     page = request.GET.get('page')
     artworks = paginator.get_page(page)
 

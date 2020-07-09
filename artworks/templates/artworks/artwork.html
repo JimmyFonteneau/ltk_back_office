@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
     {{ artwork.name }}
 {% endblock %}
 {% block content %}   
-    <div>
+    <!-- <div>
         {% csrf_token %}        
         <input type="hidden" name="artwork_id" value="{{ artwork.id }}"></input>
         
@@ -24,6 +25,105 @@
         {% else %}
             <p>indispo</p>
         {% endif %}   
+    </div> -->
+
+    <div class="section fil">
+        <div class="container">
+          <div class="row">
+            <div class="four columns">
+              <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <div  class="arrow"></div>
+                <li><a href="#">Oeuvre</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
     </div>
+      
+      
+      <div class="section u-fil">
+        {% csrf_token %}        
+        <input type="hidden" name="artwork_id" value="{{ artwork.id }}"></input>
+        <div class="container">
+        <input type="hidden" class="artwork_timer" value="{{ artwork.timer|date:'Y-m-d' }}"></input>
+        <p class="timer"></p>
+          <div class="row">
+            <div class="one-half column">
+              <img class="u-max-full-width  border-i" src="{{ artwork.photo.url }}">
+            </div>
+            <div class="one-half column left">
+              <h3 class="oeuvre-h">{{ artwork.name }}</h3>
+              <div class="row">
+                <div class="three columns">
+                  <h5 class="price">{{ artwork.price }}€ HT</h5>
+                </div>
+                <div class="nine columns">
+                  <!-- <p>Pour une location de 3 mois</p> -->
+                  {% if artwork.state == 1 %}   
+                  <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
+                      {{ cart_artwork_form }}
+                      {% csrf_token %}
+                      <button type="submit" class="btsubmit">Louer</button>
+                  </form>
+                {% else %}
+                    <p>indispo</p>
+                {% endif %}  
+                </div>
+              </div>
+              <p class="oeuvre-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <br>
+              <button class="bt5">Voir l'artiste</button>             
+            </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+
+      <div class="section">
+          <div class="container">
+            <h4>OEUVRES A LOUER</h4>
+            <h3 class="section-heading">L'oeuvre en détail</h3>
+            <button class="btsubmit">Description</button>
+            <button class="btsubmit">Caractéristiques</button>
+            <div class="row black-row left">
+              <div class="one columns"><p></p></div>
+              <div class="ten columns">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div class="one columns"><p></p></div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="section oeuvres">
+          <div class="container">
+            <h3 class="section-heading">Autres oeuvres disponibles</h3>
+            <div class="row">
+              <div class="three columns">
+                <img class="u-max-full-width border-i" src="{% static 'images/paint-placeholder.png' %}">
+            <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+            <p class="section-description">nom artiste</p>
+              </div>
+              <div class="three columns">
+                <img class="u-max-full-width border-i" src="{% static 'images/paint-placeholder.png' %}">
+            <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+            <p class="section-description">nom artiste</p>
+              </div>
+          <div class="three columns">
+                <img class="u-max-full-width border-i" src="{% static 'images/paint-placeholder.png' %}">
+            <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+            <p class="section-description">nom artiste</p>
+              </div>
+          <div class="three columns">
+                <img class="u-max-full-width border-i" src="{% static 'images/paint-placeholder.png' %}">
+            <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+            <p class="section-description">nom artiste</p>
+              </div>
+            </div>
+        </div>
+      </div>
 
 {% endblock content %}
