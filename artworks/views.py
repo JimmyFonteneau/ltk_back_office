@@ -50,14 +50,10 @@ def update_artwork(request, artwork_id):
     ) 
 
 def artworks_list(request):    
-    artworks_list = Artwork.objects.all()
+    artworks = Artwork.objects.all()
     styles = Artwork_Style.objects.all()
     categories = Artwork_Category.objects.all()
     storage_places = Artwork_Storage_Place.objects.all()
-
-    paginator = Paginator(artworks_list, 16)
-    page = request.GET.get('page')
-    artworks = paginator.get_page(page)
 
     ctx = {}
     style = request.GET.get("s")
@@ -82,6 +78,10 @@ def artworks_list(request):
             artworks = artworks.filter(state=st)
     
     ctx["artworks"] = artworks
+
+    paginator = Paginator(artworks, 4)
+    page = request.GET.get('page')
+    artworks = paginator.get_page(page)
 
     if request.user.is_superuser:
         if request.is_ajax():

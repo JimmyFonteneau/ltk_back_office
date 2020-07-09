@@ -46,6 +46,7 @@
             <a href="{% url 'artists:artists' %}">Liste des artistes</a>
             <a href="{% url 'users:users_all' %}">Liste des utilisateurs</a>
             <a href="{% url 'orders:orders_list' %}">Liste des commandes</a>
+            <a class="conn" href="{% url 'users:logout' %}">Déconnexion</a>
             {% include './search_results.html' %}
           </header>
 
