@@ -4,35 +4,43 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from carts.cart import Cart
 from artworks.models import Artwork
-from .models import Order
+from .models import Order, OrderArtworkRate
 from .forms import OrderEmailForm, OrderUpdate
 from users.models import UserProfile
 import random, string
 from rates.models import Rate
+
 
 def is_superuser(user=None):    
     if user == None:
         return false   
     return user.is_superuser
 
-@login_required
-def order_confirm(request):
+
+def create_order(request, user):
     cart = Cart(request)
     order = Order.objects.create(
-        user = request.user,
+        user = user,
         price = cart.get_total_price(),
-        state = 2
+        state = 1
     )
-    artworks = []
-    for item in cart:
-        artworks.append(item['artwork'])
-        artwork = Artwork.objects.get(id=item['artwork'].id)
-        artwork.rate = Rate.objects.get(duration=item['update_nb_month_form'].id)
-        artwork.state = 2
-        artwork.save()
-    order.artworks.set(artworks)
     order.save()
+    for item in cart:
+        artwork = Artwork.objects.get(id=item['artwork'].id)
+        rate = Rate.objects.get(duration=item['nb_month'])
+        order_artwork_rate = OrderArtworkRate.objects.create(
+            artwork = artwork,
+            rate = rate,
+            order = order
+        )
+        order_artwork_rate.save()
     cart.clear()
+    return order
+
+
+@login_required
+def order_confirm(request):
+    order = create_order(request, request.user)
     return render(
         request, 
         'orders/order_confirm.html', 
@@ -41,31 +49,18 @@ def order_confirm(request):
         }
     )
 
+
 def order_confirm_noaccount(request):
     if request.method == "POST":
         form = OrderEmailForm(request.POST)
         if form.is_valid():
-            cart = Cart(request)
             user = UserProfile.objects.create(
                 email = form.cleaned_data['email'],
                 username = form.cleaned_data['email'],
                 password = ''.join(random.choices(string.ascii_uppercase + string.digits))
             )
             user.save()
-            order = Order.objects.create(
-                user = user,
-                price = cart.get_total_price(),
-                state = 1
-            )
-            artworks = []
-            for item in cart:
-                artworks.append(item['artwork'])
-                artwork = Artwork.objects.get(id=item['artwork'].id)
-                artwork.state = 2
-                artwork.save()
-            order.artworks.set(artworks)
-            order.save()
-            cart.clear()
+            order = create_order(request, user)
             send_mail(
                 'Demande de location',
                 '<a href="'+settings.ALLOWED_HOSTS[1]+'orders/accept-order-'+str(order.id)+'">Accepter la commande</a>\n<a href="'+settings.ALLOWED_HOSTS[1]+'orders/deny-order-'+str(order.id)+'">Refuser la commande</a>',
@@ -88,30 +83,30 @@ def order_confirm_noaccount(request):
         }
     )
 
-@user_passes_test(is_superuser)
+
 def accept_order(request, **kwargs):
     order = Order.objects.get(id=kwargs['order_id'])
     order.state = 2
     order.save()
     return render(request, 'orders/accept_order.html', {})
 
-@user_passes_test(is_superuser)
 def deny_order(request, **kwargs):
     order = Order.objects.get(id=kwargs['order_id'])
     order.state = 3
     order.save()
     return render(request, 'orders/deny_order.html', {})
 
+
 def order_update(request, order_id):             
-    order = Order.objects.get(id=order_id)    
-    artworks = order.artworks.all()   
-    for a in artworks:
-        a.duration = Rate.objects.all()
-        print(a.rate)
+    order = Order.objects.get(id=order_id)
     rates = Rate.objects.all()
+    order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
+    order.artworks = []
+    for order_artwork_rate in order_artwork_rates:
+        order.artworks.append(order_artwork_rate.artwork)
     if request.method == 'POST':
         form = OrderUpdate(request.POST, instance=order)
-        if form.is_valid():           
+        if form.is_valid():
             form.save()
     else:
         form = OrderUpdate(instance=order)
@@ -120,10 +115,11 @@ def order_update(request, order_id):
         'orders/order_update.html',
         {
             'form': form,
-            'artworks': artworks,
-            'rates': rates,
+            'order': order,
+            'rates': rates
         }
     ) 
+
 
 def orders_list(request):
     orders = Order.objects.all()

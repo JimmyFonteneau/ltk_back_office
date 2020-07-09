@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm, RegisterForm, AccountSettingsForm, ForgotPassword, UpdatedPassword
 from .models import UserProfile
-from orders.models import Order
+from orders.models import Order, OrderArtworkRate
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -111,7 +111,15 @@ def account_settings(request):
 
 @login_required
 def myorders(request):
-    orders = Order.objects.filter(user=request.user, state=2)
+    orders = Order.objects.filter(user=request.user)
+
+    for order in orders:
+        order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
+
+        order.artworks = []
+        for order_artwork_rate in order_artwork_rates:
+            order.artworks.append(order_artwork_rate.artwork)
+
     return render(
         request,
         'users/myorders.html',

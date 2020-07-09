@@ -6,22 +6,23 @@
 <h2>Update order</h2>
 
   <div style="display: flex, width: 100%">
-  {% for artwork in artworks %}
-  <div style="border: solid">
-    <p>Nom : {{ artwork.name }}</p>
-    <p>Durée :</p> 
-    <select name="select"> 
-        {% for a in artwork.duration.all %}
-            <option {% if a == artwork.rate %} selected {% endif %}> {{ a }} </option>
-        {% endfor %}
-    </select>
-    <p>Prix : {{ artwork.price }}</p>
-    
-  </div>  
-  {% endfor %}
-  </div>
 
-{{ form.as_p }}
+    <p>date : {{ order.created_at }}</p>
+
+    {% for artwork in order.artworks %}
+      <div style="border:solid">
+        <p>oeuvre : {{ artwork.name }}</p>
+        <select name="select"> 
+          {% for rate in rates.all %}
+              <option {% if artwork.rate == order.rate %} selected {% endif %}> {{ rate }} </option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endfor %}
+
+    {{ form.as_p }}
+
+  </div>
 
 
     <button type="submit" class="save btn btn-default">Save</button>

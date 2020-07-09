@@ -28,9 +28,8 @@ class OrderArtworkRate(models.Model):
     order = models.ForeignKey('orders.Order', on_delete=models.CASCADE,)
 
     return_date = models.DateTimeField(
-        default=django.utils.timezone.now,
         null=True,
-        blank=False,
+        blank=True,
     )
     
     class Meta:
