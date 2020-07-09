@@ -11,21 +11,21 @@
 
     {% for artwork in order.artworks %}
       <div style="border:solid">
-        <p>oeuvre : {{ artwork.name }}</p>
+        <p>oeuvre : {{ artwork.artwork.name }}</p>
         <select name="select"> 
           {% for rate in rates.all %}
-              <option {% if artwork.rate == order.rate %} selected {% endif %}> {{ rate }} </option>
+              <option {% if rate == artwork.rate %} selected {% endif %}> {{ rate }} </option>
           {% endfor %}
         </select>
       </div>
     {% endfor %}
 
-    {{ form.as_p }}
+    <form method="POST" class="artist-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="save btn btn-default">Save</button>
+    </form>
 
   </div>
-
-
-    <button type="submit" class="save btn btn-default">Save</button>
-
 
 {% endblock content %}

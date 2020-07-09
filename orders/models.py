@@ -25,6 +25,7 @@ class OrderArtworkRate(models.Model):
         null=False,
         blank=False,
     )
+    
     order = models.ForeignKey('orders.Order', on_delete=models.CASCADE,)
 
     return_date = models.DateTimeField(
