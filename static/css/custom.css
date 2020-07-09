@@ -146,6 +146,17 @@ button a:hover {
   color: #000000;
 }
 
+.concept-hero2 {
+  background: url('../images/company.png') no-repeat left / cover;
+  background-size: 60%;
+  color: #000000;
+}
+
+.concept-hero2 .container {
+  max-width: none;
+}
+
+
 /* Oeuvres
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .oeuvres {
@@ -251,6 +262,12 @@ button a:hover {
   border-top: 3px solid #FD0786;
   height: 10px;
   width: 10%;
+}
+
+.hbar2 {
+  border-top: 3px solid #FD0786;
+  height: 10px;
+  width: 100%;
 }
 
 .footer   h4 {
@@ -678,4 +695,93 @@ p.oeuvre-p {
 .center {
     margin-left: 26%;
     margin-top: 4%;
+}
+
+.concept-c .card  {
+  margin-top: -30%;
+}
+
+.oversized-i {
+  max-width: 180% !important;
+  margin-top: -87%;
+  box-shadow: 10px 10px 20px #00000029;
+  border: 35px solid white;
+}
+
+.concept-hero h3, .concept-c h3 {
+  letter-spacing: 0px;
+  font-size: 40px;
+  font-family: 'Prata', serif;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.c-left {
+  margin-left: 14%;
+}
+
+.concept-hero2 h3 {
+  letter-spacing: 0px;
+  font-size: 40px;
+  font-family: 'Prata', serif;
+  color: white;
+}
+
+.concept-hero2 .bt4, .infos .bt4 {
+  height: 31px !important;
+  background: #FD0786 0% 0% no-repeat padding-box;
+  border: none;
+  font-size: 14px;
+  margin-left: 0;
+}
+
+.concept-hero2 .card {
+    padding: 23px 23px;
+    text-align: center;
+    margin-top: 11%;
+}
+
+.black-b {
+  border: 10px solid black;
+  margin-top: -45%;
+}
+
+.card2 {
+  margin-top: -20% !important;
+    font-size: 40px;
+  font-family: 'Prata', serif;
+}
+
+.infos .container {
+  max-width: none;
+}
+
+.infos .left {
+  padding-left: 15%;
+}
+
+.height-p {
+  height: 250px;
+}
+
+.grey-container {
+  padding: 4%;
+  background: #F5F5F5 0% 0% no-repeat padding-box;
+}
+
+.align label {
+  display: inline;
+}
+
+.mini-t {
+  font-size: 11px;
+  letter-spacing: 0px;
+  color: #00000063;
+}
+
+.grey-container2 {
+  padding: 25%;
+  background: #F5F5F5 0% 0% no-repeat padding-box;
 }
