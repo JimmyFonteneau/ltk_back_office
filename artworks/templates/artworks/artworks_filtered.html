@@ -19,7 +19,7 @@
 {% endif %}
         <div class="three columns">
             <a href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}">
-                <img class="u-max-full-width border-i" src="images/paint-placeholder.png">
+                <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
             </a>
             <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
             <p class="section-description">{{ artwork.artist.name }}</p>
