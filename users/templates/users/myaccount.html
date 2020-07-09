@@ -1,12 +1,57 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
     Mon compte
 {% endblock %}
 {% block content %}
 
-    <span class="card-title">{{ user.get_username }}</span><br>
+    <!-- <span class="card-title">{{ user.get_username }}</span><br>
     <a href="{% url 'users:account_settings'%}">Modifier mes infos</a>
     <a href="{% url 'users:myorders'%}">Mes commandes</a>
-    <a href="{% url 'users:logout' %}">Déconnexion</a>
+    <a href="{% url 'users:logout' %}">Déconnexion</a> -->
+
+    <div class="section fil">
+        <div class="container">
+          <div class="row">
+            <div class="four columns">
+              <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <div  class="arrow"></div>
+                <li><a href="#">Compte</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+        <div class="section">
+          <div class="container">
+            <h3 class="section-heading">Mon compte</h3>
+            <p class="section-description full-width">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit, orci rutrum convallis viverra, nisl tellus molestie velit, vel efficitur nisl ante sed dolor. Phasellus et urna metus. In sodales, velit vel pharetra sodales, massa lacus semper augue, eu finibus leo justo vitae ipsum. Aenean fringilla sapien eros. Aliquam quis scelerisque est. Cras sit amet hendrerit</p>
+          </div>
+        </div>
+      
+      
+      
+        <div class="section">
+          <div class="container">
+            <div class="row">
+              <div class="three columns"><p></p></div>
+              <div class="two columns">
+                <img class="u-max-full-width grey-container2" src="{% static 'images/file.svg' %}" >
+                <h6>Ma location en cours</h6>
+              </div>
+              <div class="two columns">
+                <img class="u-max-full-width grey-container2" src="{% static 'images/file.svg' %}">
+                <h6>Historique de locations</h6>
+              </div>
+              <div class="two columns">
+                <img class="u-max-full-width grey-container2" src="{% static 'images/user.svg' %}">
+                <h6>Modifier mes informations</h6>
+              </div>
+            </div>
+          </div>
+        </div>
 		
 {% endblock content %}
