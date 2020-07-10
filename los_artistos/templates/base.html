@@ -38,7 +38,6 @@
 
         {% if user.is_superuser %}   
           <header>  
-            <a href="{% url 'users:myaccount' %}">Mon compte (super user)</a>
             <a href="{% url 'dashboard' %}">Dashboard</a>    
             <a href="{% url 'rates:rates_update' %}">modification des taux</a>
             <a href="{% url 'site_content:update_content' %}">Modifier le contenu du site</a>
@@ -96,10 +95,10 @@
         <div class="four columns">
           <h4>Pratique:</h4>
           <div class="hbar"></div>
-          <a href="#">Contact</a><br>
-          <a href="#">Toutes les oeuvres</a><br>
-          <a href="#">Tous les artistes</a><br>
-          <a href="#">Le concept Artotek</a><br>
+          <a href="/contact">Contact</a><br>
+          <a href="{% url 'artworks:artworks_list' %}">Toutes les oeuvres</a><br>
+          <a href="{% url 'artists:artists' %}">Tous les artistes</a><br>
+          <a href="/concept">Le concept Artotek</a><br>
           <a href="#">Site de la galerie LTK</a><br>
           <a href="#">Protection des données</a><br>
         </div>

@@ -99,6 +99,11 @@ def accept_order(request, **kwargs):
     order = Order.objects.get(id=kwargs['order_id'])
     order.state = 2
     order.save()
+    order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
+    for order_artwork_rate in order_artwork_rates:
+        artwork = Artwork.objects.get(id=order_artwork_rate.artwork.id)
+        artwork.state = 2
+        artwork.save()
     return render(request, 'orders/accept_order.html', {})
 
 def deny_order(request, **kwargs):
@@ -118,6 +123,12 @@ def order_update(request, order_id):
     if request.method == 'POST':
         form = OrderUpdate(request.POST, instance=order)
         if form.is_valid():
+            if(form.cleaned_data['state'] == 2):
+                order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
+                for order_artwork_rate in order_artwork_rates:
+                    artwork = Artwork.objects.get(id=order_artwork_rate.artwork.id)
+                    artwork.state = 2
+                    artwork.save()
             form.save()
     else:
         form = OrderUpdate(instance=order)
