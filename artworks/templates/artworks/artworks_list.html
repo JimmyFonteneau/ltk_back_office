@@ -96,8 +96,27 @@ List artwork
                     amet hendrerit metus</p>
                 <div id="replaceable-artwork-site">
                     {% include './artworks_filtered.html' %}
+                </div>                
+            </div>
+
+            <div class="row">
+                <div class="seven columns">
+                    <p></p>
+                </div>
+                <div class="five columns">
+                    <div class="pagination">
+                        {% if artworks.has_previous %}                       
+                            <a href="?page={{ artworks.previous_page_number }}">{{ artworks.previous_page_number }}</a>
+                        {% endif %}            
+                        <a class="active" href="#">{{ artworks.number }}</a>           
+                        {% if artworks.has_next %}                
+                             <a href="?page={{ artworks.next_page_number }}">{{ artworks.next_page_number }}</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+
+            
         </div>
     </div>
 </div>
