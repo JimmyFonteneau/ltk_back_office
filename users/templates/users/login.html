@@ -28,11 +28,16 @@
             <div class="twelve column">
               <h3 class="section-heading">Connexion</h3>
               <p class="section-description full-width">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit, orci rutrum convallis viverra, nisl tellus molestie velit, vel efficitur nisl ante sed dolor. Phasellus et urna metus. In sodales, velit vel pharetra sodales, massa lacus semper augue, eu finibus leo justo vitae ipsum. Aenean fringilla sapien eros. Aliquam quis scelerisque est. Cras sit amet hendrerit</p>
-              <br>              
-              <button class="bt3"><a href="{% url 'users:register' %}">Créer un compte</a></button>
-              <button class="bt3"><a href="{% url 'users:forgot_password' %}">Mot de passe oublié</a></button>              
-              <br>
-              <br>
+         
+            </div>
+            </div>
+          </div>
+          </div>
+          
+          <div class="section">
+            <div class="container">
+              <div class="grey-container">
+
               <form method="post" action="{% url 'users:login' %}">
                 {% csrf_token %}  
                 <div class="row">
@@ -55,8 +60,10 @@
                 {% endif %}
                 <input class="btsubmit" type="submit" value="Continuer" >
               </form>
+
+              <button class="bt3"><a href="{% url 'users:register' %}">Créer un compte</a></button>
+              <button class="bt3"><a href="{% url 'users:forgot_password' %}">Mot de passe oublié</a></button>  
             </div>
           </div>
         </div> 
-      </div>
 {% endblock content %}

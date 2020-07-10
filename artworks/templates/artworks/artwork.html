@@ -75,7 +75,7 @@
               </div>
               <p class="oeuvre-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               <br>
-              <button class="bt5">Voir l'artiste</button>             
+              <button class="bt5"><a href="{% url 'artists:artist_show' artist_id=artwork.artist.id %}">Voir l'artiste</a></button>             
             </div>
             </div>
           </div>

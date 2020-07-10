@@ -3,10 +3,27 @@
     Votre email
 {% endblock %}
 {% block content %}
-  <h1>Votre email</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Save</button>
-  </form>
+
+<div class="section">
+  <div class="container">
+    <h3 class="section-heading">Votre email</h3>
+    <p class="section-description full-width">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit, orci rutrum convallis viverra, nisl tellus molestie velit, vel efficitur nisl ante sed dolor. Phasellus et urna metus. In sodales, velit vel pharetra sodales, massa lacus semper augue, eu finibus leo justo vitae ipsum. Aenean fringilla sapien eros. Aliquam quis scelerisque est. Cras sit amet hendrerit</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="grey-container">
+      <form method="POST">
+        <form method="POST" enctype="multipart/form-data" class="contact-form">
+        {% csrf_token %}
+        <div class="row">
+            {{ form.as_p }}
+        </div>
+        <input class="btsubmit" type="submit" value="Envoyer">
+      </form>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
