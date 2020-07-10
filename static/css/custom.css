@@ -428,7 +428,7 @@ button a:hover {
 }
 
 
-@media (min-width: 768px) {
+@media (min-width: 1400px) {
   .header li {
     float: left;
   }
@@ -442,7 +442,7 @@ button a:hover {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1399px) {
   .header li a {
     background-color: black;
   }
