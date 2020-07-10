@@ -11,27 +11,24 @@
         <a class="btn btn-primary" href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}" role="button">Show</a> 
     </div>
 {% endfor %} -->
-
-{% for artwork in artworks %}
-{% if forloop.counter|divisibleby:4 %}
 <div>
     <div class="row">
-{% endif %}
-        <div class="three columns">
-            <a href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}">
-                <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
-            </a>
-            <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
-            <p class="section-description">{{ artwork.artist.name }}</p>
-            {% if artwork.timer is not None %}
-            <input type="hidden" class="artwork_timer" value="{{ artwork.timer|date:'Y-m-d' }}"></input>
-            <p class="timer"></p>
-            {% endif %}
-        </div>
-{% if forloop.counter|divisibleby:4 %}
-    </div>
-</div>
-{% endif %}
-
+{% for artwork in artworks %}
+        {% if forloop.counter0|divisibleby:4 %}
+        <div class="three columns" style="margin-left: 0%">
+            {% else %}
+            <div class="three columns" >
+                {% endif %}
+                <a href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}">
+                    <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
+                </a>
+                <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
+                <p class="section-description">{{ artwork.artist.name }}</p>
+                {% if artwork.timer is not None %}
+                <input type="hidden" class="artwork_timer" value="{{ artwork.timer|date:'Y-m-d' }}"></input>
+                <p class="timer"></p>
+                {% endif %}
+            </div>
 {% endfor %}
-
+</div>
+</div>
