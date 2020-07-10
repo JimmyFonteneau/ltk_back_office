@@ -57,8 +57,10 @@ def logout_view(request):
 def login_view(request):
     if request.GET.get('next') is not None:
         url_form = "/users/login/?next="+request.GET.get('next')
+        register_link = "/users/register/?next="+request.GET.get('next')
     else:
         url_form = "/users/login/"
+        register_link = "/users/register/"
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:myaccount"))
     elif 'email' in request.POST and 'password' in request.POST:
@@ -81,7 +83,8 @@ def login_view(request):
                     {
                         "auth_error": True,
                         'form':form,
-                        "url_form": url_form
+                        "url_form": url_form,
+                        "register_link": register_link
                     }
                 )
     else:
@@ -91,7 +94,8 @@ def login_view(request):
             'users/login.html',
             {
                 'form':form,
-                "url_form": url_form
+                "url_form": url_form,
+                "register_link": register_link
             }
         )
 
