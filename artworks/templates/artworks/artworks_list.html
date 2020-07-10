@@ -59,8 +59,10 @@ List artwork
                             <fieldset>
                                 <legend>Catégories:</legend>
                                 {% for category in categories %}
-                                <input type="checkbox" name="categorie" id="category_{{ category.id }}">
-                                <label for="category_{{ category.id }}">{{ category.name }}</label>
+                                <div style="display: flex">
+                                    <input type="checkbox" name="categorie" id="category_{{ category.id }}">
+                                    <label for="category_{{ category.id }}">{{ category.name }}</label>
+                                </div>
                                 {% endfor %}
                                 <!-- <input type="checkbox" name="categorie" value="Sculpture">Sculpture<br>-->
                             </fieldset>
@@ -74,8 +76,10 @@ List artwork
                                 <legend>Styles:</legend>
                                 <!-- <input type="checkbox" name="artistes" value="Red-Ape">Red-Ape<br>-->
                                 {% for style in styles %}
-                                <input type="checkbox" id="style_{{ style.id }}">
-                                <label for="style_{{ style.id }}">{{ style.name }}</label>
+                                <div style="display: flex">
+                                    <input type="checkbox" id="style_{{ style.id }}">
+                                    <label for="style_{{ style.id }}">{{ style.name }}</label>
+                                </div>                                                         
                                 {% endfor %}
                             </fieldset>
                         </form>
