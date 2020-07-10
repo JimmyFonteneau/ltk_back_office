@@ -16,7 +16,7 @@ def contact(request):
             # send_mail('LTK - Message', message, email, ['admin@admin.fr'])
             subject = 'Subject'
             data = {'email': form.cleaned_data['email'], 'lastname': form.cleaned_data['lastName'], 'firstname': form.cleaned_data['firstName'], 'company': form.cleaned_data['company'], 'phone': form.cleaned_data['phone'], 'message': form.cleaned_data['message']}
-            html_message = render_to_string('./mails/mail_template.html', data)
+            html_message = render_to_string('./mails/contact_mail.html', data)
             plain_message = strip_tags(html_message)
             from_email = 'From <from@example.com>'
             to = 'to@example.com'
