@@ -7,8 +7,8 @@
    <div class="section hero">
     <div class="container">
 	<h2 class="section-heading">L’art n’a jamais été aussi accessible</h2>
-	<button class="bt1"><a href ="oeuvres.html">Voir les oeuvres</a></button>
-	<button class="bt2">Voir les artistes</button>
+	<button class="bt1"><a href ="{% url 'artworks:artworks_list' %}">Voir les oeuvres</a></button>
+	<button class="bt2"><a href ="{% url 'artists:artists' %}">Voir les artistes</a></button>
     </div>
   </div>
 
@@ -71,7 +71,7 @@
 		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
 		  <p class="section-description">nom artiste</p>
         </div>
-	  <button class="bt3">Voir toutes les oeuvres</button>
+	  <button class="bt3"><a href="{% url 'artworks:artworks_list' %}">Voir toutes les oeuvres</a></button>
     <br>
     <br>
     </div>
@@ -83,7 +83,7 @@
     	<h4>GALERIE LTK</h4>
       <h3 class="section-heading">L'art à portée de main</h3>
       <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
-      <button class="bt2">Decouvrir le concept</button>
+      <button class="bt2"><a href="/concept">Decouvrir le concept</a></button>
     </div>
   </div>
 
