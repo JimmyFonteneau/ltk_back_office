@@ -63,7 +63,7 @@
                 <div class="nine columns">
                   <!-- <p>Pour une location de 3 mois</p> -->
                   {% if artwork.state == 1 %}   
-                  <form action="{% url 'carts:cart_add' artwork.id %}" method="post">
+                  <form style="display: flex" action="{% url 'carts:cart_add' artwork.id %}" method="post">
                       {{ cart_artwork_form }}
                       {% csrf_token %}
                       <button type="submit" class="btsubmit">Louer</button>
