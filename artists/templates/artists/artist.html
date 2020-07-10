@@ -10,10 +10,10 @@
     <div class="row">
       <div class="four columns">
         <ul class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <div  class="arrow"></div>
-          <li><a href="#">Artistes</a></li>
-          <div  class="arrow"></div>
+          <li><a href="/">Home</a></li>
+          <div class="arrow"></div>
+          <li><a href="{% url 'artists:artists' %}">Artistes</a></li>
+          <div class="arrow"></div>
           <li><a href="#">{{ artist.name }}</a></li>
         </ul>
       </div>
