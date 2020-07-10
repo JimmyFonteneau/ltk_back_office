@@ -11,6 +11,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 def register_view(request):
+    if request.GET.get('next') is not None:
+        url_form = "/users/register/?next="+request.GET.get('next')
+    else:
+        url_form = "/users/register/"
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:myaccount"))
     if request.method == 'POST':
@@ -25,15 +29,19 @@ def register_view(request):
                 password=raw_password,
             )
             user.save()
+            next_url = request.GET.get('next')
             login(request, user)
-            return HttpResponseRedirect(reverse("users:myaccount"))
+            if next_url is not None:
+                return redirect(next_url)
+            else:
+                return HttpResponseRedirect(reverse("users:myaccount"))
     else:
         form = RegisterForm()
     return render(
         request,
         'users/register.html',
         {
-            'url_form': reverse("users:register"),
+            'url_form': url_form,
             'title': "Inscription",
             'form':form,
         }
@@ -47,6 +55,10 @@ def logout_view(request):
 
 
 def login_view(request):
+    if request.GET.get('next') is not None:
+        url_form = "/users/login/?next="+request.GET.get('next')
+    else:
+        url_form = "/users/login/"
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:myaccount"))
     elif 'email' in request.POST and 'password' in request.POST:
@@ -69,6 +81,7 @@ def login_view(request):
                     {
                         "auth_error": True,
                         'form':form,
+                        "url_form": url_form
                     }
                 )
     else:
@@ -78,6 +91,7 @@ def login_view(request):
             'users/login.html',
             {
                 'form':form,
+                "url_form": url_form
             }
         )
 

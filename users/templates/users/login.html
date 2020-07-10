@@ -38,7 +38,7 @@
             <div class="container">
               <div class="grey-container">
 
-              <form method="post" action="/users/login/?next={{ request.GET.next }}">
+              <form method="post" action="{{ url_form }}">
                 {% csrf_token %}  
                 <div class="row">
                   <div class="four columns"><p></p></div>
