@@ -56,9 +56,10 @@ def login_view(request):
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
+                next_url = request.GET.get('next')
                 login(request, user)
-                if request.GET.get('next') is not None:
-                    return redirect(request.GET['next'])
+                if next_url is not None:
+                    return redirect(next_url)
                 else:
                     return HttpResponseRedirect(reverse("users:myaccount"))
             else:
