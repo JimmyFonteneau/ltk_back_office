@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html>
   <head>
@@ -178,12 +179,12 @@
       }
 
       .btn-primary table td {
-        background-color: #3498db; 
+        background-color: #fd0786; 
       }
 
       .btn-primary a {
-        background-color: #3498db;
-        border-color: #3498db;
+        background-color: #fd0786;
+        border-color: #fd0786;
         color: #ffffff; 
       }
 
@@ -322,11 +323,11 @@
           line-height: inherit;
         }
         .btn-primary table td:hover {
-          background-color: #34495e !important; 
+          background-color: black !important; 
         }
         .btn-primary a:hover {
-          background-color: #34495e !important;
-          border-color: #34495e !important; 
+          background-color: black !important;
+          border-color: black !important; 
         } 
       }
 
@@ -350,11 +351,15 @@
                     <tr>
                       <td>
                         <p>Bonjour,</p>
-                        <p>{{ email }} souhaite effectuer une demande de location : </p>
+                        <p><b>{{ email }}</b> souhaite effectuer une demande de location : </p>
+                        {% for item in cart %}
+                          <p>Oeuvre : <b>{{ item.artwork }}</b>, pour une durée de <b>{{ item.nb_month }} mois</b> - Prix : <b>{{ item.total_price }} €</b></p>
+                        {% endfor %}
+                        <p> Montant total du panier : <b>{{ total }} €</b></p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
-                              <td align="left">
+                              <td align="center">
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>                                     
@@ -363,7 +368,7 @@
                                   </tbody>
                                 </table>
                               </td>
-                              <td align="right">
+                              <td align="center">
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
