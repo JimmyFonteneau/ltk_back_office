@@ -38,7 +38,6 @@
 
         {% if user.is_superuser %}   
           <header>  
-            <a href="{% url 'users:myaccount' %}">Mon compte (super user)</a>
             <a href="{% url 'dashboard' %}">Dashboard</a>    
             <a href="{% url 'rates:rates_update' %}">modification des taux</a>
             <a href="{% url 'site_content:update_content' %}">Modifier le contenu du site</a>
