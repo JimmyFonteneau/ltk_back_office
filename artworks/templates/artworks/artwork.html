@@ -48,12 +48,12 @@
         {% csrf_token %}        
         <input type="hidden" name="artwork_id" value="{{ artwork.id }}"></input>
         <div class="container">
-        <input type="hidden" class="artwork_timer" value="{{ artwork.timer|date:'Y-m-d' }}"></input>
-        <p class="timer"></p>
           <div class="row">
             <div class="one-half column">
               <img class="u-max-full-width  border-i" src="{{ artwork.photo.url }}">
             </div>
+            <input type="hidden" class="artwork_timer" value="{{ artwork.timer|date:'Y-m-d' }}"></input>
+            <p class="timer"></p>
             <div class="one-half column left">
               <h3 class="oeuvre-h">{{ artwork.name }}</h3>
               <div class="row">
