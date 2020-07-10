@@ -20,3 +20,9 @@ class ContactForm(forms.Form):
         widget=forms.Textarea,
         required=True
     )
+    message.widget.attrs.update({ 'class': 'u-full-width height-p' })
+    phone.widget.attrs.update({ 'class': 'u-full-width' })
+    company.widget.attrs.update({ 'class': 'u-full-width' })
+    email.widget.attrs.update({ 'class': 'u-full-width' })
+    lastName.widget.attrs.update({ 'class': 'u-full-width' })
+    firstName.widget.attrs.update({ 'class': 'u-full-width' })

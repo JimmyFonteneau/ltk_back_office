@@ -40,15 +40,16 @@
                     {% csrf_token %}
                 <div class="row">
                   <div class="five columns">
-                    <input class="u-full-width" type="email" placeholder="Votre adresse mail" id="email">
-                    <input class="u-full-width" type="text" placeholder="Votre nom/prénom" id="nom">
-                    <input class="u-full-width" type="text" placeholder="Votre entreprise" id="company">
-                    <input class="u-full-width" type="text" placeholder="Votre poste" id="poste">
-                    <input class="u-full-width" type="text" placeholder="Votre telephone" id="telephone">
-                  </div>
+                    {% for field in form %}
+                      {% if field.label != 'Message' %} 
+                        {{ field.label }} : {{ field }}
+                      {% endif %}
+                    {% endfor %}
+                    <!-- {{ form.as_p }} -->
+                  </div>      
                   <div class="seven columns">
-                    <textarea class="u-full-width height-p" placeholder="Votre message"></textarea>
-                  </div>
+                    {{ form.message.label }} : {{ form.message }}
+                  </div>     
                 </div>
                 <div class="twelve column left align">
                   <input type="checkbox" id="subscribeNews" name="subscribe" value="newsletter">

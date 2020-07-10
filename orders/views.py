@@ -9,7 +9,8 @@ from .forms import OrderEmailForm, OrderUpdate
 from users.models import UserProfile
 import random, string
 from rates.models import Rate
-
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 def is_superuser(user=None):    
     if user == None:
@@ -61,13 +62,23 @@ def order_confirm_noaccount(request):
             )
             user.save()
             order = create_order(request, user)
-            send_mail(
-                'Demande de location',
-                '<a href="'+settings.ALLOWED_HOSTS[1]+'orders/accept-order-'+str(order.id)+'">Accepter la commande</a>\n<a href="'+settings.ALLOWED_HOSTS[1]+'orders/deny-order-'+str(order.id)+'">Refuser la commande</a>',
-                form.cleaned_data['email'],
-                ['admin@email.com'],
-                fail_silently=False,
-            )
+            # send_mail(
+            #     'Demande de location',
+            #     '<a href="'+settings.ALLOWED_HOSTS[1]+'orders/accept-order-'+str(order.id)+'">Accepter la commande</a>\n<a href="'+settings.ALLOWED_HOSTS[1]+'orders/deny-order-'+str(order.id)+'">Refuser la commande</a>',
+            #     form.cleaned_data['email'],
+            #     ['admin@email.com'],
+            #     fail_silently=False,
+            # )
+            accept = settings.ALLOWED_HOSTS[1]+'orders/accept-order-'+str(order.id)
+            refuse = settings.ALLOWED_HOSTS[1]+'orders/deny-order-'+str(order.id)
+            
+            subject = 'Demande de location'
+            data = {'accept': accept, 'refuse': refuse, }
+            html_message = render_to_string('./mails/request_mail.html', data)
+            plain_message = strip_tags(html_message)
+            from_email = form.cleaned_data['email']
+            to = 'admin@admin.com'
+            send_mail(subject, plain_message, from_email, [to], html_message=html_message)
             return render(
                 request, 
                 'orders/order_confirm_noaccount.html', 
