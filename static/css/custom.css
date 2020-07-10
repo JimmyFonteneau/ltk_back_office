@@ -238,6 +238,10 @@ button a:hover {
   text-align: left;
 }
 
+.section.footer {
+    padding: 4rem 0 4rem !important;
+}
+
 .copyright {
   background-color: black;
   color: white;
@@ -402,7 +406,8 @@ button a:hover {
 }
 
 .header .menu-btn:checked ~ .menu {
-  max-height: 240px;
+    max-height: 400px;
+    background-color: black;
 }
 
 .header .menu-btn:checked ~ .menu-icon .navicon {
@@ -423,7 +428,7 @@ button a:hover {
 }
 
 
-@media (min-width: 768px) {
+@media (min-width: 1400px) {
   .header li {
     float: left;
   }
@@ -437,7 +442,7 @@ button a:hover {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1399px) {
   .header li a {
     background-color: black;
   }
