@@ -11,74 +11,69 @@
       <p class="section-description full-width">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam suscipit, orci rutrum convallis viverra, nisl tellus molestie velit, vel efficitur nisl ante sed dolor. Phasellus et urna metus. In sodales, velit vel pharetra sodales, massa lacus semper augue, eu finibus leo justo vitae ipsum. Aenean fringilla sapien eros. Aliquam quis scelerisque est. Cras sit amet hendrerit</p>
     </div>
   </div>
-  <div style="width: 100%; text-align: center;"> 
-    {% if not modify %}
-    <button class="bt3"><a href="{% url 'users:login' %}">Connexion</a></button>
-    {% endif %}
-
-    <button class="bt3"><a href="{% url 'users:forgot_password' %}">Mot de passe oublié</a></button> 
-</div>
+  
   <div class="section">
     <div class="container">
-        <div class="grey-container">
+      <div class="grey-container">
 
             <p>{{ form.non_field_errors }}</p>
-            <form method="post" action="{{ url_form }}" style="display: flex; flex-wrap: wrap;">
+            <form method="post" action="{{ url_form }}">
                 {% csrf_token %}
-                <div style="width: 50%;">
-                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label><br>
-                    {{ form.email }}<br>
-                    {% if form.errors.email %}
-                        <span>{{ form.errors.email }}</span>
+                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label><br>
+                {{ form.email }}<br>
+                {% if form.errors.email %}
+                    <span>{{ form.errors.email }}</span>
+                {% endif %}
+                
+                {% if not modify %}        
+                    
+                    <label for="{{ form.raw_password.id_for_label }}">{{ form.raw_password.label }}</label><br>
+                    {{ form.raw_password }}<br>
+                    {% if form.errors.raw_password %}
+                        <span>{{ form.errors.raw_password }}</span>
                     {% endif %}
                     
-                    {% if not modify %}        
-
-                        <label for="{{ form.raw_password.id_for_label }}">{{ form.raw_password.label }}</label><br>
-                        {{ form.raw_password }}<br>
-                        {% if form.errors.raw_password %}
-                            <span>{{ form.errors.raw_password }}</span>
-                        {% endif %}
-
-                        <label for="{{ form.raw_password_confirmation.id_for_label }}">{{ form.raw_password_confirmation.label }}</label><br>
-                        {{ form.raw_password_confirmation }}<br>
-                        {% if form.errors.raw_password_confirmation %}
-                            <span>{{ form.errors.raw_password_confirmation }}</span>
-                        {% endif %}
-
-
+                    <label for="{{ form.raw_password_confirmation.id_for_label }}">{{ form.raw_password_confirmation.label }}</label><br>
+                    {{ form.raw_password_confirmation }}<br>
+                    {% if form.errors.raw_password_confirmation %}
+                        <span>{{ form.errors.raw_password_confirmation }}</span>
                     {% endif %}
 
-                    <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label><br>
-                    {{ form.firstname }}<br>
-                    {% if form.errors.firstname %}
-                        <span>{{ form.errors.firstname }}</span>
-                    {% endif %}
-                </div>
+                    
+                {% endif %}
 
-                <div style="width: 50%;">
-                    <label for="{{ form.lastname.id_for_label }}">{{ form.lastname.label }}</label><br>
-                    {{ form.lastname }}<br>
-                    {% if form.errors.lastname %}
-                        <span>{{ form.errors.lastname }}</span>
-                    {% endif %}
+                <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label><br>
+                {{ form.firstname }}<br>
+                {% if form.errors.firstname %}
+                    <span>{{ form.errors.firstname }}</span>
+                {% endif %}
 
-                    <label for="{{ form.company.id_for_label }}">{{ form.company.label }}</label><br>
-                    {{ form.company }}<br>
-                    {% if form.errors.company %}
-                        <span>{{ form.errors.company }}</span>
-                    {% endif %}
+                <label for="{{ form.lastname.id_for_label }}">{{ form.lastname.label }}</label><br>
+                {{ form.lastname }}<br>
+                {% if form.errors.lastname %}
+                    <span>{{ form.errors.lastname }}</span>
+                {% endif %}
 
-                    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label><br>
-                    {{ form.phone }}<br>
-                    {% if form.errors.phone %}
-                        <span>{{ form.errors.phone }}</span>
-                    {% endif %}
-                </div>
+                <label for="{{ form.company.id_for_label }}">{{ form.company.label }}</label><br>
+                {{ form.company }}<br>
+                {% if form.errors.company %}
+                    <span>{{ form.errors.company }}</span>
+                {% endif %}
+
+                <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label><br>
+                {{ form.phone }}<br>
+                {% if form.errors.phone %}
+                    <span>{{ form.errors.phone }}</span>
+                {% endif %}
                 
-                <div style="width: 100%; text-align: center;">
-                    <input class="btsubmit" type="submit" value="Valider"><br>
-                </div>               
+                <input class="btsubmit" type="submit" value="Valider"><br>
+                
+                {% if not modify %}
+                <button class="bt3"><a href="{% url 'users:login' %}">Connexion</a></button>
+                {% endif %}
+
+                <button class="bt3"><a href="{% url 'users:forgot_password' %}">Mot de passe oublié</a></button>
+
             </form>
         </div>
     </div>
