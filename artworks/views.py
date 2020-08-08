@@ -79,7 +79,7 @@ def artworks_list(request):
     
     ctx["artworks"] = artworks
 
-    paginator = Paginator(artworks, 4)
+    paginator = Paginator(artworks, 8)
     page = request.GET.get('page')
     artworks = paginator.get_page(page)
 

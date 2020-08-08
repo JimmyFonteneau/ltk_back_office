@@ -27,6 +27,9 @@ def create_order(request, user):
     )
     order.save()
     for item in cart:
+        print('item')
+        print(item)
+        print(item['artwork'])
         artwork = Artwork.objects.get(id=item['artwork'].id)
         rate = Rate.objects.get(duration=item['nb_month'])
         order_artwork_rate = OrderArtworkRate.objects.create(
@@ -41,7 +44,7 @@ def create_order(request, user):
     refuse = settings.ALLOWED_HOSTS[1]+'orders/deny-order-'+str(order.id)
     
     subject = 'Demande de location'
-    data = {'accept': accept, 'refuse': refuse, 'email': user.email }
+    data = {'accept': accept, 'refuse': refuse, 'email': user.email, 'cart': cart, 'total': cart.get_total_price() }
     html_message = render_to_string('./mails/request_mail.html', data)
     plain_message = strip_tags(html_message)
     from_email = 'plateforme@ltk.com'
