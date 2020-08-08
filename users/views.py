@@ -226,3 +226,20 @@ def updated_password (request, user_id):
             'url_form': reverse('users:updated_password', kwargs={'user_id': str(user_id) }),
         }
     ) 
+
+def update_user(request, user_id):
+    user = UserProfile.objects.get(id=user_id)  
+    if request.method == 'POST':
+        form = AccountSettingsForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("users:users_all"))
+    else:
+        form = AccountSettingsForm(instance=user)
+    return render(
+        request,
+        'users/register.html',
+        {
+            'form':form,
+        }
+    )
