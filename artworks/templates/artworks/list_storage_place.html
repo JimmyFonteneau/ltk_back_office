@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+    New storage place
+{% endblock %}
+{% block content %}
+
+{% for storage_place in storage_places %}
+<p id={{storage_place.id}}> {{ storage_place.name }}</p>
+{% endfor %}
+<a class="btn btn-primary" href="{% url 'artworks:add_storage_place' %}" role="button">Ajouter un lieu de stockage</a>
+
+<script>
+    $(document).ready(function() {                   
+        $("p").click(function(event) {         
+         document.location.pathname = `artworks/update-storage-place-${event.target.id}/`;
+        });
+    });
+</script>
+{% endblock %}

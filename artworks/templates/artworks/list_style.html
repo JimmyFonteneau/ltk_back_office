@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+    New style
+{% endblock %}
+{% block content %}
+
+{% for style in styles %}
+<p id={{style.id}}> {{ style.name }}</p>
+{% endfor %}
+<a class="btn btn-primary" href="{% url 'artworks:add_style' %}" role="button">Ajouter un style</a>
+
+<script>
+    $(document).ready(function() {                   
+        $("p").click(function(event) {         
+         document.location.pathname = `artworks/update-style-${event.target.id}/`;
+        });
+    });
+</script>
+{% endblock %}
