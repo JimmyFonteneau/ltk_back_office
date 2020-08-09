@@ -65,6 +65,11 @@ class RegisterForm(forms.Form):
 
         return cleaned_data
         
+class ModifyUserForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ('email', 'lastname','firstname', 'company', 'phone',)
 
 class LoginForm(forms.Form):
 

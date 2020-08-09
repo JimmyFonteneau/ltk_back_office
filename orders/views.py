@@ -119,15 +119,19 @@ def order_update(request, order_id):
     for order_artwork_rate in order_artwork_rates:
         order.artworks.append(order_artwork_rate)
     if request.method == 'POST':
-        form = OrderUpdate(request.POST, instance=order)
-        if form.is_valid():
-            if(form.cleaned_data['state'] == 2):
-                order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
-                for order_artwork_rate in order_artwork_rates:
-                    artwork = Artwork.objects.get(id=order_artwork_rate.artwork.id)
-                    artwork.state = 2
-                    artwork.save()
-            form.save()
+        if 'delete_order' in request.POST:
+            order.delete()          
+            return redirect("orders:orders_list")
+        else:
+            form = OrderUpdate(request.POST, instance=order)
+            if form.is_valid():
+                if(form.cleaned_data['state'] == 2):
+                    order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
+                    for order_artwork_rate in order_artwork_rates:
+                        artwork = Artwork.objects.get(id=order_artwork_rate.artwork.id)
+                        artwork.state = 2
+                        artwork.save()
+                form.save()
     else:
         form = OrderUpdate(instance=order)
     return render(

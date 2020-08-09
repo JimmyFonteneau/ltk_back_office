@@ -24,9 +24,13 @@ def artist_new(request):
 def update_artist(request, artist_id):             
     artist = Artist.objects.get(id=artist_id)    
     if request.method == 'POST':
-        form = ModifyArtistForm(request.POST, instance=artist)
-        if form.is_valid():           
-            form.save()
+        if 'delete_artist' in request.POST:
+            artist.delete()                     # delete the cat.
+            return redirect("artists:artists")
+        else:
+            form = ModifyArtistForm(request.POST, instance=artist)
+            if form.is_valid():           
+                form.save()
     else:
         form = ModifyArtistForm(instance=artist)
     return render(

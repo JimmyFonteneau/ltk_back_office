@@ -36,9 +36,13 @@ def artwork_new(request):
 def update_artwork(request, artwork_id):             
     artwork = Artwork.objects.get(id=artwork_id)    
     if request.method == 'POST':
-        form = ModifyArtworkForm(request.POST, instance=artwork)
-        if form.is_valid():           
-            form.save()
+        if 'delete_artwork' in request.POST:
+            artwork.delete()                     # delete the cat.
+            return redirect("artworks:artworks_list")
+        else:
+            form = ModifyArtworkForm(request.POST, instance=artwork)
+            if form.is_valid():           
+                form.save()
     else:
         form = ModifyArtworkForm(instance=artwork)
     return render(

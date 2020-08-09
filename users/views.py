@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm, RegisterForm, AccountSettingsForm, ForgotPassword, UpdatedPassword
+from .forms import LoginForm, ModifyUserForm, RegisterForm, AccountSettingsForm, ForgotPassword, UpdatedPassword
 from .models import UserProfile
 from orders.models import Order, OrderArtworkRate
 from django.core.mail import send_mail
@@ -230,15 +230,19 @@ def updated_password (request, user_id):
 def update_user(request, user_id):
     user = UserProfile.objects.get(id=user_id)  
     if request.method == 'POST':
-        form = AccountSettingsForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("users:users_all"))
+        if 'delete_user' in request.POST:
+            user.delete()                     # delete the cat.
+            return redirect("users:users_all")
+        else:
+            form = ModifyUserForm(request.POST, instance=user)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse("users:users_all"))
     else:
-        form = AccountSettingsForm(instance=user)
+        form = ModifyUserForm(instance=user)
     return render(
         request,
-        'users/register.html',
+        'users/user_update.html',
         {
             'form':form,
         }
