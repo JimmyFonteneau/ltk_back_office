@@ -40,9 +40,8 @@ class RegisterForm(forms.Form):
         max_length=256,
         required=False,
     )
-    phone = forms.CharField(
+    phone = forms.IntegerField(
         label = "Téléphone",
-        max_length=12,
         required=False,
     )
     

@@ -23,15 +23,14 @@ class UserProfile(AbstractUser):
     company = models.CharField(
         verbose_name="Entreprise",
         max_length=256,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
         default='default company',
     )
-    phone = models.CharField(
+    phone = models.IntegerField(
         verbose_name="Téléphone",
-        max_length=12,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
         default='0000000000',
     )
 
