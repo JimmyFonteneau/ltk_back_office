@@ -5,9 +5,9 @@
 {% block content %}
     <h2>Toutes les oeuvres d'arts mode admin</h2>
     <a class="btn btn-primary" href="{% url 'artworks:artwork_new' %}" role="button">Ajouter une oeuvre</a>
-    <a class="btn btn-primary" href="{% url 'artworks:add_style' %}" role="button">Ajouter un style</a>
-    <a class="btn btn-primary" href="{% url 'artworks:add_category' %}" role="button">Ajouter une catégorie</a>
-    <a class="btn btn-primary" href="{% url 'artworks:add_storage_place' %}" role="button">Ajouter un lie de stockage</a>
+    <a class="btn btn-primary" href="{% url 'artworks:all_style' %}" role="button">Gestion des styles</a>
+    <a class="btn btn-primary" href="{% url 'artworks:all_category' %}" role="button">Gestoin des catégories</a>
+    <a class="btn btn-primary" href="{% url 'artworks:all_storage_place' %}" role="button">Gestion des lieux de stockages</a>
 
     {% for style in styles %}
     <input type="checkbox" id="style_{{ style.id }}">

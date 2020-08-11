@@ -36,9 +36,13 @@ def artwork_new(request):
 def update_artwork(request, artwork_id):             
     artwork = Artwork.objects.get(id=artwork_id)    
     if request.method == 'POST':
-        form = ModifyArtworkForm(request.POST, instance=artwork)
-        if form.is_valid():           
-            form.save()
+        if 'delete_artwork' in request.POST:
+            artwork.delete()                     # delete the cat.
+            return redirect("artworks:artworks_list")
+        else:
+            form = ModifyArtworkForm(request.POST, instance=artwork)
+            if form.is_valid():           
+                form.save()
     else:
         form = ModifyArtworkForm(instance=artwork)
     return render(
@@ -79,7 +83,7 @@ def artworks_list(request):
     
     ctx["artworks"] = artworks
 
-    paginator = Paginator(artworks, 4)
+    paginator = Paginator(artworks, 8)
     page = request.GET.get('page')
     artworks = paginator.get_page(page)
 
@@ -165,3 +169,76 @@ def add_storage_place(request):
     else:
         form = StoragePlaceForm()
     return render(request, 'artworks/add_storage_place.html', {'form': form})
+
+def all_style(request):
+    styles = Artwork_Style.objects.all()
+    print(styles)
+    return render(request, 'artworks/list_style.html', {'styles': styles})
+
+def update_style(request, style_id):             
+    style = Artwork_Style.objects.get(id=style_id)    
+    if request.method == 'POST':
+        if 'delete_style' in request.POST:
+            style.delete()                 
+            return redirect("artworks:all_style")
+        else:
+            form = StyleForm(request.POST, instance=style)
+            if form.is_valid():           
+                form.save()
+    else:
+        form = StyleForm(instance=style)
+    return render(
+        request,
+        'artworks/style_update.html',
+        {
+            'form': form,
+        }
+    ) 
+
+def all_category(request):
+    categories = Artwork_Category.objects.all()    
+    return render(request, 'artworks/list_category.html', {'categories': categories})
+
+def update_category(request, category_id):             
+    category = Artwork_Category.objects.get(id=category_id)    
+    if request.method == 'POST':
+        if 'delete_category' in request.POST:
+            category.delete()                 
+            return redirect("artworks:all_category")
+        else:
+            form = CategoryForm(request.POST, instance=category)
+            if form.is_valid():           
+                form.save()
+    else:
+        form = CategoryForm(instance=category)
+    return render(
+        request,
+        'artworks/category_update.html',
+        {
+            'form': form,
+        }
+    ) 
+
+def all_storage_place(request):
+    storage_places = Artwork_Storage_Place.objects.all()    
+    return render(request, 'artworks/list_storage_place.html', {'storage_places': storage_places})
+
+def update_storage_place(request, storage_place_id):             
+    storage_place = Artwork_Storage_Place.objects.get(id=storage_place_id)    
+    if request.method == 'POST':
+        if 'delete_storage_place' in request.POST:
+            storage_place.delete()                 
+            return redirect("artworks:all_storage_place")
+        else:
+            form = StoragePlaceForm(request.POST, instance=storage_place)
+            if form.is_valid():           
+                form.save()
+    else:
+        form = StoragePlaceForm(instance=storage_place)
+    return render(
+        request,
+        'artworks/storage_place_update.html',
+        {
+            'form': form,
+        }
+    ) 

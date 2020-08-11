@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+    New category
+{% endblock %}
+{% block content %}
+
+{% for category in categories %}
+<p id={{category.id}}> {{ category.name }}</p>
+{% endfor %}
+<a class="btn btn-primary" href="{% url 'artworks:add_category' %}" role="button">Ajouter un category</a>
+
+<script>
+    $(document).ready(function() {                   
+        $("p").click(function(event) {        
+         document.location.pathname = `artworks/update-category-${event.target.id}/`;
+        });
+    });
+</script>
+{% endblock %}
