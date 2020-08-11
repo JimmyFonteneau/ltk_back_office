@@ -10,6 +10,9 @@ from orders.models import Order, OrderArtworkRate
 from django.core.mail import send_mail
 from django.conf import settings
 
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 def register_view(request):
     if request.GET.get('next') is not None:
         url_form = "/users/register/?next="+request.GET.get('next')
@@ -188,17 +191,20 @@ def user(request, user_id):
 def forgot_password(request):                    
     if request.method == 'POST':
         form = ForgotPassword(request.POST)        
-        if form.is_valid():           
+        if form.is_valid():                                  
             user = UserProfile.objects.get(email=form.cleaned_data['email'])            
             user.updated_password = True
             user.save()
-            send_mail(
-                'Demande de récupération de mot de passe',
-                '<a href="'+settings.ALLOWED_HOSTS[1]+'users/updated-password-'+str(user.id)+'">Modifier mon mot de passe</a>',
-                form.cleaned_data['email'],
-                ['admin@email.com'],
-                fail_silently=False,
-            )
+
+            linkForgot = settings.ALLOWED_HOSTS[1]+'users/updated-password-'+str(user.id)
+            subject = 'Demande de modificatin de mot de passe'
+            data = {'linkForgot': linkForgot }
+            html_message = render_to_string('./mails/forgot_email.html', data)
+            plain_message = strip_tags(html_message)
+            from_email = 'plateforme@ltk.com'
+            to = 'admin@admin.com'
+            send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
     else:
         form = ForgotPassword()
     return render(
