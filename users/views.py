@@ -23,10 +23,14 @@ def register_view(request):
             username = form.cleaned_data['email']
             email = form.cleaned_data['email']
             raw_password = form.cleaned_data['raw_password']
+            firstname = form.cleaned_data['firstname']
+            lastname = form.cleaned_data['lastname']
             user = UserProfile.objects.create_user(
                 username=username,
                 email=email,
                 password=raw_password,
+                firstname=firstname,
+                lastname=lastname
             )
             user.save()
             next_url = request.GET.get('next')
