@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+    List rates
+{% endblock %}
+{% block content %}
+
+{% for rate in rates %}
+<p> {{ rate.duration }}</p>
+<p> {{ rate.rate }}</p>
+<button id={{rate.id}}>Modifier</button>
+{% endfor %}
+<a class="btn btn-primary" href="{% url 'rates:rates_add' %}" role="button">Ajouter un taux</a>
+
+<script>
+    $(document).ready(function() {                   
+        $("button").click(function(event) {         
+         document.location.pathname = `rates/update-rate-${event.target.id}/`;
+        });
+    });
+</script>
+{% endblock %}

@@ -9,30 +9,32 @@ def add(request):
         form = RateForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/rates/update/')
+            return redirect("rates:rates_list")
     else:
         form = RateForm()
     return render(request, 'rates/add.html', {'form': form})
 
-def update(request):
-    rates = Rate.objects.all().order_by('duration')
-    forms = []
-    index = 0
+def update(request, rate_id):
+    rate = Rate.objects.get(id=rate_id)      
     if request.method == 'POST':
-        for r in rates:
-            index+=1
-            form = ModifyRateForm(request.POST, instance=r, prefix="form"+str(index))
-            if form.is_valid():
-                form.save() 
-            forms.append(ModifyRateForm(instance=r, prefix="form"+str(index)))
-    else:            
-        for r in rates:
-            index+=1
-            forms.append(ModifyRateForm(instance=r, prefix="form"+str(index)))
+        if 'delete_rate' in request.POST:
+            rate.delete()                 
+            return redirect("rates:rates_list")
+        else:
+            form = ModifyRateForm(request.POST, instance=rate)
+            if form.is_valid():           
+                form.save()
+                return redirect("rates:rates_list")
+    else:
+        form = ModifyRateForm(instance=rate)
     return render(
         request,
         'rates/update.html',
         {
-            'forms': forms,
+            'form': form,
         }
-    )
+    ) 
+
+def rates_list(request):
+    rates = Rate.objects.all()    
+    return render(request, 'rates/list_rates.html', {'rates': rates})
