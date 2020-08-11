@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
+import copy
 
 def is_superuser(user=None):    
     if user == None:
@@ -37,12 +38,17 @@ def update_artwork(request, artwork_id):
     artwork = Artwork.objects.get(id=artwork_id)    
     if request.method == 'POST':
         if 'delete_artwork' in request.POST:
-            artwork.delete()                     # delete the cat.
+            artwork.delete()                     
+            return redirect("artworks:artworks_list")
+        elif 'duplicate_artwork' in request.POST:            
+            a = Artwork(state= 1, name=artwork.name, height= artwork.height, width= artwork.width, artist= artwork.artist, photo= artwork.photo, price= artwork.price, style= artwork.style, category= artwork.category, storage_place= artwork.storage_place)
+            a.save()
             return redirect("artworks:artworks_list")
         else:
             form = ModifyArtworkForm(request.POST, instance=artwork)
             if form.is_valid():           
                 form.save()
+                return redirect("artworks:artworks_list")
     else:
         form = ModifyArtworkForm(instance=artwork)
     return render(
@@ -171,8 +177,7 @@ def add_storage_place(request):
     return render(request, 'artworks/add_storage_place.html', {'form': form})
 
 def all_style(request):
-    styles = Artwork_Style.objects.all()
-    print(styles)
+    styles = Artwork_Style.objects.all()    
     return render(request, 'artworks/list_style.html', {'styles': styles})
 
 def update_style(request, style_id):             
