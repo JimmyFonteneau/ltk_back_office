@@ -11,6 +11,8 @@ import random, string
 from rates.models import Rate
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from datetime import datetime, timedelta
+from dateutil.relativedelta import *
 
 def is_superuser(user=None):    
     if user == None:
@@ -32,7 +34,8 @@ def create_order(request, user):
         order_artwork_rate = OrderArtworkRate.objects.create(
             artwork = artwork,
             rate = rate,
-            order = order
+            order = order,
+            return_date = datetime.now() + relativedelta(months=+rate.duration)
         )
         order_artwork_rate.save()
     cart.clear()
