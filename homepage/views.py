@@ -5,6 +5,10 @@ from django.views.generic import ListView
 from artworks.models import Artwork
 from django.db.models import Q
 from artists.models import Artist
+from orders.models import Order, OrderArtworkRate
+from datetime import datetime, timedelta
+from dateutil.relativedelta import *
+from django.utils.timezone import make_aware
 
 def homepage(request):
     artworks = Artwork.objects.all()
@@ -20,9 +24,42 @@ def homepage(request):
     )
 
 def dashboard(request):
+    order = Order.objects.filter(state=1).count()
+    artworks = Artwork.objects.all().count()
+    artworksInLocation = Artwork.objects.filter(state=2).count()
+    artistsTotal = Artist.objects.all().count()
+    artistSpotlight = Artist.objects.filter(spotlight=True).first()
+    artworksTimer = Artwork.objects.filter(timer__isnull=False).count()
+    artworksBaclInLessThan = OrderArtworkRate.objects.filter(return_date__lte=make_aware(datetime.now() + timedelta(days=15)), return_date__gte=make_aware(datetime.now()))
+    arrBackSoon = []
+    for a in artworksBaclInLessThan:
+        art = Artwork.objects.get(id=a.artwork_id)
+        art.returnDate = a.return_date
+        arrBackSoon.append(art)
+
+    artworksmustBeBack = OrderArtworkRate.objects.filter(return_date__lte=make_aware(datetime.now()))
+    arrMustBeBack = []
+    for a in artworksmustBeBack:
+        art = Artwork.objects.get(id=a.artwork_id)
+        art.returnDate = a.return_date
+        if art.state == 2:
+            arrMustBeBack.append(art)
+        
+    
     return render(
         request, 
-        'homepage/dashboard.html'
+        'homepage/dashboard.html',
+        {
+            'orderWaiting': order,
+            'totalArtworks': artworks,
+            'artworksInLocation': artworksInLocation,
+            'artistsTotal': artistsTotal,
+            'artistSpotlight': artistSpotlight,
+            'artworksTimer': artworksTimer,
+            'artworksBackSoon': arrBackSoon,
+            'artWorksMustBeBack': arrMustBeBack,
+        }
+
     )
 
 class SearchResultsView(ListView):

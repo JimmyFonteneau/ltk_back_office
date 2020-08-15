@@ -3,5 +3,24 @@
 	Home page
 {% endblock %}
 {% block content %}   
-  <h2>This is the dahsboard</h2>   
+  <h2>This is the dahsboard</h2>
+  <p>nombre de commande en attente : {{ orderWaiting }} </p>
+  <p>Total des oeuvres : {{ totalArtworks }} </p>
+  <p>Total des oeuvres en location : {{ artworksInLocation }} </p>
+  <p>Total des artistes : {{ artistsTotal }} </p>
+  <p>Artiste à l'honneur : {{ artistSpotlight.name }} </p>
+  <p>Nb d'oeuvre avec un timer : {{ artworksTimer }} </p>
+  
+  <p>Liste des oeuvres qui sont bientot de retour</p>
+  {% for art in artworksBackSoon %}
+    <p>{{art}}</p>
+    <p>Retour prévu le : {{ art.returnDate }}</p>
+  {% endfor %}
+
+  <p>Liste des oeuvres qui auraient dû être retournées</p>
+  {% for art in artWorksMustBeBack %}
+    <p>{{art}}</p>
+    <p>Retour initialement prévu le : {{ art.returnDate }}</p>
+  {% endfor %}
+
 {% endblock content %}
