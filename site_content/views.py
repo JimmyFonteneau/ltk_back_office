@@ -6,6 +6,7 @@ def update_content(request):
     content = Content.objects.last()  
     if request.method == 'POST':
         form = HomePageContentForm(request.POST, instance=content)
+        formconcept = ConceptContentForm()
         if form.is_valid():           
             form.save()
     else:
