@@ -27,9 +27,6 @@ def create_order(request, user):
     )
     order.save()
     for item in cart:
-        print('item')
-        print(item)
-        print(item['artwork'])
         artwork = Artwork.objects.get(id=item['artwork'].id)
         rate = Rate.objects.get(duration=item['nb_month'])
         order_artwork_rate = OrderArtworkRate.objects.create(
@@ -124,13 +121,21 @@ def order_update(request, order_id):
             return redirect("orders:orders_list")
         else:
             form = OrderUpdate(request.POST, instance=order)
-            if form.is_valid():
+            if form.is_valid(): 
+                data = {'accept': False, 'id': order.id }
                 if(form.cleaned_data['state'] == 2):
+                    data = {'accept': True , 'id': order.id }
                     order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
                     for order_artwork_rate in order_artwork_rates:
                         artwork = Artwork.objects.get(id=order_artwork_rate.artwork.id)
                         artwork.state = 2
-                        artwork.save()
+                        artwork.save()                
+                subject = 'Demande de location'                
+                html_message = render_to_string('./mails/order_response.html', data)
+                plain_message = strip_tags(html_message)
+                from_email = 'plateforme@ltk.com'
+                to = 'admin@admin.com'
+                send_mail(subject, plain_message, from_email, [to], html_message=html_message)
                 form.save()
     else:
         form = OrderUpdate(instance=order)
