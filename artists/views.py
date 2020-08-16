@@ -3,6 +3,7 @@ from .forms import ArtistForm, ModifyArtistForm
 from .models import Artist
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.paginator import Paginator
+from artworks.models import Artwork
 
 def is_superuser(user=None):    
     if user == None:
@@ -25,12 +26,13 @@ def update_artist(request, artist_id):
     artist = Artist.objects.get(id=artist_id)    
     if request.method == 'POST':
         if 'delete_artist' in request.POST:
-            artist.delete()                     # delete the cat.
+            artist.delete()                    
             return redirect("artists:artists")
         else:
             form = ModifyArtistForm(request.POST, instance=artist)
             if form.is_valid():           
                 form.save()
+                return redirect("artists:artists")
     else:
         form = ModifyArtistForm(instance=artist)
     return render(
@@ -65,10 +67,14 @@ def all_artists(request):
 
 def artist(request, artist_id):             
     artist = Artist.objects.get(id=artist_id)    
+    artworks = Artwork.objects.filter(artist_id=artist_id)[:4]
+    print('popopopo')
+    print(len(artworks))
     return render(
         request,
         'artists/artist.html',
         {
             'artist': artist,
+            'artworks': artworks,
         }
     ) 

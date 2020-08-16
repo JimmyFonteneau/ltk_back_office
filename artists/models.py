@@ -28,6 +28,22 @@ class Artist(models.Model):
         default=False,
     )
 
+    artist_description = models.CharField(
+        verbose_name="Description de l'artiste",
+        max_length=200,
+        blank=False,
+        null=False,
+        default='default',
+    )
+
+    artist_universe = models.CharField(
+        verbose_name="Description de l'artiste",
+        max_length=200,
+        blank=False,
+        null=False,
+        default='default',
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
