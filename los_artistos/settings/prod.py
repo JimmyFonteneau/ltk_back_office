@@ -5,7 +5,7 @@ import dj_database_url
 ALLOWED_HOSTS = ['ltk-gallery.herokuapp.com']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
