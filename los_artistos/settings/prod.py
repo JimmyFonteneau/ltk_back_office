@@ -2,7 +2,7 @@ from .base import *
 import django_heroku
 import dj_database_url
 
-ALLOWED_HOSTS = ['los-artistos.herokuapp.com', 'https://los-artistos.herokuapp.com']
+ALLOWED_HOSTS = ['ltk-gallery.herokuapp.com']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
