@@ -73,7 +73,7 @@
                 {% endif %}  
                 </div>
               </div>
-              <p class="oeuvre-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="oeuvre-p">{{ artwork.introduction }}</p>
               <br>
               <button class="bt3"><a href="{% url 'artists:artist_show' artist_id=artwork.artist.id %}">Voir l'artiste</a></button>             
             </div>
@@ -86,14 +86,22 @@
           <div class="container">
             <h4>OEUVRES A LOUER</h4>
             <h3 class="section-heading">L'oeuvre en détail</h3>
-            <button class="btsubmit">Description</button>
-            <button class="btsubmit">Caractéristiques</button>
+            <button id="btn1" class="btsubmit">Description</button>
+            <button id="btn2" class="btsubmit">Caractéristiques</button>
+            
             <div class="row black-row left">
               <div class="one columns"><p></p></div>
-              <div class="ten columns">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              
+              <div id="description" class="ten columns">
+                <p>{{ artwork.description }}</p>
+              </div>
+              
+              <div id="caracteristique" class="ten columns">
+                <p> Hauteur : {{ artwork.description }}</p>
+                <p> Largeur : {{ artwork.description }}</p>
+                <p> Artiste : {{ artwork.description }}</p>
+                <p> Style : {{ artwork.description }}</p>
+                <p> Catégorie : {{ artwork.description }}</p>
               </div>
               <div class="one columns"><p></p></div>
             </div>
@@ -102,30 +110,37 @@
       
         <div class="section oeuvres">
           <div class="container">
-            <h3 class="section-heading">Autres oeuvres disponibles</h3>
+            <h3 class="section-heading">Elles pourraint vous intéresser</h3>
             <div class="row">
-              <div class="three columns">
-                <img class="u-max-full-width border-i" src="{% static 'images/paint-placeholder.png' %}">
-            <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-            <p class="section-description">nom artiste</p>
+              {% for artwork in artworksWithSameStyle %}    
+              <div class="three columns">          
+                <a href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}">
+                  <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
+                </a>
+                <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
               </div>
-              <div class="three columns">
-                <img class="u-max-full-width border-i" src="{% static 'images/paint-placeholder.png' %}">
-            <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-            <p class="section-description">nom artiste</p>
-              </div>
-          <div class="three columns">
-                <img class="u-max-full-width border-i" src="{% static 'images/paint-placeholder.png' %}">
-            <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-            <p class="section-description">nom artiste</p>
-              </div>
-          <div class="three columns">
-                <img class="u-max-full-width border-i" src="{% static 'images/paint-placeholder.png' %}">
-            <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-            <p class="section-description">nom artiste</p>
-              </div>
+              {% endfor %}
             </div>
         </div>
       </div>
+
+<script>
+  $(document).ready(function () {
+
+  $("#caracteristique").hide();
+
+  $("#btn1").click(function(){
+      //  $("#p1").toggle();
+      $("#description").show();
+       $("#caracteristique").hide();
+  });
+
+  $("#btn2").click(function(){
+    $("#description").hide();
+       $("#caracteristique").show();
+  });
+
+});
+</script>
 
 {% endblock content %}

@@ -6,13 +6,13 @@ class ArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state', 'description', 'introduction')
 
 class ModifyArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state', 'spotlight', 'timer')
+        fields = ('name', 'height','width', 'artist', 'photo', 'price', 'style', 'category', 'storage_place', 'state', 'spotlight', 'timer', 'description', 'introduction')
         widgets = {
             'timer': forms.DateInput(
                 attrs={'type': 'date'},

@@ -67,9 +67,7 @@ def all_artists(request):
 
 def artist(request, artist_id):             
     artist = Artist.objects.get(id=artist_id)    
-    artworks = Artwork.objects.filter(artist_id=artist_id)[:4]
-    print('popopopo')
-    print(len(artworks))
+    artworks = Artwork.objects.filter(artist_id=artist_id)[:4]   
     return render(
         request,
         'artists/artist.html',

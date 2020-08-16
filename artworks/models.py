@@ -102,6 +102,22 @@ class Artwork(models.Model):
         blank=True,
     )
 
+    description = models.CharField(
+        verbose_name="Description de l'oeuvre",
+        max_length=200,
+        blank=False,
+        null=False,
+        default='default',
+    )
+    
+    introduction = models.CharField(
+        verbose_name="Description de l'oeuvre",
+        max_length=200,
+        blank=False,
+        null=False,
+        default='default',
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

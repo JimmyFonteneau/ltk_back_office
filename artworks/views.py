@@ -137,12 +137,14 @@ def artworks_list(request):
 def artwork(request, artwork_id):             
     artwork = Artwork.objects.get(id=artwork_id)
     cart_artwork_form = CartAddArtworkForm()
+    artworksWithSameStyle = Artwork.objects.filter(style_id=artwork.style_id)[:4] 
     return render(
         request,
         'artworks/artwork.html',
         {
             'artwork': artwork,
-            'cart_artwork_form': cart_artwork_form
+            'cart_artwork_form': cart_artwork_form,
+            'artworksWithSameStyle': artworksWithSameStyle,
         }
     )
 
