@@ -29,12 +29,12 @@
       <div class="container">
          <div class="row">
           <div class="nine columns left">
-            {% if content.concept_firstblock_title != '' %} 
+            {% if content and content.concept_firstblock_title != '' %} 
               <h2 class="section-heading">{{content.concept_firstblock_title}}</h2>
             {% else %}
               <h3>L'art  sous toutes ses formes</h3>
             {% endif %} 
-            {% if content.concept_firstblock_content != '' %} 
+            {% if content and content.concept_firstblock_content != '' %} 
               <p>{{content.concept_firstblock_content}}</p>
             {% else %}
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
@@ -54,12 +54,12 @@
          <div class="row">
             <div class="seven columns cat-card concept-c">
               <div class="card">
-                {% if content.concept_secondblock_title != '' %} 
+                {% if content and content.concept_secondblock_title != '' %} 
                   <h3>{{content.concept_secondblock_title}}</h3>
                 {% else %}
                   <h3>Stockage des oeuvres</h3>
                 {% endif %} 
-                {% if content.concept_secondblock_content != '' %} 
+                {% if content and content.concept_secondblock_content != '' %} 
                   <p>{{content.concept_secondblock_content}}</p>
                 {% else %}
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -100,7 +100,7 @@
             <div class="row">
               <div class="four columns card">
                 <img class="u-max-full-width black-b" src="{% static 'images/first-floor.png' %}">
-                {% if content.concept_thirdblock_firstservice != '' %} 
+                {% if content and content.concept_thirdblock_firstservice != '' %} 
                   <p>{{content.concept_thirdblock_firstservice}}</p>
                 {% else %}
                   <p>Lorem ipsum toto sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>                
@@ -109,7 +109,7 @@
               </div>
               <div class="four columns card">
                 <img class="u-max-full-width black-b" src="{% static 'images/first-floor.png' %}">
-                {% if content.concept_thirdblock_secondservice != '' %} 
+                {% if content and content.concept_thirdblock_secondservice != '' %} 
                   <p>{{content.concept_thirdblock_secondservice}}</p>
                 {% else %}
                   <p>Lorem ipsum toto sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>                
@@ -118,7 +118,7 @@
               </div>
               <div class="four columns card">
                 <img class="u-max-full-width black-b" src="{% static 'images/first-floor.png' %}">
-                {% if content.concept_thirdblock_thirdservice != '' %} 
+                {% if content and content.concept_thirdblock_thirdservice != '' %} 
                   <p>{{content.concept_thirdblock_thirdservice}}</p>
                 {% else %}
                   <p>Lorem ipsum toto sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>                
@@ -129,7 +129,7 @@
           </div>
           <div class="one-half column">
               <div class="card card2">
-                {% if content.concept_thirdblock_title != '' %} 
+                {% if content and content.concept_thirdblock_title != '' %} 
                   <p>{{content.concept_thirdblock_title}}</p>
                 {% else %}
                   <p>Lorem ipsum toto sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>                

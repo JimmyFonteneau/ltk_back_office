@@ -6,7 +6,7 @@
 {% block content %}   
    <div class="section hero">
     <div class="container">
-      {% if content.homepage_title != '' %} 
+      {% if content and content.homepage_title != '' %} 
         <h2 class="section-heading">{{content.homepage_title}}</h2>
       {% else %}
         <h2 class="section-heading">L’art n’a jamais été aussi accessible</h2>
@@ -85,12 +85,12 @@
   <div class="section concept">
     <div class="container">
     	<h4>GALERIE LTK</h4>
-      {% if content.homepage_title_description != '' %} 
+      {% if content and content.homepage_title_description != '' %} 
         <h2 class="section-heading">{{content.homepage_title_description}}</h2>
       {% else %}
         <h2 class="section-heading">L'art à portée de main</h2>
       {% endif %}
-      {% if content.homepage_content_description != '' %} 
+      {% if content and content.homepage_content_description != '' %} 
         <p class="section-description">{{content.homepage_content_description}}</p>
       {% else %}
         <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
