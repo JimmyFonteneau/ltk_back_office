@@ -247,6 +247,14 @@ def update_user(request, user_id):
         if 'delete_user' in request.POST:
             user.delete()                     # delete the cat.
             return redirect("users:users_all")
+        elif 'downgrade' in request.POST:
+            user.is_superuser = False
+            user.save()
+            return redirect("users:users_all")
+        elif 'upgrade' in request.POST:
+            user.is_superuser = True
+            user.save()
+            return redirect("users:users_all")
         else:
             form = ModifyUserForm(request.POST, instance=user)
             if form.is_valid():
@@ -259,5 +267,6 @@ def update_user(request, user_id):
         'users/user_update.html',
         {
             'form':form,
+            'isAdmin': user.is_superuser,
         }
     )
