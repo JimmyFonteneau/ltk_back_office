@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from site_content.models import Content
 
 from .forms import ContactForm
 
@@ -26,3 +27,15 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})
+
+
+def concept(request):
+    content = Content.objects.last() 
+    print('popoppoopo')
+    return render(
+        request, 
+        'concept.html',
+        {
+            'content': content,
+        }       
+    )

@@ -9,17 +9,20 @@ from orders.models import Order, OrderArtworkRate
 from datetime import datetime, timedelta
 from dateutil.relativedelta import *
 from django.utils.timezone import make_aware
+from site_content.models import Content
 
 def homepage(request):
     artworks = Artwork.objects.all()
     artworks = artworks.filter(spotlight=True)
     artist = Artist.objects.filter(spotlight=True).first()
+    content = Content.objects.last() 
     return render(
         request, 
         'homepage/homepage.html',
         {
             'artworks': artworks,
             'artist': artist,
+            'content': content,
         }       
     )
 

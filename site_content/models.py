@@ -10,7 +10,7 @@ class Content(models.Model):
         default='default',
     )
 
-    homepage_first_img = models.ImageField(upload_to='static', default='/default.jpg')
+    homepage_first_img = models.ImageField(upload_to='static', null=True, blank=True)
 
     homepage_title_description = models.CharField(
         verbose_name="Titre bloc page d'accueil",
@@ -27,7 +27,8 @@ class Content(models.Model):
         default='default',
     )
 
-    homepage_content_img = models.ImageField(upload_to='static', default='/default.jpg')
+    homepage_content_img = models.ImageField(upload_to='static', null=True, blank=True)
+
 
     concept_firstblock_title = models.CharField(
         verbose_name="Titre premier bloc",
@@ -44,9 +45,9 @@ class Content(models.Model):
         default='default',
     )
 
-    concept_firstblock_background = models.ImageField(upload_to='static', default='/default.jpg')
+    concept_firstblock_background = models.ImageField(upload_to='static', null=True, blank=True)
 
-    concept_firstblock_img = models.ImageField(upload_to='static', default='/default.jpg')
+    concept_firstblock_img = models.ImageField(upload_to='static', null=True, blank=True)
     
     concept_secondblock_title = models.CharField(
         verbose_name="Titre du second bloc",

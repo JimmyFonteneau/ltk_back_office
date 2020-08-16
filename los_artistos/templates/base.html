@@ -60,7 +60,7 @@
           <input class="menu-btn" type="checkbox" id="menu-btn" />
           <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
           <ul class="menu">
-            <li><a href="/concept">Le concept</a></li>
+            <li><a href="{% url 'concept' %}">Le concept</a></li>
             <li><a href="{% url 'artists:artists' %}">Les artistes</a></li>
             <li><a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a></li>
             <li><a href="/contact">Contact</a></li>

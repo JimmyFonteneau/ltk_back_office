@@ -6,9 +6,13 @@
 {% block content %}   
    <div class="section hero">
     <div class="container">
-	<h2 class="section-heading">L’art n’a jamais été aussi accessible</h2>
-	<button class="bt1"><a href ="{% url 'artworks:artworks_list' %}">Voir les oeuvres</a></button>
-	<button class="bt2"><a href ="{% url 'artists:artists' %}">Voir les artistes</a></button>
+      {% if content.homepage_title != '' %} 
+        <h2 class="section-heading">{{content.homepage_title}}</h2>
+      {% else %}
+        <h2 class="section-heading">L’art n’a jamais été aussi accessible</h2>
+      {% endif %}
+      <button class="bt1"><a href ="{% url 'artworks:artworks_list' %}">Voir les oeuvres</a></button>
+      <button class="bt2"><a href ="{% url 'artists:artists' %}">Voir les artistes</a></button>
     </div>
   </div>
 
@@ -81,8 +85,16 @@
   <div class="section concept">
     <div class="container">
     	<h4>GALERIE LTK</h4>
-      <h3 class="section-heading">L'art à portée de main</h3>
-      <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+      {% if content.homepage_title_description != '' %} 
+        <h2 class="section-heading">{{content.homepage_title_description}}</h2>
+      {% else %}
+        <h2 class="section-heading">L'art à portée de main</h2>
+      {% endif %}
+      {% if content.homepage_content_description != '' %} 
+        <p class="section-description">{{content.homepage_content_description}}</p>
+      {% else %}
+        <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+      {% endif %}
       <button class="bt2"><a href="/concept">Decouvrir le concept</a></button>
     </div>
   </div>
