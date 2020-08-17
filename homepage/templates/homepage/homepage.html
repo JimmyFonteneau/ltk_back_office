@@ -21,63 +21,48 @@
     	<h4>OEUVRES A L'HONNEUR</h4>
       <h3 class="section-heading">Oeuvres Street Art Disponibles</h3>
       <div class="row">
+        {% for artwork in artworksmain %}          
+          <div class="six columns">
+            <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
+            <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
+            <p class="section-description">{{ artwork.artist }}</p>
+          </div>
+        {% endfor %}
+        <!-- <div class="six columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+      <p class="section-description">nom artiste</p>
+        </div>
+
         <div class="six columns">
           <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
       <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
       <p class="section-description">nom artiste</p>
         </div>
-        <div class="six columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-      <p class="section-description">nom artiste</p>
-        </div>
-      </div>
+      </div> -->
+
       <div class="row">
-        <div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-        <div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-		<div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-		<div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-      </div>
+        {% for artwork in artworks %}          
+          <div class="three columns">
+            <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
+            <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
+            <p class="section-description">{{ artwork.artist }}</p>
+          </div>
+        {% endfor %}
+
 	  <div class="row">
+      {% for artwork in artworksLast %}          
         <div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
+          <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
+          <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
+          <p class="section-description">{{ artwork.artist }}</p>
         </div>
-        <div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-		<div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-		<div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
+      {% endfor %}
+
 	  <button class="bt3"><a href="{% url 'artworks:artworks_list' %}">Voir toutes les oeuvres</a></button>
     <br>
     <br>
+    
     </div>
   </div>
 </div>
@@ -118,9 +103,7 @@
     </div>
   </div>
 
-{% for artwork in artworks %}
-  <li>{{ artwork.name }}</li>
-{% endfor %}
+
 </ul>
 
 {% endblock content %}
