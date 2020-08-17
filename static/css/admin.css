@@ -86,20 +86,20 @@ header > div#search > #user-input {
 }
 .content-page {
     flex-grow: 1;
+    padding: 0 20px;
 }
 /*------------------------------------*/
 .content-page > .container {
-    margin-left: 10px;
     width: 100%;
     max-width: 1200px;
 }
-@media screen and (min-width:1200px) {
-    .content-page > .container {
-        margin-left: auto;
-    }
-}
 .content-page > .container > h2 {
     width: 70%;
+}
+form {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
 }
 form > p > label {
     color: #fd0786;
@@ -109,9 +109,14 @@ form > p > textarea,
 form > p > select {
     width: 100%;
 }
-.filters > input,
+form > button {
+    width: 30%;
+    margin: 0 auto;
+    display: block;
+}
 .filters > label {
     display: inline-block;
+    margin-right: 15px;
 }
 table,
 table.dataTable {
@@ -138,4 +143,9 @@ table.dataTable {
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 0;
+}
+.rate {
+    display: inline-block;
+    margin: 0 20px;
+    text-align: center;
 }
