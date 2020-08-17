@@ -31,8 +31,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-  
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
     <script src="{% static 'js/dataTable.js' %}"></script>
     {% block head_end %}
     {% endblock head_end %}
@@ -44,6 +43,7 @@
         {% if user.is_superuser %}   
           <header>  
             <div>
+              <img src="{% static 'images/LOGO GALERIE.png' %}">
               {{ user }}
               <a class="btn" href="{% url 'users:logout' %}">Déconnexion</a>
             </div>

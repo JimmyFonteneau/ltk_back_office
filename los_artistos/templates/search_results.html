@@ -1,11 +1,7 @@
 {% block content %}   
 
-<div id="search" class="row">
-   
-    <div class="col-6 align-left">
-      <i id="search-icon" class="fas fa-search"></i>
-      <input id="user-input" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
-    </div>
+<div id="search">
+    <input id="user-input" type="text" placeholder="Search" aria-label="Search">
       
     <div id="replaceable-content" class="col-6">
       {% include './artworks-results-partial.html' %}
