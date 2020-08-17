@@ -46,7 +46,7 @@ header {
     flex-direction: column;
     height: min-content;
     align-items: center;
-    min-width: 180px;
+    min-width: 240px;
 }
 header > div {
     display: flex;
@@ -60,7 +60,7 @@ header > div:first-child {
     text-align: center;
 }
 header > div > a {
-    margin: 5px;
+    margin: 10px 5px;
     font-weight: bold;
 }
 header > div > img {
@@ -86,7 +86,7 @@ header > div#search > #user-input {
 }
 .content-page {
     flex-grow: 1;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 /*------------------------------------*/
 .content-page > .container {
@@ -99,7 +99,7 @@ header > div#search > #user-input {
 form {
     text-align: center;
     background: #f5f5f5;
-    padding: 10px;
+    padding: 10px 15%;
     border-radius: 5px;
 }
 form > p > label {
@@ -167,4 +167,25 @@ table > tbody > tr:nth-child(2n+1) > th {
     display: inline-block;
     margin: 0 20px;
     text-align: center;
+}
+a.paginate_button {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+a.paginate_button.current {
+    color: #fff;
+    background-color: #fd0786;
+    border-color: transparent;
+    border-radius: 0;
+    margin: 0 5px;
+    cursor: initial;
+}
+.dataTables_info {
+    margin-bottom: 10px;
 }
