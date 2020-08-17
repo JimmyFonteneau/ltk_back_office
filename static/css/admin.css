@@ -140,6 +140,7 @@ table > tbody > tr:nth-child(2n) > th {
 table > tbody > tr:nth-child(2n+1) > td,
 table > tbody > tr:nth-child(2n+1) > th {
     background: #fff;
+}
 /*------------------------------------*/
 .dashborad_infos {
     display: flex;
