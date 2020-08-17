@@ -89,10 +89,6 @@ def artworks_list(request):
     
     ctx["artworks"] = artworks
 
-    paginator = Paginator(artworks, 8)
-    page = request.GET.get('page')
-    artworks = paginator.get_page(page)
-
     if request.user.is_superuser:
         if request.is_ajax():
             html = render_to_string(
@@ -115,6 +111,9 @@ def artworks_list(request):
             }
         )
     else :
+        paginator = Paginator(artworks, 8)
+        page = request.GET.get('page')
+        artworks = paginator.get_page(page)
         if request.is_ajax():
             html = render_to_string(
                 template_name="artworks/artworks_filtered.html", 

@@ -12,8 +12,9 @@ from django.utils.timezone import make_aware
 from site_content.models import Content
 
 def homepage(request):
-    artworks = Artwork.objects.all()
-    artworks = artworks.filter(spotlight=True)
+    artworksmain = Artwork.objects.filter(spotlight=True)[:2]
+    artworks = Artwork.objects.filter(spotlight=True)[2:6] 
+    artworksLast = Artwork.objects.filter(spotlight=True)[6:10] 
     artist = Artist.objects.filter(spotlight=True).first()
     content = Content.objects.last() 
     return render(
@@ -21,8 +22,10 @@ def homepage(request):
         'homepage/homepage.html',
         {
             'artworks': artworks,
+            'artworksmain': artworksmain,
             'artist': artist,
             'content': content,
+            'artworksLast': artworksLast,
         }       
     )
 
