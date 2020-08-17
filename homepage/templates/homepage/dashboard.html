@@ -3,6 +3,7 @@
 	Home page
 {% endblock %}
 {% block content %}   
+<div class="container">
   <h2>This is the dahsboard</h2>
   <p>nombre de commande en attente : {{ orderWaiting }} </p>
   <p>Total des oeuvres : {{ totalArtworks }} </p>
@@ -22,5 +23,5 @@
     <p>{{art}}</p>
     <p>Retour initialement prévu le : {{ art.returnDate }}</p>
   {% endfor %}
-
+</div>
 {% endblock content %}

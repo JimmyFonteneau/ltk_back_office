@@ -3,12 +3,13 @@
     New category
 {% endblock %}
 {% block content %}
-
+<div class="container">
+    <h2>Liste des catégories</h2>
 {% for category in categories %}
 <p id={{category.id}}> {{ category.name }}</p>
 {% endfor %}
 <a class="btn btn-primary" href="{% url 'artworks:add_category' %}" role="button">Ajouter un category</a>
-
+</div>
 <script>
     $(document).ready(function() {                   
         $("p").click(function(event) {        

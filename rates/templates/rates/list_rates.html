@@ -3,13 +3,16 @@
     List rates
 {% endblock %}
 {% block content %}
-
+<div class="container">
+    <h2>Liste des taux</h2>
 {% for rate in rates %}
-<p> {{ rate.duration }}</p>
-<p> {{ rate.rate }}</p>
-<button id={{rate.id}}>Modifier</button>
+    {{ rate.duration }} mois : 
+    x {{ rate.rate }}
+    <button id={{rate.id}}>Modifier</button>
+    <br>
+    <br>
 {% endfor %}
-<a class="btn btn-primary" href="{% url 'rates:rates_add' %}" role="button">Ajouter un taux</a>
+<a class="btn" href="{% url 'rates:rates_add' %}" role="button">Ajouter un taux</a>
 
 <script>
     $(document).ready(function() {                   
@@ -18,4 +21,5 @@
         });
     });
 </script>
+</div>
 {% endblock %}

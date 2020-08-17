@@ -3,8 +3,9 @@
     Modification d'un utilisateur
 {% endblock %}
 {% block content %} 
+<div class="container">
     <form method="POST" class="artist-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
-    </form>
+    </form></div>
 {% endblock %}

@@ -3,12 +3,13 @@
     New style
 {% endblock %}
 {% block content %}
-
+<div class="container">
+    <h2>Liste des styles</h2>
 {% for style in styles %}
 <p id={{style.id}}> {{ style.name }}</p>
 {% endfor %}
 <a class="btn btn-primary" href="{% url 'artworks:add_style' %}" role="button">Ajouter un style</a>
-
+</div>
 <script>
     $(document).ready(function() {                   
         $("p").click(function(event) {         

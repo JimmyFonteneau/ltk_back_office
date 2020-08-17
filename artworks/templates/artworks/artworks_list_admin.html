@@ -3,12 +3,15 @@
     List artwork mode admin
 {% endblock %}
 {% block content %}
+<div class="container">
     <h2>Toutes les oeuvres d'arts mode admin</h2>
     <a class="btn btn-primary" href="{% url 'artworks:artwork_new' %}" role="button">Ajouter une oeuvre</a>
     <a class="btn btn-primary" href="{% url 'artworks:all_style' %}" role="button">Gestion des styles</a>
     <a class="btn btn-primary" href="{% url 'artworks:all_category' %}" role="button">Gestoin des catégories</a>
     <a class="btn btn-primary" href="{% url 'artworks:all_storage_place' %}" role="button">Gestion des lieux de stockages</a>
-
+<br>
+<br>
+<div class="filters">
     {% for style in styles %}
     <input type="checkbox" id="style_{{ style.id }}">
     <label for="style_{{ style.id }}">{{ style.name }}</label>
@@ -28,6 +31,8 @@
     <input type="checkbox" id="state_{{ id }}">
     <label for="state_{{ id }}">{{ state }}</label>
     {% endfor %}
+</div>
+<br>
 
     <div id="replaceable-artwork">
         {% include './artworks_filtered_admin.html' %}
@@ -138,3 +143,4 @@
     });
 </script>
 {% endblock content %}
+</div>

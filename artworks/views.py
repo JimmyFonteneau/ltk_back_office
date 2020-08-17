@@ -192,6 +192,7 @@ def update_style(request, style_id):
             form = StyleForm(request.POST, instance=style)
             if form.is_valid():           
                 form.save()
+                return redirect("artworks:all_style")
     else:
         form = StyleForm(instance=style)
     return render(
@@ -216,6 +217,7 @@ def update_category(request, category_id):
             form = CategoryForm(request.POST, instance=category)
             if form.is_valid():           
                 form.save()
+                return redirect("artworks:all_category")
     else:
         form = CategoryForm(instance=category)
     return render(
@@ -240,6 +242,7 @@ def update_storage_place(request, storage_place_id):
             form = StoragePlaceForm(request.POST, instance=storage_place)
             if form.is_valid():           
                 form.save()
+                return redirect("artworks:all_storage_place")
     else:
         form = StoragePlaceForm(instance=storage_place)
     return render(
