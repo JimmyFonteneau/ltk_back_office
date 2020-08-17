@@ -13,7 +13,7 @@ def is_superuser(user=None):
 @user_passes_test(is_superuser)
 def artist_new(request):
     if request.method == "POST":
-        form = ArtistForm(request.POST)
+        form = ArtistForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()            
             return redirect("artists:artists")
@@ -29,7 +29,7 @@ def update_artist(request, artist_id):
             artist.delete()                    
             return redirect("artists:artists")
         else:
-            form = ModifyArtistForm(request.POST, instance=artist)
+            form = ModifyArtistForm(request.POST, request.FILES, instance=artist)
             if form.is_valid():           
                 form.save()
                 return redirect("artists:artists")

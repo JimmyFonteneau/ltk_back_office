@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
@@ -140,6 +140,7 @@ def order_update(request, order_id):
                 to = 'admin@admin.com'
                 send_mail(subject, plain_message, from_email, [to], html_message=html_message)
                 form.save()
+                return redirect("orders:orders_list")
     else:
         form = OrderUpdate(instance=order)
     return render(
