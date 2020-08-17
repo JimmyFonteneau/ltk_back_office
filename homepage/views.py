@@ -85,12 +85,12 @@ def search_result_view(request):
     else:
         artworks = []
 
-    ctx["artworks"] = artworks
+    ctx["artworksPartial"] = artworks
     
     if request.is_ajax():
         html = render_to_string(
             template_name="artworks-results-partial.html", 
-            context={"artworks": artworks}
+            context={"artworksPartial": artworks}
         )
 
         data_dict = {"html_from_view": html}
