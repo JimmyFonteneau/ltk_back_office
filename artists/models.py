@@ -44,6 +44,11 @@ class Artist(models.Model):
         default='default',
     )
 
+    photo = models.ImageField(
+        upload_to='artists', 
+        default='/default.jpg'
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

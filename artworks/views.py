@@ -45,7 +45,7 @@ def update_artwork(request, artwork_id):
             a.save()
             return redirect("artworks:artworks_list")
         else:
-            form = ModifyArtworkForm(request.POST, instance=artwork)
+            form = ModifyArtworkForm(request.POST, request.FILES, instance=artwork)
             if form.is_valid():           
                 form.save()
                 return redirect("artworks:artworks_list")
