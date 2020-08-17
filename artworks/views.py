@@ -111,7 +111,7 @@ def artworks_list(request):
             }
         )
     else :
-            paginator = Paginator(artworks, 8)
+        paginator = Paginator(artworks, 8)
         page = request.GET.get('page')
         artworks = paginator.get_page(page)
         if request.is_ajax():
