@@ -9,6 +9,10 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 import copy
+from dateutil.relativedelta import *
+from django.utils.timezone import make_aware
+from orders.models import Order, OrderArtworkRate
+from datetime import datetime, timedelta
 
 def is_superuser(user=None):    
     if user == None:
@@ -29,6 +33,11 @@ def artwork_new(request):
 @user_passes_test(is_superuser)
 def update_artwork(request, artwork_id):             
     artwork = Artwork.objects.get(id=artwork_id)    
+    
+    if artwork.state == 2:        
+        oar = OrderArtworkRate.objects.get(return_date__gte=make_aware(datetime.now()), artwork_id=artwork.id)
+        order = Order.objects.get(id=oar.order_id)        
+
     if request.method == 'POST':
         if 'delete_artwork' in request.POST:
             artwork.delete()                     
@@ -49,6 +58,8 @@ def update_artwork(request, artwork_id):
         'artworks/artwork_update.html',
         {
             'form': form,
+            'order': order,
+            'oar': oar,
         }
     ) 
 
