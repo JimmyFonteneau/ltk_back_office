@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from carts.cart import Cart
 from artworks.models import Artwork
 from .models import Order, OrderArtworkRate
-from .forms import OrderEmailForm, OrderUpdate
+from .forms import OrderEmailForm, OrderUpdate, ReturnDateUpdate
 from users.models import UserProfile
 import random, string
 from rates.models import Rate
@@ -116,6 +116,7 @@ def order_update(request, order_id):
     rates = Rate.objects.all()
     order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
     order.artworks = []
+    
     for order_artwork_rate in order_artwork_rates:
         order.artworks.append(order_artwork_rate)
     if request.method == 'POST':
@@ -133,23 +134,25 @@ def order_update(request, order_id):
                         artwork = Artwork.objects.get(id=order_artwork_rate.artwork.id)
                         artwork.state = 2
                         artwork.save()                
+                
                 subject = 'Demande de location'                
                 html_message = render_to_string('./mails/order_response.html', data)
                 plain_message = strip_tags(html_message)
                 from_email = 'plateforme@ltk.com'
                 to = 'admin@admin.com'
                 send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+                
                 form.save()
                 return redirect("orders:orders_list")
     else:
-        form = OrderUpdate(instance=order)
+        form = OrderUpdate(instance=order)  
     return render(
         request,
         'orders/order_update.html',
         {
             'form': form,
             'order': order,
-            'rates': rates
+            'rates': rates,
         }
     ) 
 
@@ -164,3 +167,25 @@ def orders_list(request):
                 'orders_list': orders,
             }
         )
+
+def change_return_date(request, order_id):
+    order_artwork_rates = OrderArtworkRate.objects.get(id=order_id)
+
+    print('POPOPPOPO')
+    print(order_artwork_rates)
+
+    if request.method == 'POST':                
+        form = ReturnDateUpdate(request.POST, instance=order_artwork_rates)
+        if form.is_valid(): 
+            form.save()
+            return redirect("orders:orders_list")
+    else:
+        form = ReturnDateUpdate(instance=order_artwork_rates) 
+    return render(
+        request,
+        'orders/update_return_date.html',
+        {
+            'order_artwork_rates': order_artwork_rates,
+            'form': form,
+        }
+    )

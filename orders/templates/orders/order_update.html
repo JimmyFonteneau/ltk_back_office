@@ -9,14 +9,20 @@
 
     <p>date : {{ order.created_at }}</p>
 
+
     {% for artwork in order.artworks %}
       <div style="border:solid">
-        <p>oeuvre : {{ artwork.artwork.name }}</p>
+        <p>Artworkd : {{ artwork.artwork_id }}</p>
+        <p>Oeuvre : {{ artwork.artwork.name }}</p>
+        <p>Date de retour prévue : {{ artwork.return_date }}</p>
+        Durée de location prévue
         <select name="select"> 
           {% for rate in rates.all %}
               <option {% if rate == artwork.rate %} selected {% endif %}> {{ rate }} </option>
           {% endfor %}
         </select>
+        <a class="btn btn-primary" href="{% url 'orders:change_return_date' artwork.id %}" role="button">Modifier la date de retour de cette oeuvre</a>
+        mois
       </div>
     {% endfor %}
 

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+    Update rate
+{% endblock %}
+{% block content %}   
+<div class="container">
+    <h2>Modification de la date de retour</h2>
+    <p>Date de retour intial: {{ order_artwork_rates.return_date }}</p>
+<form method="POST" enctype="multipart/form-data" class="artist-form">
+    {% csrf_token %}     
+    {{ form.as_p }}       
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+</div>
+{% endblock content %}
