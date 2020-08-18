@@ -10,7 +10,7 @@ class Artist(models.Model):
     )
 
     lastname = models.CharField(
-        verbose_name="Nom de famille",
+        verbose_name="Nom",
         max_length=200,
         blank=False,
         null=False,
@@ -24,7 +24,7 @@ class Artist(models.Model):
     )
 
     spotlight = models.BooleanField(
-        verbose_name="Mise en avant",
+        verbose_name="Mettre en avant",
         default=False,
     )
 
@@ -37,7 +37,7 @@ class Artist(models.Model):
     )
 
     artist_universe = models.CharField(
-        verbose_name="Description de l'artiste",
+        verbose_name="Description de son univers",
         max_length=200,
         blank=False,
         null=False,

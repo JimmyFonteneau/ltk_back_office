@@ -3,7 +3,7 @@ from django.db import models
 class Configuration(models.Model):
 
     email = models.EmailField(
-        'Email', 
+        verbose_name="Email utilisé pour l'envoi de mail",
         unique=True
     )
     

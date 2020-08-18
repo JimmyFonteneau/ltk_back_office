@@ -77,7 +77,7 @@ class Artwork(models.Model):
     )
 
     storage_place = models.ForeignKey(
-        "Artwork_Storage_Place",        
+        "Artwork_Storage_Place",      
         on_delete=models.CASCADE,
         verbose_name = "Lieu de stockage",
         db_index=True,
@@ -87,7 +87,7 @@ class Artwork(models.Model):
     )
 
     spotlight = models.BooleanField(
-        verbose_name="Mise en avant",
+        verbose_name="Mettre en avant",
         default=False,
     )
 
@@ -111,7 +111,7 @@ class Artwork(models.Model):
     )
     
     introduction = models.CharField(
-        verbose_name="Description de l'oeuvre",
+        verbose_name="Introduction de l'oeuvre",
         max_length=200,
         blank=False,
         null=False,
