@@ -170,10 +170,10 @@ def orders_list(request):
 
 def change_return_date(request, order_id):
     order_artwork_rates = OrderArtworkRate.objects.get(id=order_id)
-
-    print('POPOPPOPO')
-    print(order_artwork_rates)
-
+    print('order_artwork_rates.artwork_id')
+    print(order_artwork_rates.artwork_id)
+    artwork = Artwork.objects.get(id=order_artwork_rates.artwork_id)
+    
     if request.method == 'POST':                
         form = ReturnDateUpdate(request.POST, instance=order_artwork_rates)
         if form.is_valid(): 
@@ -187,5 +187,6 @@ def change_return_date(request, order_id):
         {
             'order_artwork_rates': order_artwork_rates,
             'form': form,
+            'artworkd': artwork,
         }
     )

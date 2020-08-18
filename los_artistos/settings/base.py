@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rates',
     'site_content',
     'orders',
+    'configuration',
 
     'pwa',
     'whitenoise.runserver_nostatic',
