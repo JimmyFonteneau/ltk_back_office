@@ -9,6 +9,8 @@
 <p id={{category.id}}> {{ category.name }}</p>
 {% endfor %}
 <a class="btn btn-primary" href="{% url 'artworks:add_category' %}" role="button">Ajouter un category</a>
+<a class="btn btn-primary" href="{% url 'artworks:category_upload' %}" role="button">Import csv</a>
+
 </div>
 <script>
     $(document).ready(function() {                   

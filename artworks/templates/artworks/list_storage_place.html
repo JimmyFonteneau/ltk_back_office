@@ -9,6 +9,8 @@
 <p id={{storage_place.id}}> {{ storage_place.name }}</p>
 {% endfor %}
 <a class="btn btn-primary" href="{% url 'artworks:add_storage_place' %}" role="button">Ajouter un lieu de stockage</a>
+<a class="btn btn-primary" href="{% url 'artworks:storage_place_upload' %}" role="button">Import csv</a>
+
 </div>
 <script>
     $(document).ready(function() {                   

@@ -6,6 +6,8 @@ List rates
 <div class="container">
     <h2>Liste des taux</h2>
     <a class="btn" href="{% url 'rates:rates_add' %}" role="button">Ajouter un taux</a>
+    <a class="btn btn-primary" href="{% url 'rates:rate_upload' %}" role="button">Import csv</a>
+
 <br>
 <br>
     {% for rate in rates %}

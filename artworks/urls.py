@@ -19,4 +19,7 @@ urlpatterns = [
     path('all-storage-place/', views.all_storage_place, name="all_storage_place"),
     path('update-storage-place-<int:storage_place_id>/', views.update_storage_place, name="update_storage_place"),
     path('upload-csv/', views.artwork_upload, name="artwork_upload"),
+    path('upload-csv-style/', views.style_upload, name="style_upload"),
+    path('upload-csv-category/', views.category_upload, name="category_upload"),
+    path('upload-csv-storage-place/', views.storage_place_upload, name="storage_place_upload"),
 ]

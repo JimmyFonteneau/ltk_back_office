@@ -104,4 +104,4 @@ def artist_upload(request):
             artist_universe=column[4],
         )
     context = {}
-    return render(request, template, context)
+    return redirect("artists:artists")

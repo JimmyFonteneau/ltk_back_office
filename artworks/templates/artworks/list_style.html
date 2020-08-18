@@ -9,6 +9,8 @@
 <p id={{style.id}}> {{ style.name }}</p>
 {% endfor %}
 <a class="btn btn-primary" href="{% url 'artworks:add_style' %}" role="button">Ajouter un style</a>
+<a class="btn btn-primary" href="{% url 'artworks:style_upload' %}" role="button">Import csv</a>
+
 </div>
 <script>
     $(document).ready(function() {                   

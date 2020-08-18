@@ -280,4 +280,77 @@ def artwork_upload(request):
             introduction=column[5],
         )
     context = {}
-    return render(request, template, context)
+    return redirect("artworks:artworks_list")
+
+def style_upload(request):
+    template = "artworks/import_style.html"
+    prompt = {
+        'style': 'Order of the csv should be , name '
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Artwork_Style.objects.update_or_create(
+            name=column[0],
+        )
+    context = {}
+    return redirect("artworks:all_style")
+
+
+def category_upload(request):
+    template = "artworks/import_category.html"
+    prompt = {
+        'category': 'Order of the csv should be , name '
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Artwork_Category.objects.update_or_create(
+            name=column[0],
+        )
+    context = {}
+    return redirect("artworks:all_category")
+
+def storage_place_upload(request):
+    template = "artworks/import_storage_place.html"
+    prompt = {
+        'storage place': 'Order of the csv should be , name '
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Artwork_Storage_Place.objects.update_or_create(
+            name=column[0],
+        )
+    context = {}
+    return redirect("artworks:all_storage_place")
