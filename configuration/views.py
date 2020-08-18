@@ -3,20 +3,20 @@ from .models import Configuration
 from .forms import ModifyConfiguration
 
 def update(request):
-    rate = Configuration.objects.all().first()     
+    configuration = Configuration.objects.all().first()     
     if request.method == 'POST':     
-        if rate is None:
+        if configuration is None:
             form = ModifyConfiguration(request.POST)
         else:     
-            form = ModifyConfiguration(request.POST, instance=rate)        
+            form = ModifyConfiguration(request.POST, instance=configuration)        
         if form.is_valid():           
             form.save()
             return redirect("dashboard")
     else:
-        if rate is None:
+        if configuration is None:
             form = ModifyConfiguration()
         else:     
-            form = ModifyConfiguration(instance=rate)
+            form = ModifyConfiguration(instance=configuration)
     return render(
         request,
         'configuration/update.html',

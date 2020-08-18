@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from datetime import datetime, timedelta
 from dateutil.relativedelta import *
+from configuration.models import Configuration
 
 def is_superuser(user=None):    
     if user == None:
@@ -40,6 +41,7 @@ def create_order(request, user):
         order_artwork_rate.save()
     cart.clear()
 
+    configuration = Configuration.objects.all().first() 
     accept = settings.ALLOWED_HOSTS[1]+'orders/accept-order-'+str(order.id)
     refuse = settings.ALLOWED_HOSTS[1]+'orders/deny-order-'+str(order.id)
     
@@ -48,7 +50,7 @@ def create_order(request, user):
     html_message = render_to_string('./mails/request_mail.html', data)
     plain_message = strip_tags(html_message)
     from_email = 'plateforme@ltk.com'
-    to = 'admin@admin.com'
+    to = configuration.email
     send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
     return order
@@ -116,7 +118,6 @@ def order_update(request, order_id):
     rates = Rate.objects.all()
     order_artwork_rates = OrderArtworkRate.objects.filter(order=order)
     order.artworks = []
-    
     for order_artwork_rate in order_artwork_rates:
         order.artworks.append(order_artwork_rate)
     if request.method == 'POST':
@@ -139,7 +140,7 @@ def order_update(request, order_id):
                 html_message = render_to_string('./mails/order_response.html', data)
                 plain_message = strip_tags(html_message)
                 from_email = 'plateforme@ltk.com'
-                to = 'admin@admin.com'
+                to = order.user.email
                 send_mail(subject, plain_message, from_email, [to], html_message=html_message)
                 
                 form.save()

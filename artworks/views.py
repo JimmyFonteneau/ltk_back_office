@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from .forms import ArtworkForm, ModifyArtworkForm, StyleForm, CategoryForm, StoragePlaceForm
 from .models import Artwork, Artwork_Style, Artwork_Category, Artwork_Storage_Place
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.core.mail import send_mail
 from carts.forms import CartAddArtworkForm
 from django.db.models import Q
 from django.template.loader import render_to_string
@@ -19,16 +18,9 @@ def is_superuser(user=None):
 @user_passes_test(is_superuser)
 def artwork_new(request):
     if request.method == "POST":
-        form = ArtworkForm(request.POST, request.FILES)
+        form = ArtworkForm(request.POST, request.FILES)  
         if form.is_valid():
             form.save()           
-            send_mail(
-                'Subject here',
-                'Here is the message.',
-                'from@example.com',
-                ['to@example.com'],
-                fail_silently=False,
-            )
             return redirect("artworks:artworks_list")
     else:
         form = ArtworkForm()

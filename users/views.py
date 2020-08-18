@@ -202,7 +202,7 @@ def forgot_password(request):
             html_message = render_to_string('./mails/forgot_email.html', data)
             plain_message = strip_tags(html_message)
             from_email = 'plateforme@ltk.com'
-            to = 'admin@admin.com'
+            to = user.email
             send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
     else:
