@@ -1,3 +1,4 @@
+import csv, io
 from django.shortcuts import render, redirect
 from .forms import ArtworkForm, ModifyArtworkForm, StyleForm, CategoryForm, StoragePlaceForm
 from .models import Artwork, Artwork_Style, Artwork_Category, Artwork_Storage_Place
@@ -251,3 +252,32 @@ def update_storage_place(request, storage_place_id):
             'form': form,
         }
     ) 
+
+def artwork_upload(request):
+    template = "artworks/import_artworks.html"
+    prompt = {
+        'artwork': 'Order of the csv should be , name, height, width, price, description, introduction'
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Artwork.objects.update_or_create(
+            name=column[0],
+            height=column[1],
+            width=column[2],
+            price=column[3],
+            description=column[4],
+            introduction=column[5],
+        )
+    context = {}
+    return render(request, template, context)

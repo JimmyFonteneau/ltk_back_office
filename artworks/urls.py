@@ -18,4 +18,5 @@ urlpatterns = [
     path('update-category-<int:category_id>/', views.update_category, name="update_category"),
     path('all-storage-place/', views.all_storage_place, name="all_storage_place"),
     path('update-storage-place-<int:storage_place_id>/', views.update_storage_place, name="update_storage_place"),
+    path('upload-csv/', views.artwork_upload, name="artwork_upload"),
 ]
