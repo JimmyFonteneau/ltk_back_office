@@ -91,6 +91,9 @@ header > div#search > #user-input {
     flex-grow: 1;
     padding: 0 40px;
 }
+.nowrap {
+    white-space: nowrap;
+}
 /*------------------------------------*/
 .content-page > .container {
     width: 100%;
@@ -120,10 +123,6 @@ form > p > select {
 form > button {
     width: 30%;
     margin: 0 auto;
-}
-.filters > label {
-    display: inline-block;
-    margin-right: 15px;
 }
 table,
 table.dataTable {
@@ -198,5 +197,49 @@ a.paginate_button.current {
     cursor: initial;
 }
 .dataTables_info {
+    margin-bottom: 10px;
+}
+#order_update_div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+#order_update_div > div {
+    flex: 33% 0 0;
+    text-align: center;
+}
+#order_update_div > div > img {
+    height: 200px;
+    margin: 0 auto;
+    display: block;
+}
+.artwork_container {
+    display: flex;
+    margin-top: 30px;
+}
+.filters {
+    padding: 15px;
+    margin-right: 10px;
+    background: #f5f5f5;
+}
+.filters label {
+    display: inline-block;
+}
+#replaceable-artwork {
+    flex: auto 1 1;
+}
+.artwork_container hr {
+    width: 30%;
+    margin: 20px 0;
+    border-top-width: 4px;
+    border-top-color: #fd0786;
+}
+.dataTables_length,
+.dataTables_filter {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+.dataTables_length {
     margin-bottom: 10px;
 }
