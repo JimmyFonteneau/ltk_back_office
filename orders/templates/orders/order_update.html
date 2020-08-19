@@ -3,6 +3,7 @@
     Mise à jour d'une commande
 {% endblock %}
 {% block content %}   
+<div class="container">
 <h2>Mise à jour d'une commande</h2>
 
     <p>Commande génerée le : {{ order.created_at }}</p>
@@ -10,7 +11,7 @@
     <div id="order_update_div">
       {% for artwork in order.artworks %}
       <div>
-          <p>Oeuvre : {{ artwork.artwork.name }}</p>
+          <b>{{ artwork.artwork.name }}</b><br><br>
           <img src="{{ artwork.artwork.photo.url }}">
           <p>Date de retour prévue : {{ artwork.return_date }}</p>
           <a class="btn btn-primary" href="{% url 'orders:change_return_date' artwork.id %}" role="button">Modifier la date de retour</a>        
@@ -27,5 +28,5 @@
     </form>
 
   </div>
-
+</div>
 {% endblock content %}

@@ -8,7 +8,7 @@ Modifier un utilisateur
 <form method="POST" enctype="multipart/form-data" class="artist-form">
     {% csrf_token %}
     {{ form.as_p }}    
-    <input type="submit" class="btn" value="Valider"><br>
+    <input type="submit" class="btn" value="Valider">
     <button type="submit" name="delete_user">Delete</button>
     {% if isAdmin %}        
         <button type="submit" name="downgrade">Downgrade</button>

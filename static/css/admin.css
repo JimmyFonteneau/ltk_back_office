@@ -130,12 +130,20 @@ form > p > select {
     width: 100%;
 }
 form > button {
-    width: 30%;
     margin: 0 auto;
 }
 table,
 table.dataTable {
     width: 100% !important;
+}
+table.dataTable > thead > tr > th::after {
+    font-family: "FontAwesome";
+    cursor: pointer;
+    content: " \f0dc";
+}
+table.dataTable > tbody > tr > td,
+table.dataTable > tbody > tr > th {
+    cursor: pointer;
 }
 table > thead > tr > th {
     border-bottom-width: 2px;
@@ -144,13 +152,8 @@ table > tbody > tr > td,
 table > tbody > tr > th {
     font-weight: normal;
 }
-table > tbody > tr:nth-child(2n) > td,
-table > tbody > tr:nth-child(2n) > th {
+table > tbody > tr:hover {
     background: #f5f5f5;
-}
-table > tbody > tr:nth-child(2n+1) > td,
-table > tbody > tr:nth-child(2n+1) > th {
-    background: #fff;
 }
 /*------------------------------------*/
 .dashborad_infos {
@@ -237,6 +240,9 @@ a.paginate_button.current {
 #order_update_div > div {
     flex: 33% 0 0;
     text-align: center;
+    box-shadow: 1px 1px 5px 0px #cfcfcf;
+    padding: 30px 5px;
+    border-radius: 10px;
 }
 #order_update_div > div > img {
     height: 200px;
@@ -272,4 +278,8 @@ a.paginate_button.current {
 }
 .dataTables_length {
     margin-bottom: 10px;
+    text-align: left;
+}
+.dataTables_filter {
+    text-align: right;
 }
