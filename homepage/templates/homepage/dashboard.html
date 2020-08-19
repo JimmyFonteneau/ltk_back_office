@@ -21,17 +21,45 @@ Home page
     </span>
     <span>
       <p>Liste des oeuvres bientot de retour</p>
-      {% for art in artworksBackSoon %}
-      {{art}}<br>
-      Retour prévu le : {{ art.returnDate }}</p>
-      {% endfor %}
+      {% if artworksBackSoon|length > 0 %}
+      <table class="dashboard_table">
+        <thead>
+          <tr>
+            <th>Oeuvre</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for art in artworksBackSoon %}
+          <tr>
+            <td>{{art}}</td>
+            <td>{{ art.returnDate }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
     </span>
     <span>
       <p>Liste des oeuvres en retard</p>
-      {% for art in artWorksMustBeBack %}
-      {{art}}<br>
-      Retour initialement prévu le : {{ art.returnDate }}
-      {% endfor %}
+      {% if artWorksMustBeBack|length > 0 %}
+      <table class="dashboard_table">
+        <thead>
+          <tr>
+            <th>Oeuvre</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for art in artWorksMustBeBack %}
+          <tr>
+            <td>{{art}}</td>
+            <td>{{ art.returnDate }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
     </span>
   </div>
 </div>
