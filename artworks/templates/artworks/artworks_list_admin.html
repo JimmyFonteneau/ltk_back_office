@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    List artwork mode admin
+List artwork mode admin
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -10,46 +10,61 @@
     <a class="btn btn-primary" href="{% url 'artworks:all_category' %}" role="button">Gestoin des catégories</a>
     <a class="btn btn-primary" href="{% url 'artworks:all_storage_place' %}" role="button">Gestion des lieux de stockages</a>
     <a class="btn btn-primary" href="{% url 'artworks:artwork_upload' %}" role="button">Import csv</a>
-
-<br>
-<br>
-<div class="filters">
-    {% for style in styles %}
-    <input type="checkbox" id="style_{{ style.id }}">
-    <label for="style_{{ style.id }}">{{ style.name }}</label>
-    {% endfor %}
-
-    {% for category in categories %}
-    <input type="checkbox" id="category_{{ category.id }}">
-    <label for="category_{{ category.id }}">{{ category.name }}</label>
-    {% endfor %}
-
-    {% for sp in storage_places %}
-    <input type="checkbox" id="sp_{{ sp.id }}">
-    <label for="sp_{{ sp.id }}">{{ sp.name }}</label>
-    {% endfor %}
-
-    {% for id, state in states %}
-    <input type="checkbox" id="state_{{ id }}">
-    <label for="state_{{ id }}">{{ state }}</label>
-    {% endfor %}
-</div>
-<br>
-
-    <div id="replaceable-artwork">
-        {% include './artworks_filtered_admin.html' %}
+    
+    <div class="artwork_container">
+        <div class="filters">
+            <div>
+                {% for style in styles %}
+                <div class="nowrap">
+                    <input type="checkbox" id="style_{{ style.id }}">
+                    <label for="style_{{ style.id }}">{{ style.name }}</label>
+                </div>
+                {% endfor %}
+            </div>
+            <hr>
+            <div>
+                {% for category in categories %}
+                <div class="nowrap">
+                    <input type="checkbox" id="category_{{ category.id }}">
+                    <label for="category_{{ category.id }}">{{ category.name }}</label>
+                </div>
+                {% endfor %}
+            </div>
+            <hr>
+            <div>
+                {% for sp in storage_places %}
+                <div class="nowrap">
+                    <input type="checkbox" id="sp_{{ sp.id }}">
+                    <label for="sp_{{ sp.id }}">{{ sp.name }}</label>
+                </div>
+                {% endfor %}
+            </div>
+            <hr>
+            <div>
+                {% for id, state in states %}
+                <div class="nowrap">
+                    <input type="checkbox" id="state_{{ id }}">
+                    <label for="state_{{ id }}">{{ state }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div id="replaceable-artwork">
+            {% include './artworks_filtered_admin.html' %}
+        </div>
     </div>
-
-<script>
-    $( document ).ready(function() {
-        // const user_input = $("#user-input")
-        const artists_div = $('#replaceable-artwork')
-        const endpoint = ''
-        const delay_by_in_ms = 100
-        let scheduled_function = false
-
-        let ajax_call = function (endpoint, request_parameters) {
-            $.getJSON(endpoint, request_parameters)
+    
+    <script>
+        $( document ).ready(function() {
+            // const user_input = $("#user-input")
+            const artists_div = $('#replaceable-artwork')
+            const endpoint = ''
+            const delay_by_in_ms = 100
+            let scheduled_function = false
+            
+            let ajax_call = function (endpoint, request_parameters) {
+                $.getJSON(endpoint, request_parameters)
                 .done(response => {
                     // fade out the artists_div, then:
                     artists_div.fadeTo('slow', 0).promise().then(() => {
@@ -59,90 +74,90 @@
                         artists_div.fadeTo('slow', 1)
                     })
                 })
-        }
-
-
-        $('input[type="checkbox"]').change(function () {
-            const request_parameters = {}
-            const id = this.id.split('_')[1];
-            const type = this.id.split('_')[0];
-            var inputsCheck= $('input[type="checkbox"]:checked')
-
-            Object.values(inputsCheck).forEach(ic => {
-                if (ic.id && ic.id.split('_')[0] !== type) {
-                    switch (ic.id.split('_')[0]) {
-                    case 'style':
-                        request_parameters.s = ic.id.split('_')[1]
-                        break;
-                    case 'category':
-                        request_parameters.c = ic.id.split('_')[1]
-                        break;
-                    case 'sp':
-                        request_parameters.sp = ic.id.split('_')[1]
-                        break;
-                    case 'state':
-                        request_parameters.st = ic.id.split('_')[1]
-                        break;
-                }
-                }
-            });
+            }
             
-
-            if(this.checked) {                                 
-                var inputAlreadyCheck = Object.values(inputsCheck).find( i => i.id && i.id.split('_')[0] === type && i.id.split('_')[1] !== id);
-                if (inputAlreadyCheck) $(`#${type}_${inputAlreadyCheck.id.split('_')[1]}`).prop('checked', false);
+            
+            $('input[type="checkbox"]').change(function () {
+                const request_parameters = {}
+                const id = this.id.split('_')[1];
+                const type = this.id.split('_')[0];
+                var inputsCheck= $('input[type="checkbox"]:checked')
                 
-                switch (type) {
-                    case 'style':
+                Object.values(inputsCheck).forEach(ic => {
+                    if (ic.id && ic.id.split('_')[0] !== type) {
+                        switch (ic.id.split('_')[0]) {
+                            case 'style':
+                            request_parameters.s = ic.id.split('_')[1]
+                            break;
+                            case 'category':
+                            request_parameters.c = ic.id.split('_')[1]
+                            break;
+                            case 'sp':
+                            request_parameters.sp = ic.id.split('_')[1]
+                            break;
+                            case 'state':
+                            request_parameters.st = ic.id.split('_')[1]
+                            break;
+                        }
+                    }
+                });
+                
+                
+                if(this.checked) {                                 
+                    var inputAlreadyCheck = Object.values(inputsCheck).find( i => i.id && i.id.split('_')[0] === type && i.id.split('_')[1] !== id);
+                    if (inputAlreadyCheck) $(`#${type}_${inputAlreadyCheck.id.split('_')[1]}`).prop('checked', false);
+                    
+                    switch (type) {
+                        case 'style':
                         request_parameters.s = id
                         break;
-                    case 'category':
+                        case 'category':
                         request_parameters.c = id
                         break;
-                    case 'sp':
+                        case 'sp':
                         request_parameters.sp = id
                         break;
-                    case 'state':
+                        case 'state':
                         request_parameters.st = id
                         break;
-                    default:
+                        default:
                         request_parameters.c = 0
                         request_parameters.s = 0
                         request_parameters.sp = 0
                         request_parameters.st = 0   
-                    break;
-                }
-                 
-            } else {
-                switch (type) {
-                    case 'style':
+                        break;
+                    }
+                    
+                } else {
+                    switch (type) {
+                        case 'style':
                         request_parameters.s = 0
                         break;
-                    case 'category':
+                        case 'category':
                         request_parameters.c = 0
                         break;
-                    case 'sp':
+                        case 'sp':
                         request_parameters.sp = 0
-                    case 'st':
+                        case 'st':
                         request_parameters.st = 0
-                    default:
+                        default:
                         request_parameters.c = 0
                         request_parameters.s = 0
                         request_parameters.sp = 0 
                         request_parameters.st = 0  
-                    break;
+                        break;
+                    }
+                }                         
+                
+                // if scheduled_function is NOT false, cancel the execution of the function
+                if (scheduled_function) {
+                    clearTimeout(scheduled_function)
                 }
-            }                         
-            
-            // if scheduled_function is NOT false, cancel the execution of the function
-            if (scheduled_function) {
-                clearTimeout(scheduled_function)
-            }
-
-            // setTimeout returns the ID of the function to be executed
-            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
-        })
-    });
-</script>
-{% endblock content %}
+                
+                // setTimeout returns the ID of the function to be executed
+                scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+            })
+        });
+    </script>
+    {% endblock content %}
 </div>
