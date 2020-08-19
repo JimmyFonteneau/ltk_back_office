@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800;900&display=swap');
 
 a {
     color: initial;
@@ -282,4 +282,28 @@ a.paginate_button.current {
 }
 .dataTables_filter {
     text-align: right;
+}
+
+.listStyle p {
+    border: 0;
+    padding: 8px 10px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.listStyle p:hover {
+    color: #fd0786;
+}
+
+.listStyle {
+    margin-top: 78px;
+    cursor: pointer;
+}
+
+.subTitle {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    color: grey;
+    letter-spacing: -.1rem;
+    font-size: 1.2em;
 }
