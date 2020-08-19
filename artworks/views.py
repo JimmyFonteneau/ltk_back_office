@@ -33,7 +33,9 @@ def artwork_new(request):
 @user_passes_test(is_superuser)
 def update_artwork(request, artwork_id):             
     artwork = Artwork.objects.get(id=artwork_id)    
-    
+    order = None
+    oar = None
+
     if artwork.state == 2:        
         oar = OrderArtworkRate.objects.get(return_date__gte=make_aware(datetime.now()), artwork_id=artwork.id)
         order = Order.objects.get(id=oar.order_id)        
