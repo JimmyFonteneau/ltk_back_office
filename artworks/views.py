@@ -36,10 +36,10 @@ def update_artwork(request, artwork_id):
     order = None
     oar = None
 
-    if artwork.state == 2:        
-        oar = OrderArtworkRate.objects.get(return_date__gte=make_aware(datetime.now()), artwork_id=artwork.id)
-        if oar is not None:
-            order = Order.objects.get(id=oar.order_id)        
+    # if artwork.state == 2:        
+    #     oar = OrderArtworkRate.objects.get(return_date__gte=make_aware(datetime.now()), artwork_id=artwork.id)
+    #     if oar is not None:
+    #         order = Order.objects.get(id=oar.order_id)        
 
     if request.method == 'POST':
         if 'delete_artwork' in request.POST:
@@ -61,8 +61,8 @@ def update_artwork(request, artwork_id):
         'artworks/artwork_update.html',
         {
             'form': form,
-            'order': order,
-            'oar': oar,
+            # 'order': order,
+            # 'oar': oar,
         }
     ) 
 
