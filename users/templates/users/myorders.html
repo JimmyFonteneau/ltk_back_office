@@ -1,20 +1,55 @@
 {% extends "base.html" %}
 {% block title %}
-    Mes commandes
+Mes commandes
 {% endblock %}
 {% block content %}
 
-    {% for order in orders %}
-        <div>
-            <p>id : {{ order.id }}</p>
-            <p>prix : {{ order.price }}</p>
-            <p>etat : {{ order.state }}</p>
-            <p>date : {{ order.created_at }}</p>
-            {% for artwork in order.artworks %}
-                <p>oeuvre : {{ artwork.name }}</p>
-            {% endfor %}
+<div class="section fil">
+</div>
+
+<div class="section">
+    <div class="container">
+        <h3 class="section-heading">Mes commandes</h3>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <table id="table_orders">
+                <thead>
+                    <tr>
+                        <th>Prix</th>
+                        <th>Etat</th>
+                        <th>Date</th>
+                        <th>Oeuvre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.price }} €</td>
+                        <td>
+                            {% if order.state == 1 %}
+                                En attente
+                            {% elif order.state == 2 %}
+                                Confirmée
+                            {% else %}
+                                Refusée
+                            {% endif %}    
+                        </td>
+                        <td>{{ order.created_at }}</td>
+                        <td>
+                            {% for artwork in order.artworks %}
+                            <p>{{ artwork.name }}</p>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <hr>
-    {% endfor %}
+    </div>
+</div>
 
 {% endblock content %}

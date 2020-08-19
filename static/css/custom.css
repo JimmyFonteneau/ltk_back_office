@@ -791,3 +791,16 @@ p.oeuvre-p {
   padding: 25%;
   background: #F5F5F5 0% 0% no-repeat padding-box;
 }
+
+#table_orders {
+  width: 100%;
+  margin: 0;
+  font-size: 1.5em;
+}
+#table_orders > tbody > tr > td {
+  border-top: 3px solid #FD0786;
+  border-bottom: 0;
+}
+#table_orders > tbody > tr > td > p {
+  margin: 10px 0;
+}
