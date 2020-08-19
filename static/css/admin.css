@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800;900&display=swap');
+
 a {
     color: initial;
     text-decoration: none;
@@ -39,6 +41,8 @@ a.btn {
 body {
     display: flex;
     padding: 20px;
+    font-family: 'Montserrat';
+
 }
 /*------------------------------------*/
 header {
@@ -63,7 +67,8 @@ header > div:first-child {
 }
 header > div > a {
     margin: 10px 5px;
-    font-weight: bold;
+    font-family: 'Montserrat';
+    font-weight: 600;
     letter-spacing: -0.7px;
 }
 header > div > img {
@@ -98,6 +103,10 @@ header > div#search > #user-input {
 }
 .content-page > .container > h2 {
     width: 70%;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    letter-spacing: -.2rem;
+    line-height: 1.0;
 }
 form {
     text-align: center;
