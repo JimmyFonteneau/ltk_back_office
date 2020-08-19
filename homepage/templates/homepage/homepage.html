@@ -20,7 +20,6 @@
     <div class="container">
     	<h4>OEUVRES A L'HONNEUR</h4>
       <h3 class="section-heading">Oeuvres Street Art Disponibles</h3>
-      <div class="row">
         {% for artwork in artworksmain %}          
           <div class="six columns">
             <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
@@ -49,6 +48,7 @@
             <p class="section-description">{{ artwork.artist }}</p>
           </div>
         {% endfor %}
+      </div>
 
 	  <div class="row">
       {% for artwork in artworksLast %}          
@@ -58,12 +58,11 @@
           <p class="section-description">{{ artwork.artist }}</p>
         </div>
       {% endfor %}
+    </div>
 
 	  <button class="bt3"><a href="{% url 'artworks:artworks_list' %}">Voir toutes les oeuvres</a></button>
     <br>
     <br>
-    
-    </div>
   </div>
 </div>
 
