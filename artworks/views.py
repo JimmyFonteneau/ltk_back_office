@@ -38,7 +38,8 @@ def update_artwork(request, artwork_id):
 
     if artwork.state == 2:        
         oar = OrderArtworkRate.objects.get(return_date__gte=make_aware(datetime.now()), artwork_id=artwork.id)
-        order = Order.objects.get(id=oar.order_id)        
+        if oar is not None:
+            order = Order.objects.get(id=oar.order_id)        
 
     if request.method == 'POST':
         if 'delete_artwork' in request.POST:
