@@ -1,7 +1,7 @@
 {% if artworksPartial %}
   <ul>
   {% for artwork in artworksPartial %}
-    <li>{{ artwork.name }}</li>
+    <li><a href="{% url 'artworks:artwork_update' artwork.id %}">{{ artwork.name }}</a></li>
   {% endfor %}
   </ul>
 {% endif %}
