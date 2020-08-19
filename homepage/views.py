@@ -68,13 +68,6 @@ def dashboard(request):
 
     )
 
-class SearchResultsView(ListView):
-    model = Artwork
-    template_name = 'search_results.html'
-    def get_queryset(self):
-        return Artwork.objects.filter(
-            Q(name__icontains='el pueblo') | Q(artist__icontains='pablo')
-        )
 
 def search_result_view(request):    
     ctx = {}
