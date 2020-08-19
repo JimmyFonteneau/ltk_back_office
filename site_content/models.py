@@ -10,7 +10,7 @@ class Content(models.Model):
         default='default',
     )
 
-    homepage_first_img = models.ImageField(upload_to='static', null=True, blank=True)
+    homepage_first_img = models.ImageField(upload_to='static', null=True, blank=True, verbose_name="Première image page d'accueil",)
 
     homepage_title_description = models.CharField(
         verbose_name="Titre bloc page d'accueil",
@@ -27,11 +27,11 @@ class Content(models.Model):
         default='default',
     )
 
-    homepage_content_img = models.ImageField(upload_to='static', null=True, blank=True)
+    homepage_content_img = models.ImageField(upload_to='static', null=True, blank=True, verbose_name="Image central page d'accueil",)
 
 
     concept_firstblock_title = models.CharField(
-        verbose_name="Titre premier bloc",
+        verbose_name="Titre premier bloc concept",
         max_length=200,
         blank=False,
         null=False,
@@ -39,18 +39,18 @@ class Content(models.Model):
     )
 
     concept_firstblock_content = models.TextField(
-        verbose_name="Titre du second bloc",
+        verbose_name="Titre du second bloc concept",
         blank=False,
         null=False,
         default='default',
     )
 
-    concept_firstblock_background = models.ImageField(upload_to='static', null=True, blank=True)
+    concept_firstblock_background = models.ImageField(upload_to='static', null=True, blank=True, verbose_name="Première image background concept",)
 
-    concept_firstblock_img = models.ImageField(upload_to='static', null=True, blank=True)
+    concept_firstblock_img = models.ImageField(upload_to='static', null=True, blank=True, verbose_name="Image premier bloc concept")
     
     concept_secondblock_title = models.CharField(
-        verbose_name="Titre du second bloc",
+        verbose_name="Titre du second bloc concept",
         max_length=200,
         blank=False,
         null=False,
@@ -58,14 +58,14 @@ class Content(models.Model):
     )
 
     concept_secondblock_content = models.TextField(
-        verbose_name="Contenu du second bloc",
+        verbose_name="Contenu du second bloc concept",
         blank=False,
         null=False,
         default='default',
     )
 
     concept_thirdblock_title = models.CharField(
-        verbose_name="Titre du troisième bloc",
+        verbose_name="Titre du troisième bloc concept",
         max_length=200,
         blank=False,
         null=False,
