@@ -29,7 +29,7 @@
 {% for artist in artists_list %}
         <div class="row">
           <div class="nine columns">
-              <img class="u-max-full-width" src="{% static 'images/redhape-c.png' %}">
+              <img class="u-max-full-width" src="{{ artist.photo.url }}">
           </div>
           <div class="one-half column cat-card">
             <div class="card">

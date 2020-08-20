@@ -16,6 +16,7 @@ Mes commandes
 <div class="section">
     <div class="container">
         <div class="row">
+            {% if orders|length > 0 %}
             <table id="table_orders">
                 <thead>
                     <tr>
@@ -48,6 +49,9 @@ Mes commandes
                     {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+                Aucune commande
+            {% endif %}    
         </div>
     </div>
 </div>

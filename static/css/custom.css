@@ -8,11 +8,19 @@
   height: 68px;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 button a {
   text-decoration: none;
   color: white;
 }
 
+a:hover {
+  color: black;
+ }
 button a:hover {
   color: white;
 }
