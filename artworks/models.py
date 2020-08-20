@@ -58,7 +58,7 @@ class Artwork(models.Model):
 
     style = models.ForeignKey(
         "Artwork_Style",        
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name = "Style",
         db_index=True,
         null=True,
@@ -68,7 +68,7 @@ class Artwork(models.Model):
 
     category = models.ForeignKey(
         "Artwork_Category",        
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name = "Catégorie",
         db_index=True,
         null=True,
@@ -78,7 +78,7 @@ class Artwork(models.Model):
 
     storage_place = models.ForeignKey(
         "Artwork_Storage_Place",      
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name = "Lieu de stockage",
         db_index=True,
         null=True,
