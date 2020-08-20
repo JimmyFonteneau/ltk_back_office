@@ -22,9 +22,12 @@
       <h3 class="section-heading">Oeuvres Street Art Disponibles</h3>
         {% for artwork in artworksmain %}          
           <div class="six columns">
+            <a href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}">
+
             <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
             <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
             <p class="section-description">{{ artwork.artist }}</p>
+            </a>
           </div>
         {% endfor %}
         <!-- <div class="six columns">
@@ -43,9 +46,11 @@
       <div class="row">
         {% for artwork in artworks %}          
           <div class="three columns">
+            <a href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}">
             <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
             <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
             <p class="section-description">{{ artwork.artist }}</p>
+            </a>  
           </div>
         {% endfor %}
       </div>
@@ -93,9 +98,9 @@
         </div>
         <div class="one-half column cat-card">
           <div class="card">
-			<h5>Red Ape</h5>
+			<h5>{{ artist.name }}</h5>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			<button class="bt4">Découvrir</button>
+			<button class="bt3"><a href="{% url 'artists:artist_show' artist_id=artist.id %}">Découvrir</a></button>
 		  </div>
         </div>
       </div>
