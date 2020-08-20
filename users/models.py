@@ -46,7 +46,7 @@ class UserProfile(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.firstname
+        return self.firstname+" "+self.lastname
 
     class Meta:
         verbose_name = "Utilisateur"

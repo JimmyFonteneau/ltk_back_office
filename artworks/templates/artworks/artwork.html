@@ -34,7 +34,7 @@
               <ul class="breadcrumb">
                 <li><a href="/">Home</a></li>
                 <div  class="arrow"></div>
-                <li><a href="{% url 'artworks:artworks_list' %}">Liste des oeuvre</a></li>
+                <li><a href="{% url 'artworks:artworks_list' %}">Liste des oeuvres</a></li>
                 <div  class="arrow"></div>
                 <li><a href="#">Oeuvre</a></li>
               </ul>
@@ -97,11 +97,11 @@
               </div>
               
               <div id="caracteristique" class="ten columns">
-                <p> Hauteur : {{ artwork.description }}</p>
-                <p> Largeur : {{ artwork.description }}</p>
-                <p> Artiste : {{ artwork.description }}</p>
-                <p> Style : {{ artwork.description }}</p>
-                <p> Catégorie : {{ artwork.description }}</p>
+                <p> Hauteur : {{ artwork.height }}</p>
+                <p> Largeur : {{ artwork.width }}</p>
+                <p> Artiste : {{ artwork.artist }}</p>
+                <p> Style : {{ artwork.style }}</p>
+                <p> Catégorie : {{ artwork.category }}</p>
               </div>
               <div class="one columns"><p></p></div>
             </div>

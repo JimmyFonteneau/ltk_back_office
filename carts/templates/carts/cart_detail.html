@@ -5,6 +5,10 @@
 {% endblock %}
 {% block content %}
 
+<div class="section fil">
+</div>
+  
+
   <div class="section">
     <div class="container">
       <h3 class="section-heading">Votre demande de location</h3>
@@ -60,7 +64,9 @@
           </div>
           <h5 class="left">Effectuer ma commande</h5>
           <div class="hbar2"></div>
+          {% if not user.is_authenticated %}
           <button class="bt3"><a href ="{% url 'orders:order_confirm_noaccount' %}">Continuer sans compte</a></button>
+          {% endif %}
           <button class="bt3"><a href="{% url 'orders:order_confirm' %}">Valider la commande</a></button>
         </div>
       </div>
