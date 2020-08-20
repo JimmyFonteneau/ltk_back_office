@@ -4,15 +4,8 @@
 {% endblock %}
 {% block content %}
 
+<div class="container">
 <h2>Liste des utilisateurs</h2>
-{% for user in users_list %}
-<div>
-    <p>{{ user.email }}</p>
-    <p>{{ user.firstname }}</p>
-    <p>{{ user.lastname }}</p>
-    <a class="btn btn-primary" href="{% url 'users:user' user_id=user.id %}" role="button">Show</a>
-</div> 
-{% endfor %}
 
 <table id="table_id" class="display">
     <thead>
@@ -32,6 +25,7 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 
 <script>
     $(document).ready(function() {                   

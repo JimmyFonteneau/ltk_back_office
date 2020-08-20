@@ -7,5 +7,6 @@ urlpatterns = [
     path('update-rate-<int:rate_id>/', views.update, name='rates_update'),
     path('add/', views.add, name='rates_add'),
     path('list/', views.rates_list, name='rates_list'),
+    path('upload-csv/', views.rate_upload, name="rate_upload"),
 ]
 

@@ -6,14 +6,14 @@
     <title>{% block title %}Galerie LTK{% endblock title %}</title>
     
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
-    <link rel="stylesheet" href="{% static 'css/skeleton.css'  %}">
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+      <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+      <link rel="stylesheet" href="{% static 'css/skeleton.css'  %}">
     {% if user.is_superuser %}
-        <link href="{% static 'css/admin.css' %}" rel="stylesheet">
+      <link href="{% static 'css/admin.css' %}" rel="stylesheet">
     {% else %}
-        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+      <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+      <link href="{% static 'css/common.css' %}" rel="stylesheet">
+      <link href="{% static 'css/base.css' %}" rel="stylesheet">
     {% endif %}       
     <script type="text/javascript" src="{% static 'js/jquery-3.4.1.js' %}"></script>      
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
@@ -30,10 +30,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-  
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-    <script src="{% static 'js/dataTable.js' %}"></script>
     {% block head_end %}
     {% endblock head_end %}
 </head>
@@ -43,14 +40,23 @@
 
         {% if user.is_superuser %}   
           <header>  
-            <a href="{% url 'dashboard' %}">Dashboard</a>    
-            <a href="{% url 'rates:rates_list' %}">modification des taux</a>
-            <a href="{% url 'site_content:update_content' %}">Modifier le contenu du site</a>
-            <a href="{% url 'artworks:artworks_list' %}">Liste des oeuvres</a>
-            <a href="{% url 'artists:artists' %}">Liste des artistes</a>
-            <a href="{% url 'users:users_all' %}">Liste des utilisateurs</a>
-            <a href="{% url 'orders:orders_list' %}">Liste des commandes</a>
-            <a class="conn" href="{% url 'users:logout' %}">Déconnexion</a>
+            <div>
+              <img src="{% static 'images/LOGO GALERIE.png' %}">
+              <b>{{ user }}</b>
+              <a class="btn" href="{% url 'users:logout' %}">Déconnexion</a>
+            </div>
+            <br>
+            <div>
+              <a href="{% url 'dashboard' %}"><i class="fa fa-tachometer"></i>&nbsp;Dashboard</a>  
+              <a href="{% url 'artworks:artworks_list' %}"><i class="fa fa-list"></i>&nbsp;Liste des oeuvres</a>
+              <a href="{% url 'artists:artists' %}"><i class="fa fa-paint-brush"></i>&nbsp;Liste des artistes</a>
+              <a href="{% url 'users:users_all' %}"><i class="fa fa-users"></i>&nbsp;Liste des utilisateurs</a>
+              <a href="{% url 'orders:orders_list' %}"><i class="fa fa-envelope"></i>&nbsp;Liste des commandes</a>  
+              <a href="{% url 'rates:rates_list' %}"><i class="fa fa-edit"></i>&nbsp;Modification des taux</a>
+              <a href="{% url 'site_content:update_content' %}"><i class="fa fa-file-text"></i>&nbsp;Modifier le contenu du site</a>
+              <a href="{% url 'configuration:configuration_update' %}"><i class="fa fa-cog"></i>&nbsp;Modifier la configuration du site</a>
+            </div>
+            
             {% include './search_results.html' %}
           </header>
 
@@ -60,7 +66,7 @@
           <input class="menu-btn" type="checkbox" id="menu-btn" />
           <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
           <ul class="menu">
-            <li><a href="/concept">Le concept</a></li>
+            <li><a href="{% url 'concept' %}">Le concept</a></li>
             <li><a href="{% url 'artists:artists' %}">Les artistes</a></li>
             <li><a href="{% url 'artworks:artworks_list' %}">Les oeuvres</a></li>
             <li><a href="/contact">Contact</a></li>
@@ -80,6 +86,7 @@
 
     <div class="content-page">{% block content %}{% endblock content %}</div>
     
+  {% if not user.is_superuser %}
     {% block body_footer %}
 
     <div class="section footer">
@@ -92,20 +99,28 @@
             </div>
             <div  class="eleven columns">
               <h4>8 Place Louis Imbach</h4>
-              <p>49100 ANGERS<br>07 67 22 20 68</p>
-              <p>HORRAIRES<br>Lundi/vendredi: 8h-12h / 14h-17h<br>Samedi: 8h-12h / 14h-19h</p>
+              <p style="font-family: Prata;
+              font-size: 16px;
+              letter-spacing: 0px;
+              color: #000000;
+              font-weight: 400;">49100 ANGERS<br>07 67 22 20 68</p>
+              <p style="font-family: Prata;
+              font-size: 16px;
+              letter-spacing: 0px;
+              color: #000000;
+              font-weight: 400;">HORRAIRES<br>Lundi/vendredi: 8h-12h / 14h-17h<br>Samedi: 8h-12h / 14h-19h</p>
             </div>
           </div>
         </div>
         <div class="four columns">
           <h4>Pratique:</h4>
           <div class="hbar"></div>
-          <a href="/contact">Contact</a><br>
-          <a href="{% url 'artworks:artworks_list' %}">Toutes les oeuvres</a><br>
-          <a href="{% url 'artists:artists' %}">Tous les artistes</a><br>
-          <a href="/concept">Le concept Artotek</a><br>
-          <a href="#">Site de la galerie LTK</a><br>
-          <a href="#">Protection des données</a><br>
+          <a href="/contact" style="font-family: Raleway">Contact</a><br>
+          <a href="{% url 'artworks:artworks_list' %}" style="font-family: Raleway">Toutes les oeuvres</a><br>
+          <a href="{% url 'artists:artists' %}" style="font-family: Raleway">Tous les artistes</a><br>
+          <a href="/concept" style="font-family: Raleway">Le concept Artotek</a><br>
+          <a href="#" style="font-family: Raleway">Site de la galerie LTK</a><br>
+          <a href="#" style="font-family: Raleway">Protection des données</a><br>
         </div>
         <div class="three columns">
           <img class="u-max-full-width" src="{% static 'images/LOGO GALERIE.png' %}">
@@ -122,20 +137,19 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="section copyright">
-    <div class="container">
-      <div class="row">
-        <div class="twelve column">
-          ©Galerie LTK - 2020
+    <div class="section copyright">
+      <div class="container">
+        <div class="row">
+          <div class="twelve column">
+            ©Galerie LTK - 2020
+          </div>
         </div>
       </div>
     </div>
   </div>
     
     {% endblock body_footer %}
-    
+  {% endif %}
 
 </body>
 

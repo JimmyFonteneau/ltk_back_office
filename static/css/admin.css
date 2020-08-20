@@ -1,3 +1,309 @@
-h2 {
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800;900&display=swap');
+
+a {
+    color: initial;
+    text-decoration: none;
+}
+a:hover {
+    color: #fd0786;
+}
+button {
+    line-height: initial;
+}
+a.btn,
+button.btn,
+input[type="submit"].btn {
+    background-color: #fd0786;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    transition: .2s;
+    white-space: nowrap;
+}
+a.btn:hover,
+button.btn:hover,
+input[type="submit"].btn:hover {
+    background-color: #ca056b;
+    color: #fff;
+}
+a.btn {
+    display: inline-block;
+    height: 38px;
+    padding: 0 10px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+body {
+    display: flex;
+    padding: 20px;
+    font-family: 'Montserrat';
+
+}
+/*------------------------------------*/
+header {
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    align-items: center;
+    min-width: 240px;
+}
+header > div {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 15px;
+    opacity: 1;
+    padding: 5px 10px;
+}
+header > div:first-child {
+    width: 60%;
+    text-align: center;
+}
+header > div > a {
+    margin: 10px 5px;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    letter-spacing: -0.7px;
+}
+header > div > img {
+    width: 75px;
+    margin: 0 auto;
+    border: 2px solid #FD0786;
+    border-radius: 50%;
+    overflow: hidden;
+}
+header > div#search {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: 20px;
+    margin-top: 20px;
+    z-index: 1;
+    background: #f5f5f5;
+}
+header > div#search > #user-input {
+    margin-bottom: 0;
+    border: none;
+    background: transparent;
+}
+.content-page {
+    flex-grow: 1;
+    padding: 0 40px;
+}
+.nowrap {
+    white-space: nowrap;
+}
+/*------------------------------------*/
+.content-page > .container {
+    width: 100%;
+    max-width: 1200px;
+}
+.content-page > .container > h2 {
+    width: 70%;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    letter-spacing: -.2rem;
+    line-height: 1.0;
+}
+form {
+    text-align: center;
+    background: #f5f5f5;
+    padding: 10px 15%;
+    border-radius: 5px;
+}
+form > p > label {
+    text-align: left;
+    color: #fd0786;
+}
+form > p > input[type="checkbox"] {
+    margin-right: 100%;
+}
+form > p > input:not([type="checkbox"]),
+form > p > textarea,
+form > p > select {
+    width: 100%;
+}
+form > button {
+    margin: 0 auto;
+}
+table,
+table.dataTable {
+    width: 100% !important;
+}
+table.dataTable > thead > tr > th::after {
+    font-family: "FontAwesome";
+    cursor: pointer;
+    content: " \f0dc";
+}
+table.dataTable > tbody > tr > td,
+table.dataTable > tbody > tr > th {
+    cursor: pointer;
+}
+table > thead > tr > th {
+    border-bottom-width: 2px;
+}
+table > tbody > tr > td,
+table > tbody > tr > th {
+    font-weight: normal;
+}
+table > tbody > tr:hover {
+    background: #f5f5f5;
+}
+/*------------------------------------*/
+.dashborad_infos {
+    display: flex;
+    flex-wrap: wrap;
+}
+.dashborad_infos > span {
+    flex: 15% 1 0;
+    min-width: 150px;
+    box-shadow: 1px 1px 5px 0px #cfcfcf;
+    margin: 8px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.dashborad_infos > span#info_oeuvres {
+    background-color: #fd0786;
+    color: #fff;
+}
+.dashborad_infos > span > p {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+table.dashboard_table {
+    border-collapse:separate; 
+    border-spacing: 0 10px;
+}
+table.dashboard_table > thead > tr > th {
+    border: 0;
+}
+table.dashboard_table > tbody > tr > td {
+    border: 0;
+    padding: 8px 10px;
+    background-color: #f5f5f5;
+}
+table.dashboard_table > tbody > tr > td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+table.dashboard_table > tbody > tr > td:last-child {
+    color: #fd0786;
+    font-weight: bold;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+body > div > div > div:nth-child(4) > span:nth-child(1) > img{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 15px;
+    opacity: 1;
+}
+
+.rate {
+    display: inline-block;
+    margin: 0 20px;
+    text-align: center;
+}
+a.paginate_button {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+a.paginate_button.current {
+    color: #fff;
+    background-color: #fd0786;
+    border-color: transparent;
+    border-radius: 0;
+    margin: 0 5px;
+    cursor: initial;
+}
+.dataTables_info {
+    margin-bottom: 10px;
+}
+#order_update_div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+#order_update_div > div {
+    flex: 33% 0 0;
+    text-align: center;
+    box-shadow: 1px 1px 5px 0px #cfcfcf;
+    padding: 30px 5px;
+    border-radius: 10px;
+}
+#order_update_div > div > img {
+    height: 200px;
+    margin: 0 auto;
+    display: block;
+}
+.artwork_container {
+    display: flex;
+    margin-top: 30px;
+}
+.filters {
+    padding: 15px;
+    margin-right: 10px;
+    background: #f5f5f5;
+}
+.filters label {
+    display: inline-block;
+}
+#replaceable-artwork {
+    flex: auto 1 1;
+}
+.artwork_container hr {
+    width: 30%;
+    margin: 20px 0;
+    border-top-width: 4px;
+    border-top-color: #fd0786;
+}
+.dataTables_length,
+.dataTables_filter {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+.dataTables_length {
+    margin-bottom: 10px;
+    text-align: left;
+}
+.dataTables_filter {
+    text-align: right;
+}
+
+.listStyle p {
+    border: 0;
+    padding: 8px 10px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.listStyle p:hover {
+    color: #fd0786;
+}
+
+.listStyle {
+    margin-top: 78px;
+    cursor: pointer;
+}
+
+.subTitle {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    color: grey;
+    letter-spacing: -.1rem;
+    font-size: 1.2em;
 }

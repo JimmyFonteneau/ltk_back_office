@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+    Import des catégories
+{% endblock %}
+
+{% block content %}
+<h2>Import des catégories</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <div>
+            <strong>{{message|safe}}</strong>
+        </div>
+    {% endfor %}
+{% else %}
+{{order}}
+<form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Upload du fichier</label>
+    <input type="file" name="file"></input>
+    <p>Seul les fichiers CSV sont acceptés</p>
+    <button type="submit">valider</button>
+</form>
+{% endif %}
+
+{% endblock %}

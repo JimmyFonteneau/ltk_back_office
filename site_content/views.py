@@ -1,26 +1,22 @@
 from django.shortcuts import render
-from .forms import HomePageContentForm, ConceptContentForm
+from .forms import HomePageContentForm, ConceptContentForm, AllContent
 from .models import Content
 
 def update_content(request):             
     content = Content.objects.last()  
     if request.method == 'POST':
-        form = HomePageContentForm(request.POST, instance=content)
-        formconcept = ConceptContentForm()
+        form = AllContent(request.POST, instance=content)      
         if form.is_valid():           
             form.save()
     else:
         if content is None:
-            form = HomePageContentForm()
-            formconcept = ConceptContentForm()
+            form = AllContent()
         else:
-            form = HomePageContentForm(instance=content)
-            formconcept = ConceptContentForm(instance=content)
+            form = AllContent(instance=content)
     return render(
         request,
         'content/update.html',
         {
             'form': form,
-            'formconcept': formconcept,
         }
     ) 

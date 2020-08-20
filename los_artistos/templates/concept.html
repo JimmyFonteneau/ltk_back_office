@@ -29,10 +29,18 @@
       <div class="container">
          <div class="row">
           <div class="nine columns left">
-            <h3>L'art  sous toutes ses formes</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+            {% if content and content.concept_firstblock_title != '' %} 
+              <h2 class="section-heading">{{content.concept_firstblock_title}}</h2>
+            {% else %}
+              <h3>L'art  sous toutes ses formes</h3>
+            {% endif %} 
+            {% if content and content.concept_firstblock_content != '' %} 
+              <p>{{content.concept_firstblock_content}}</p>
+            {% else %}
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+            {% endif %}           
           </div>
           <div class="three columns">
               <img class="u-max-full-width oversized-i" src="{% static 'images/concept-img.png' %}">
@@ -46,14 +54,23 @@
          <div class="row">
             <div class="seven columns cat-card concept-c">
               <div class="card">
-                <h3>Stockage des oeuvres</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
+                {% if content and content.concept_secondblock_title != '' %} 
+                  <h3>{{content.concept_secondblock_title}}</h3>
+                {% else %}
+                  <h3>Stockage des oeuvres</h3>
+                {% endif %} 
+                {% if content and content.concept_secondblock_content != '' %} 
+                  <p>{{content.concept_secondblock_content}}</p>
+                {% else %}
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+   
+                {% endif %}                 
+             </div>
             </div>
             <div class="five columns c-left">
               <h3>Notre équipe:</h3>
@@ -83,25 +100,41 @@
             <div class="row">
               <div class="four columns card">
                 <img class="u-max-full-width black-b" src="{% static 'images/first-floor.png' %}">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>
+                {% if content and content.concept_thirdblock_firstservice != '' %} 
+                  <p>{{content.concept_thirdblock_firstservice}}</p>
+                {% else %}
+                  <p>Lorem ipsum toto sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>                
+                {% endif %} 
                 <button class="bt4"><a href="" role="button">Voir le site</a></button>
               </div>
               <div class="four columns card">
                 <img class="u-max-full-width black-b" src="{% static 'images/first-floor.png' %}">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>
-                <button class="bt4"><a href="" role="button">Voir le site</a></button>
+                {% if content and content.concept_thirdblock_secondservice != '' %} 
+                  <p>{{content.concept_thirdblock_secondservice}}</p>
+                {% else %}
+                  <p>Lorem ipsum toto sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>                
+                {% endif %} 
+                 <button class="bt4"><a href="" role="button">Voir le site</a></button>
               </div>
               <div class="four columns card">
                 <img class="u-max-full-width black-b" src="{% static 'images/first-floor.png' %}">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>
-                <button class="bt4"><a href="" role="button">Voir le site</a></button>
+                {% if content and content.concept_thirdblock_thirdservice != '' %} 
+                  <p>{{content.concept_thirdblock_thirdservice}}</p>
+                {% else %}
+                  <p>Lorem ipsum toto sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>                
+                {% endif %}
+              <button class="bt4"><a href="" role="button">Voir le site</a></button>
               </div>
             </div>
           </div>
           <div class="one-half column">
               <div class="card card2">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>
-              </div>
+                {% if content and content.concept_thirdblock_title != '' %} 
+                  <p>{{content.concept_thirdblock_title}}</p>
+                {% else %}
+                  <p>Lorem ipsum toto sit amet, consectetur adipiscing elit. Praesent vel lacinia magna, nec convallis neque. Nullam metus neque, imperdiet at</p>                
+                {% endif %} 
+             </div>
           </div>
         </div>
       </div>

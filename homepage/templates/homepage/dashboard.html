@@ -1,26 +1,66 @@
 {% extends "base.html" %}
 {% block title %}
-	Home page
+Dahsboard
 {% endblock %}
 {% block content %}   
-  <h2>This is the dahsboard</h2>
-  <p>nombre de commande en attente : {{ orderWaiting }} </p>
-  <p>Total des oeuvres : {{ totalArtworks }} </p>
-  <p>Total des oeuvres en location : {{ artworksInLocation }} </p>
-  <p>Total des artistes : {{ artistsTotal }} </p>
-  <p>Artiste à l'honneur : {{ artistSpotlight.name }} </p>
-  <p>Nb d'oeuvre avec un timer : {{ artworksTimer }} </p>
-  
-  <p>Liste des oeuvres qui sont bientot de retour</p>
-  {% for art in artworksBackSoon %}
-    <p>{{art}}</p>
-    <p>Retour prévu le : {{ art.returnDate }}</p>
-  {% endfor %}
-
-  <p>Liste des oeuvres qui auraient dû être retournées</p>
-  {% for art in artWorksMustBeBack %}
-    <p>{{art}}</p>
-    <p>Retour initialement prévu le : {{ art.returnDate }}</p>
-  {% endfor %}
-
+<div class="container">
+  <h2>Bonjour {{ user }}</h2>
+  <div class="dashborad_infos">
+    <span id="info_oeuvres"><p>{{ totalArtworks }}</p>oeuvres</span>
+    <span><p>{{ artworksInLocation }}</p>oeuvres en location</span>
+    <span><p>{{ orderWaiting }}</p>commandes en attente</span>
+    <span><p>{{ artworksTimer }}</p>oeuvres avec un timer</span>
+    <span><p>{{ artistsTotal }}</p>artistes</span>
+  </div>
+  <hr>
+  <div class="dashborad_infos">
+    <span>
+      <p>Artiste à l'honneur</p>
+      {{ artistSpotlight.name }}<br>
+      <img src="{{ artistSpotlight.photo.url }}" width="200">
+    </span>
+    <span>
+      <p>Liste des oeuvres bientot de retour</p>
+      {% if artworksBackSoon|length > 0 %}
+      <table class="dashboard_table">
+        <thead>
+          <tr>
+            <th>Oeuvre</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for art in artworksBackSoon %}
+          <tr>
+            <td>{{art}}</td>
+            <td>{{ art.returnDate }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </span>
+    <span>
+      <p>Liste des oeuvres en retard</p>
+      {% if artWorksMustBeBack|length > 0 %}
+      <table class="dashboard_table">
+        <thead>
+          <tr>
+            <th>Oeuvre</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for art in artWorksMustBeBack %}
+          <tr>
+            <td>{{art}}</td>
+            <td>{{ art.returnDate }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </span>
+  </div>
+</div>
 {% endblock content %}

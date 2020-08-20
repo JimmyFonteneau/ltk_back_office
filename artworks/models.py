@@ -52,42 +52,42 @@ class Artwork(models.Model):
         on_delete=models.CASCADE,
         verbose_name = "Artiste",
         db_index=True,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     style = models.ForeignKey(
         "Artwork_Style",        
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name = "Style",
         db_index=True,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         default='',
     )
 
     category = models.ForeignKey(
         "Artwork_Category",        
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name = "Catégorie",
         db_index=True,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         default='',
     )
 
     storage_place = models.ForeignKey(
-        "Artwork_Storage_Place",        
-        on_delete=models.CASCADE,
+        "Artwork_Storage_Place",      
+        on_delete=models.SET_NULL,
         verbose_name = "Lieu de stockage",
         db_index=True,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         default='',
     )
 
     spotlight = models.BooleanField(
-        verbose_name="Mise en avant",
+        verbose_name="Mettre en avant",
         default=False,
     )
 
@@ -100,6 +100,22 @@ class Artwork(models.Model):
         verbose_name="Timer",
         null=True,
         blank=True,
+    )
+
+    description = models.CharField(
+        verbose_name="Description de l'oeuvre",
+        max_length=200,
+        blank=False,
+        null=False,
+        default='default',
+    )
+    
+    introduction = models.CharField(
+        verbose_name="Introduction de l'oeuvre",
+        max_length=200,
+        blank=False,
+        null=False,
+        default='default',
     )
 
     created_at = models.DateTimeField(auto_now_add=True)

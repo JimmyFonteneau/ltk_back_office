@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 {% block title %}
-    New style
+Liste des styles
 {% endblock %}
 {% block content %}
-
-{% for style in styles %}
-<p id={{style.id}}> {{ style.name }}</p>
-{% endfor %}
+<div class="container">
+    <h2>Liste des styles</h2>
+    
+<div class="listStyle">
+    {% for style in styles %}
+    <p id={{style.id}}> {{ style.name }}</p>
+    {% endfor %}
+</div
+>
 <a class="btn btn-primary" href="{% url 'artworks:add_style' %}" role="button">Ajouter un style</a>
+<a class="btn btn-primary" href="{% url 'artworks:style_upload' %}" role="button">Import csv</a>
 
+</div>
 <script>
     $(document).ready(function() {                   
         $("p").click(function(event) {         

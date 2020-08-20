@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 {% block title %}
-    Update artwork
+    Mise à jour de l'oeuvre
 {% endblock %}
 {% block content %}   
-<h2>Update artwork</h2>
+<div class="container">
+<h2>Mise à jour de l'oeuvre</h2>
+{% if order %}
+<p>L'oeuvre est actuellement louée par : {{ order.user.company }}</p>
+<p>Jusqu'au : {{ oar.return_date|date:'d-m-Y' }}</p>
+{% endif %}
 <form method="POST" enctype="multipart/form-data" class="artist-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-    <button type="submit" name="delete_artwork">Delete</button>
+    <button type="submit" class="save btn btn-default">Valider</button>
+    <button type="submit" name="delete_artwork">Supprimer</button>
     <button type="submit" name="duplicate_artwork">Dupliquer</button>
-</form>
+</form></div>
 {% endblock content %}

@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block title %}
-    Update style
+    Modifier un style
 {% endblock %}
 {% block content %}   
-<h2>Update style</h2>
+<div class="container">
+<h2>Modifier un style</h2>
 <form method="POST" enctype="multipart/form-data" class="artist-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-    <button type="submit" name="delete_style">Delete</button>
-</form>
+    <button type="submit" class="save btn btn-default">Valider</button>
+    <button type="submit" name="delete_style">Supprimer</button>
+</form></div>
 {% endblock content %}

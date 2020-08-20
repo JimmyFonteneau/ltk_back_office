@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 {% block title %}
-    List artists
+    Liste des artistes
 {% endblock %}
 
 {% block content %}
-
-<h2>Les artistes mode admin</h2>
+<div class="container">
+<h2>Les artistes</h2>
 <a class="btn btn-primary" href="{% url 'artists:artist_new' %}" role="button">Ajouter un artiste</a>
-
+<a class="btn btn-primary" href="{% url 'artists:artist_upload' %}" role="button">Import csv</a>
+<br>
+<br>
 <table id="table_id" class="display">
     <thead>
         <tr>
             <th>Id</th>
-            <th>nom d'artiste</th>
+            <th>Nom d'artiste</th>
             <th>Prénom</th>
             <th>Nom</th>                    
         </tr>
@@ -20,7 +22,7 @@
     <tbody>
         {% for artist in artists_list %}
         <tr>
-            <th>{{ artist.id }}</th>
+            <td>{{ artist.id }}</td>
             <td>{{ artist.name }}</td>
             <td>{{ artist.firstname }}</td>
             <td>{{ artist.lastname }}</td>            
@@ -28,7 +30,7 @@
         {% endfor %}
     </tbody>
 </table>
-
+</div>
 <script>
     $(document).ready(function() {                   
         var table = $('#table_id').DataTable({

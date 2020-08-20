@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+    Modification de la date de retour
+{% endblock %}
+{% block content %}   
+<div class="container">
+    <h2>Modification de la date de retour pour la commande : {{ order_artwork_rates.order_id }}</h2>
+    <p>Oeuvre concernée : {{ artwork.name }}</p>
+    <p>Date de retour intial: {{ order_artwork_rates.return_date }}</p>
+    <img src="{{ artwork.artwork.photo.url }}" width="200">
+<form method="POST" enctype="multipart/form-data" class="artist-form">
+    {% csrf_token %}     
+    {{ form.as_p }}       
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+</div>
+{% endblock content %}

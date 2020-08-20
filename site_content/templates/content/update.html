@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 {% block title %}
-    Update site content
+Modification du contenu du site
 {% endblock %}
 {% block content %}   
-<h2>Update site content</h2>
-<form method="POST" enctype="multipart/form-data" class="artist-form">{% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-</form>
-<form method="POST" enctype="multipart/form-data" class="artist-form">{% csrf_token %}    
-    {{ formconcept.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-</form>
+<div class="container">
+    <h2>Modification du contenu du site</h2>
+    <form method="POST" enctype="multipart/form-data" class="artist-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Valider</button>
+    </form>
+</div>
 {% endblock content %}

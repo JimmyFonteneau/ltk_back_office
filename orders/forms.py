@@ -1,5 +1,5 @@
 from django import forms
-from .models import Order
+from .models import Order, OrderArtworkRate
 
 class OrderEmailForm(forms.Form):
 
@@ -14,3 +14,9 @@ class OrderUpdate(forms.ModelForm):
     class Meta:
         model = Order
         fields = ('price', 'state')
+
+class ReturnDateUpdate(forms.ModelForm):
+
+    class Meta:
+        model = OrderArtworkRate
+        fields = ('return_date',)

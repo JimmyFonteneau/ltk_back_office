@@ -1,21 +1,29 @@
 {% extends "base.html" %}
 {% block title %}
-    List rates
+Liste des taux
 {% endblock %}
 {% block content %}
+<div class="container">
+    <h2>Liste des taux</h2>
+    <a class="btn" href="{% url 'rates:rates_add' %}" role="button">Ajouter un taux</a>
+    <a class="btn btn-primary" href="{% url 'rates:rate_upload' %}" role="button">Import csv</a>
 
-{% for rate in rates %}
-<p> {{ rate.duration }}</p>
-<p> {{ rate.rate }}</p>
-<button id={{rate.id}}>Modifier</button>
-{% endfor %}
-<a class="btn btn-primary" href="{% url 'rates:rates_add' %}" role="button">Ajouter un taux</a>
-
-<script>
-    $(document).ready(function() {                   
-        $("button").click(function(event) {         
-         document.location.pathname = `rates/update-rate-${event.target.id}/`;
+<br>
+<br>
+    {% for rate in rates %}
+    <div class="rate">
+        <b>{{ rate.duration }}</b> mois : 
+        x <b>{{ rate.rate }}</b><br>
+        <button id={{rate.id}}>Modifier</button>
+    </div>
+    {% endfor %}
+        
+    <script>
+        $(document).ready(function() {                   
+            $("button").click(function(event) {         
+                document.location.pathname = `rates/update-rate-${event.target.id}/`;
+            });
         });
-    });
-</script>
+    </script>
+</div>
 {% endblock %}

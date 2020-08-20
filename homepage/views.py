@@ -9,17 +9,23 @@ from orders.models import Order, OrderArtworkRate
 from datetime import datetime, timedelta
 from dateutil.relativedelta import *
 from django.utils.timezone import make_aware
+from site_content.models import Content
 
 def homepage(request):
-    artworks = Artwork.objects.all()
-    artworks = artworks.filter(spotlight=True)
+    artworksmain = Artwork.objects.filter(spotlight=True)[:2]
+    artworks = Artwork.objects.filter(spotlight=True)[2:6] 
+    artworksLast = Artwork.objects.filter(spotlight=True)[6:10] 
     artist = Artist.objects.filter(spotlight=True).first()
+    content = Content.objects.last() 
     return render(
         request, 
         'homepage/homepage.html',
         {
             'artworks': artworks,
+            'artworksmain': artworksmain,
             'artist': artist,
+            'content': content,
+            'artworksLast': artworksLast,
         }       
     )
 
@@ -62,13 +68,6 @@ def dashboard(request):
 
     )
 
-class SearchResultsView(ListView):
-    model = Artwork
-    template_name = 'search_results.html'
-    def get_queryset(self):
-        return Artwork.objects.filter(
-            Q(name__icontains='el pueblo') | Q(artist__icontains='pablo')
-        )
 
 def search_result_view(request):    
     ctx = {}
@@ -79,12 +78,12 @@ def search_result_view(request):
     else:
         artworks = []
 
-    ctx["artworks"] = artworks
+    ctx["artworksPartial"] = artworks
     
     if request.is_ajax():
         html = render_to_string(
             template_name="artworks-results-partial.html", 
-            context={"artworks": artworks}
+            context={"artworksPartial": artworks}
         )
 
         data_dict = {"html_from_view": html}

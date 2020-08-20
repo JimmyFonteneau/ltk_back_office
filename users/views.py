@@ -202,7 +202,7 @@ def forgot_password(request):
             html_message = render_to_string('./mails/forgot_email.html', data)
             plain_message = strip_tags(html_message)
             from_email = 'plateforme@ltk.com'
-            to = 'admin@admin.com'
+            to = user.email
             send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
     else:
@@ -247,6 +247,14 @@ def update_user(request, user_id):
         if 'delete_user' in request.POST:
             user.delete()                     # delete the cat.
             return redirect("users:users_all")
+        elif 'downgrade' in request.POST:
+            user.is_superuser = False
+            user.save()
+            return redirect("users:users_all")
+        elif 'upgrade' in request.POST:
+            user.is_superuser = True
+            user.save()
+            return redirect("users:users_all")
         else:
             form = ModifyUserForm(request.POST, instance=user)
             if form.is_valid():
@@ -259,5 +267,6 @@ def update_user(request, user_id):
         'users/user_update.html',
         {
             'form':form,
+            'isAdmin': user.is_superuser,
         }
     )

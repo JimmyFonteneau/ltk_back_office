@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 {% block title %}
-    New category
+Liste des catégories
 {% endblock %}
 {% block content %}
-
+<div class="container">
+    <h2>Liste des catégories</h2>
+ 
+<div class="listStyle">
 {% for category in categories %}
 <p id={{category.id}}> {{ category.name }}</p>
 {% endfor %}
-<a class="btn btn-primary" href="{% url 'artworks:add_category' %}" role="button">Ajouter un category</a>
+</div>
 
+<a class="btn btn-primary" href="{% url 'artworks:add_category' %}" role="button">Ajouter une catégorie</a>
+<a class="btn btn-primary" href="{% url 'artworks:category_upload' %}" role="button">Import csv</a>
+
+</div>
 <script>
     $(document).ready(function() {                   
         $("p").click(function(event) {        

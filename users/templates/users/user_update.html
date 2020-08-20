@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 {% block title %}
-    {{ title }}
+Modifier un utilisateur
 {% endblock %}
 {% block content %}
-
+<h2>Modifier un utilisateur</h2>
+<div class="container">
 <form method="POST" enctype="multipart/form-data" class="artist-form">
     {% csrf_token %}
     {{ form.as_p }}    
-    <input type="submit" value="Valider"><br>
-    <button type="submit" name="delete_user">Delete</button>
-
+    <input type="submit" class="btn" value="Valider">
+    <button type="submit" name="delete_user">Supprimer</button>
+    {% if isAdmin %}        
+        <button type="submit" name="downgrade">Downgrade</button>
+    {% else %}
+        <button type="submit" name="upgrade">Upgrade</button>
+    {% endif %}
 </form>
-
+</div>
 {% endblock content %}

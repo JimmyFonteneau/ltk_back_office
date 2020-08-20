@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
 
 /* Boutons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -7,11 +8,19 @@
   height: 68px;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 button a {
   text-decoration: none;
   color: white;
 }
 
+a:hover {
+  color: black;
+ }
 button a:hover {
   color: white;
 }
@@ -91,7 +100,7 @@ button a:hover {
 /* Sections
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .section {
-  padding: 8rem 0 7rem;
+  padding: 0rem 0 7rem;
   text-align: center;
 }
 .section-heading,
@@ -238,7 +247,7 @@ button a:hover {
 }
 
 .section.footer {
-    padding: 4rem 0 4rem !important;
+    padding: 1rem 0 1rem !important;
 }
 
 .copyright {
@@ -258,7 +267,8 @@ button a:hover {
 
 .vbar {
   border-left: 3px solid #FD0786;
-  height: 267px;
+  height: 150px;
+  margin-top: 25px;
 }
 
 .hbar {
@@ -275,13 +285,13 @@ button a:hover {
 
 .footer   h4 {
   font-family: 'Prata', serif;
-  font-size: 40px;
+  font-size: 25px;
   letter-spacing: 0px;
   color: #000000;
 }
 
 .footer   a {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Prata', serif;
   font-size: 16px;
   letter-spacing: 0px;
   color: #000000;
@@ -574,7 +584,7 @@ button {
 
 .section-heading {
   font-size: 75px;
-  font-family: 'Prata', serif;
+  font-family: Prata;
 }
 
 h4 {
@@ -788,4 +798,17 @@ p.oeuvre-p {
 .grey-container2 {
   padding: 25%;
   background: #F5F5F5 0% 0% no-repeat padding-box;
+}
+
+#table_orders {
+  width: 100%;
+  margin: 0;
+  font-size: 1.5em;
+}
+#table_orders > tbody > tr > td {
+  border-top: 3px solid #FD0786;
+  border-bottom: 0;
+}
+#table_orders > tbody > tr > td > p {
+  margin: 10px 0;
 }

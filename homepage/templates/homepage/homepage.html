@@ -1,14 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-	Home page
+	Page d'accueil
 {% endblock %}
 {% block content %}   
    <div class="section hero">
     <div class="container">
-	<h2 class="section-heading">L’art n’a jamais été aussi accessible</h2>
-	<button class="bt1"><a href ="{% url 'artworks:artworks_list' %}">Voir les oeuvres</a></button>
-	<button class="bt2"><a href ="{% url 'artists:artists' %}">Voir les artistes</a></button>
+      {% if content and content.homepage_title != '' %} 
+        <h2 class="section-heading">{{content.homepage_title}}</h2>
+      {% else %}
+        <h2 class="section-heading">L’art n’a jamais été aussi accessible</h2>
+      {% endif %}
+      <button class="bt1"><a href ="{% url 'artworks:artworks_list' %}">Voir les oeuvres</a></button>
+      <button class="bt2"><a href ="{% url 'artists:artists' %}">Voir les artistes</a></button>
     </div>
   </div>
 
@@ -16,73 +20,70 @@
     <div class="container">
     	<h4>OEUVRES A L'HONNEUR</h4>
       <h3 class="section-heading">Oeuvres Street Art Disponibles</h3>
-      <div class="row">
+        {% for artwork in artworksmain %}          
+          <div class="six columns">
+            <a href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}">
+
+            <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
+            <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
+            <p class="section-description">{{ artwork.artist }}</p>
+            </a>
+          </div>
+        {% endfor %}
+        <!-- <div class="six columns">
+          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
+      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
+      <p class="section-description">nom artiste</p>
+        </div>
+
         <div class="six columns">
           <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
       <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
       <p class="section-description">nom artiste</p>
         </div>
-        <div class="six columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-      <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-      <p class="section-description">nom artiste</p>
-        </div>
-      </div>
+      </div> -->
+
       <div class="row">
-        <div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-        <div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-		<div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-		<div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
+        {% for artwork in artworks %}          
+          <div class="three columns">
+            <a href="{% url 'artworks:artwork_show' artwork_id=artwork.id %}">
+            <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
+            <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
+            <p class="section-description">{{ artwork.artist }}</p>
+            </a>  
+          </div>
+        {% endfor %}
       </div>
+
 	  <div class="row">
+      {% for artwork in artworksLast %}          
         <div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
+          <img class="u-max-full-width border-i" src="{{ artwork.photo.url }}">
+          <h5 class="oeuvre-heading">{{ artwork.name }}</h5>
+          <p class="section-description">{{ artwork.artist }}</p>
         </div>
-        <div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-		<div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
-		<div class="three columns">
-          <img class="u-max-full-width border-i" src="{% static 'images/opaf.png' %}">
-		  <h5 class="oeuvre-heading">Titre d'oeuvre</h5>
-		  <p class="section-description">nom artiste</p>
-        </div>
+      {% endfor %}
+    </div>
+
 	  <button class="bt3"><a href="{% url 'artworks:artworks_list' %}">Voir toutes les oeuvres</a></button>
     <br>
     <br>
-    </div>
   </div>
 </div>
 
   <div class="section concept">
     <div class="container">
     	<h4>GALERIE LTK</h4>
-      <h3 class="section-heading">L'art à portée de main</h3>
-      <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+      {% if content and content.homepage_title_description != '' %} 
+        <h2 class="section-heading">{{content.homepage_title_description}}</h2>
+      {% else %}
+        <h2 class="section-heading">L'art à portée de main</h2>
+      {% endif %}
+      {% if content and content.homepage_content_description != '' %} 
+        <p class="section-description">{{content.homepage_content_description}}</p>
+      {% else %}
+        <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+      {% endif %}
       <button class="bt2"><a href="/concept">Decouvrir le concept</a></button>
     </div>
   </div>
@@ -93,22 +94,20 @@
       <h3 class="section-heading">L'art de la couleur</h3>
       <div class="row">
         <div class="one-half column">
-          <img class="u-max-full-width" src="{% static 'images/redhape.png' %}">
+          <img class="u-max-full-width" src="{{ artist.photo.url }}">
         </div>
         <div class="one-half column cat-card">
           <div class="card">
-			<h5>Red Ape</h5>
+			<h5>{{ artist.name }}</h5>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			<button class="bt4">Découvrir</button>
+			<button class="bt3"><a href="{% url 'artists:artist_show' artist_id=artist.id %}">Découvrir</a></button>
 		  </div>
         </div>
       </div>
     </div>
   </div>
 
-{% for artwork in artworks %}
-  <li>{{ artwork.name }}</li>
-{% endfor %}
+
 </ul>
 
 {% endblock content %}

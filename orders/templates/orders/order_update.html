@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 {% block title %}
-    Update order
+    Mise à jour d'une commande
 {% endblock %}
 {% block content %}   
-<h2>Update order</h2>
+<div class="container">
+<h2>Mise à jour d'une commande</h2>
 
-  <div style="display: flex, width: 100%">
+    <p>Commande génerée le : {{ order.created_at }}</p>
 
-    <p>date : {{ order.created_at }}</p>
-
-    {% for artwork in order.artworks %}
-      <div style="border:solid">
-        <p>oeuvre : {{ artwork.artwork.name }}</p>
-        <select name="select"> 
-          {% for rate in rates.all %}
-              <option {% if rate == artwork.rate %} selected {% endif %}> {{ rate }} </option>
-          {% endfor %}
-        </select>
+    <div id="order_update_div">
+      {% for artwork in order.artworks %}
+      <div>
+          <b>{{ artwork.artwork.name }}</b><br><br>
+          <img src="{{ artwork.artwork.photo.url }}">
+          <p>Date de retour prévue : {{ artwork.return_date }}</p>
+          <a class="btn btn-primary" href="{% url 'orders:change_return_date' artwork.id %}" role="button">Modifier la date de retour</a>        
       </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
+    <br>
 
     <form method="POST" class="artist-form">
       {% csrf_token %}
@@ -28,5 +28,5 @@
     </form>
 
   </div>
-
+</div>
 {% endblock content %}

@@ -1,14 +1,18 @@
+import csv, io
 from django.shortcuts import render, redirect
 from .forms import ArtworkForm, ModifyArtworkForm, StyleForm, CategoryForm, StoragePlaceForm
 from .models import Artwork, Artwork_Style, Artwork_Category, Artwork_Storage_Place
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.core.mail import send_mail
 from carts.forms import CartAddArtworkForm
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 import copy
+from dateutil.relativedelta import *
+from django.utils.timezone import make_aware
+from orders.models import Order, OrderArtworkRate
+from datetime import datetime, timedelta
 
 def is_superuser(user=None):    
     if user == None:
@@ -18,16 +22,9 @@ def is_superuser(user=None):
 @user_passes_test(is_superuser)
 def artwork_new(request):
     if request.method == "POST":
-        form = ArtworkForm(request.POST, request.FILES)
+        form = ArtworkForm(request.POST, request.FILES)  
         if form.is_valid():
             form.save()           
-            send_mail(
-                'Subject here',
-                'Here is the message.',
-                'from@example.com',
-                ['to@example.com'],
-                fail_silently=False,
-            )
             return redirect("artworks:artworks_list")
     else:
         form = ArtworkForm()
@@ -36,6 +33,14 @@ def artwork_new(request):
 @user_passes_test(is_superuser)
 def update_artwork(request, artwork_id):             
     artwork = Artwork.objects.get(id=artwork_id)    
+    order = None
+    oar = None
+
+    # if artwork.state == 2:        
+    #     oar = OrderArtworkRate.objects.get(return_date__gte=make_aware(datetime.now()), artwork_id=artwork.id)
+    #     if oar is not None:
+    #         order = Order.objects.get(id=oar.order_id)        
+
     if request.method == 'POST':
         if 'delete_artwork' in request.POST:
             artwork.delete()                     
@@ -45,7 +50,7 @@ def update_artwork(request, artwork_id):
             a.save()
             return redirect("artworks:artworks_list")
         else:
-            form = ModifyArtworkForm(request.POST, instance=artwork)
+            form = ModifyArtworkForm(request.POST, request.FILES, instance=artwork)
             if form.is_valid():           
                 form.save()
                 return redirect("artworks:artworks_list")
@@ -56,6 +61,8 @@ def update_artwork(request, artwork_id):
         'artworks/artwork_update.html',
         {
             'form': form,
+            # 'order': order,
+            # 'oar': oar,
         }
     ) 
 
@@ -89,10 +96,6 @@ def artworks_list(request):
     
     ctx["artworks"] = artworks
 
-    paginator = Paginator(artworks, 8)
-    page = request.GET.get('page')
-    artworks = paginator.get_page(page)
-
     if request.user.is_superuser:
         if request.is_ajax():
             html = render_to_string(
@@ -115,6 +118,9 @@ def artworks_list(request):
             }
         )
     else :
+        paginator = Paginator(artworks, 8)
+        page = request.GET.get('page')
+        artworks = paginator.get_page(page)
         if request.is_ajax():
             html = render_to_string(
                 template_name="artworks/artworks_filtered.html", 
@@ -137,12 +143,14 @@ def artworks_list(request):
 def artwork(request, artwork_id):             
     artwork = Artwork.objects.get(id=artwork_id)
     cart_artwork_form = CartAddArtworkForm()
+    artworksWithSameStyle = Artwork.objects.filter(style_id=artwork.style_id)[:4] 
     return render(
         request,
         'artworks/artwork.html',
         {
             'artwork': artwork,
-            'cart_artwork_form': cart_artwork_form
+            'cart_artwork_form': cart_artwork_form,
+            'artworksWithSameStyle': artworksWithSameStyle,
         }
     )
 
@@ -190,6 +198,7 @@ def update_style(request, style_id):
             form = StyleForm(request.POST, instance=style)
             if form.is_valid():           
                 form.save()
+                return redirect("artworks:all_style")
     else:
         form = StyleForm(instance=style)
     return render(
@@ -214,6 +223,7 @@ def update_category(request, category_id):
             form = CategoryForm(request.POST, instance=category)
             if form.is_valid():           
                 form.save()
+                return redirect("artworks:all_category")
     else:
         form = CategoryForm(instance=category)
     return render(
@@ -238,6 +248,7 @@ def update_storage_place(request, storage_place_id):
             form = StoragePlaceForm(request.POST, instance=storage_place)
             if form.is_valid():           
                 form.save()
+                return redirect("artworks:all_storage_place")
     else:
         form = StoragePlaceForm(instance=storage_place)
     return render(
@@ -247,3 +258,105 @@ def update_storage_place(request, storage_place_id):
             'form': form,
         }
     ) 
+
+def artwork_upload(request):
+    template = "artworks/import_artworks.html"
+    prompt = {
+        'artwork': 'Order of the csv should be , name, height, width, price, description, introduction'
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Artwork.objects.update_or_create(
+            name=column[0],
+            height=column[1],
+            width=column[2],
+            price=column[3],
+            description=column[4],
+            introduction=column[5],
+        )
+    context = {}
+    return redirect("artworks:artworks_list")
+
+def style_upload(request):
+    template = "artworks/import_style.html"
+    prompt = {
+        'style': 'Order of the csv should be , name '
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Artwork_Style.objects.update_or_create(
+            name=column[0],
+        )
+    context = {}
+    return redirect("artworks:all_style")
+
+
+def category_upload(request):
+    template = "artworks/import_category.html"
+    prompt = {
+        'category': 'Order of the csv should be , name '
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Artwork_Category.objects.update_or_create(
+            name=column[0],
+        )
+    context = {}
+    return redirect("artworks:all_category")
+
+def storage_place_upload(request):
+    template = "artworks/import_storage_place.html"
+    prompt = {
+        'storage place': 'Order of the csv should be , name '
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Artwork_Storage_Place.objects.update_or_create(
+            name=column[0],
+        )
+    context = {}
+    return redirect("artworks:all_storage_place")

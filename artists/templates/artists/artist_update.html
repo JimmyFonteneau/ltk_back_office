@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block title %}
-    Update artist
+    Modifier un artiste
 {% endblock %}
 {% block content %}   
-<h2>Update artist</h2>
+<div class="container">
+<h2>Modifier un artiste</h2>
 <form method="POST" enctype="multipart/form-data" class="artist-form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="save btn btn-default">Save</button>
     <button type="submit" name="delete_artist">Delete</button>
-</form>
+</form></div>
 {% endblock content %}

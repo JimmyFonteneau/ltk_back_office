@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 {% block title %}
-    New storage place
+Liste des lieux de stockages
 {% endblock %}
 {% block content %}
+<div class="container">
+    <h2>Liste des lieux de stockages</h2>
+    <p class="subTitle">Ajouter, modifier un lieu de stockage</p>
+<div class="listStyle">
+    {% for storage_place in storage_places %}
+    <p id={{storage_place.id}}> {{ storage_place.name }}</p>
+    {% endfor %}
+</div>
 
-{% for storage_place in storage_places %}
-<p id={{storage_place.id}}> {{ storage_place.name }}</p>
-{% endfor %}
 <a class="btn btn-primary" href="{% url 'artworks:add_storage_place' %}" role="button">Ajouter un lieu de stockage</a>
+<a class="btn btn-primary" href="{% url 'artworks:storage_place_upload' %}" role="button">Import csv</a>
 
+</div>
 <script>
     $(document).ready(function() {                   
         $("p").click(function(event) {         
