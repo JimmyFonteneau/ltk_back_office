@@ -2,10 +2,10 @@ from .base import *
 import django_heroku
 import dj_database_url
 
-ALLOWED_HOSTS = ['ltk-back-office.herokuapp.com', 'https://ltk-back-office.herokuapp.com']
+ALLOWED_HOSTS = ['ltk-gallery.herokuapp.com']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
