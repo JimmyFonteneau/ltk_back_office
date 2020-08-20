@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Mise à jour de l'oeuvre
+    Mise à jour de l'oeuvre
 {% endblock %}
 {% block content %}   
 <div class="container">
@@ -12,8 +12,8 @@ Mise à jour de l'oeuvre
 <form method="POST" enctype="multipart/form-data" class="artist-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-    <button type="submit" name="delete_artwork">Delete</button>
+    <button type="submit" class="save btn btn-default">Valider</button>
+    <button type="submit" name="delete_artwork">Supprimer</button>
     <button type="submit" name="duplicate_artwork">Dupliquer</button>
 </form></div>
 {% endblock content %}

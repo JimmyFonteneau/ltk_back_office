@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block title %}
-    List artists
+    Import des lieux des stockage
 {% endblock %}
 
 {% block content %}
-<h2>Import des lieu de stockages</h2>
+<h2>Import des lieux de stockage</h2>
 
 {% if messages %}
     {% for message in messages %}
@@ -16,10 +16,10 @@
 {{order}}
 <form method='post' enctype="multipart/form-data">
     {% csrf_token %}
-    <label>Upload a file </label>
+    <label>Upload du fichier</label>
     <input type="file" name="file"></input>
-    <p>Only accepts csv files</p>
-    <button type="submit">Upload</button>
+    <p>Seul les fichiers CSV sont acceptés</p>
+    <button type="submit">valider</button>
 </form>
 {% endif %}
 

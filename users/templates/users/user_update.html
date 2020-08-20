@@ -9,7 +9,7 @@ Modifier un utilisateur
     {% csrf_token %}
     {{ form.as_p }}    
     <input type="submit" class="btn" value="Valider">
-    <button type="submit" name="delete_user">Delete</button>
+    <button type="submit" name="delete_user">Supprimer</button>
     {% if isAdmin %}        
         <button type="submit" name="downgrade">Downgrade</button>
     {% else %}

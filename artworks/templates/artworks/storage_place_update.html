@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block title %}
-    Update storage place
+    Modifier un lieu de stockage
 {% endblock %}
 {% block content %}   
 <div class="container">
-<h2>Update strorage place</h2>
+<h2>Modifier un lieu de stockage</h2>
 <form method="POST" enctype="multipart/form-data" class="artist-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-    <button type="submit" name="delete_storage_place">Delete</button>
+    <button type="submit" class="save btn btn-default">Valider</button>
+    <button type="submit" name="delete_storage_place">Supprimer</button>
 </form></div>
 {% endblock content %}

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block title %}
-    List artists
+    Liste des artistes
 {% endblock %}
 
 {% block content %}
 <div class="container">
-<h2>Les artistes mode admin</h2>
+<h2>Les artistes</h2>
 <a class="btn btn-primary" href="{% url 'artists:artist_new' %}" role="button">Ajouter un artiste</a>
 <a class="btn btn-primary" href="{% url 'artists:artist_upload' %}" role="button">Import csv</a>
 <br>
